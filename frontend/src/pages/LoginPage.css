@@ -1,0 +1,9 @@
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.smallFont {
+  font-size: 13px;
+}
