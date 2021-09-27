@@ -1,0 +1,28 @@
+{
+  "name": "a4-components",
+  "version": "1.0.0",
+  "description": "Submission for Matthew Malone",
+  "author": "Matthew7758",
+  "main": "../a2-shortstack/server.js",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "start": "node ./build/server.js",
+    "build": "snowpack build"
+  },
+  "repository": "https://github.com/Matthew7758-a4-components",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "express-validator": "^6.12.1",
+    "morgan": "^1.10.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "mime": "^2.5.2"
+  },
+  "devDependencies": {
+    "snowpack": "latest"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
