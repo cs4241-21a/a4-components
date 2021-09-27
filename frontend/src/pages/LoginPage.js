@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { Form, Button, Card, InputGroup } from "react-bootstrap";
 
-import ModalCustom from "../componenets/ModalRegister";
+import ModalRegister from "../componenets/ModalRegister";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
@@ -104,7 +104,7 @@ function LoginPage(props) {
       </Card>
 
       {showModal ? (
-        <ModalCustom show={handleShow} onHide={handleClose} />
+        <ModalRegister show={handleShow} onHide={handleClose} />
       ) : null}
     </div>
   );

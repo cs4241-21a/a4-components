@@ -15,7 +15,7 @@ async function registerUser(credentials) {
   }).then((data) => data.json());
 }
 
-function ModalCustom(props) {
+function ModalRegister(props) {
   const [username, setUsername] = useState("");
 
   const [password, setPassword] = useState("");
@@ -118,4 +118,4 @@ function ModalCustom(props) {
   );
 }
 
-export default ModalCustom;
+export default ModalRegister;

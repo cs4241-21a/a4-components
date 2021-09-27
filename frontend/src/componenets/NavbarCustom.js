@@ -1,5 +1,7 @@
 import { Button, Navbar, Nav } from "react-bootstrap";
 import classes from "./NavbarCustom.module.css";
+import { useState } from "react";
+import ModalCreation from "./ModalCreation";
 
 async function logoutUser(credentials) {
   return fetch("/signOut", {
@@ -12,6 +14,8 @@ async function logoutUser(credentials) {
 }
 
 function NavbarCustom(props) {
+  const [showModal, setModal] = useState(false);
+
   const handleLogout = async (e) => {
     e.preventDefault();
     const token = await logoutUser({
@@ -23,11 +27,14 @@ function NavbarCustom(props) {
     }
   };
 
+  const handleShow = () => setModal(true);
+  const handleClose = () => setModal(false);
+
   return (
     <Navbar bg="dark" variant="dark" className={classes.paddingLeft}>
       <Navbar.Brand href="#home">Contacts</Navbar.Brand>
       <Nav className="me-auto">
-        <Button> Add Contact </Button>
+        <Button onClick={handleShow}> Add Contact </Button>
       </Nav>
       <Nav>
         <Button
@@ -38,6 +45,9 @@ function NavbarCustom(props) {
           Logout
         </Button>
       </Nav>
+      {showModal ? (
+        <ModalCreation show={handleShow} onHide={handleClose} />
+      ) : null}
     </Navbar>
   );
 }
