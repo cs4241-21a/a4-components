@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CS4241 Assignment 3</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This is a simple todo app. This is the main page">
+    <link rel="stylesheet" href="https://unpkg.com/chota">
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <form method="post">
+    <h1>A simple todo list app</h1>
+    <ul>
+      <li>
+        <label for="todo">Todo:</label>
+        <textarea id="todo" name="todo"></textarea>
+      </li>
+      <li>
+        <label for="day">Select Day of the Week:</label>
+          <select id="day" name="day">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+        </select>
+      </li>
+      <li>
+        <label for="difficulty">Select Task Difficulty:</label>
+          <select id="difficulty" name="difficulty">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+      </li>
+      <li class="button">
+        <button type="button" id="submitButton">submit</button>
+      </li>     
+    </ul>
+    </form>
+    <p>In the table, click on a delete button to delete that todo, 
+      and the update button to replace any part of that todo with what's in the inputs above!</p>
+    <h2>Your Todos:</h2>
+<style>
+  td:nth-child(1){
+    width:60%;
+  }
+
+  .table-container{
+    display: flex;
+    flex-direction: row;
+  }
+  table{
+    border:2px solid grey;
+  }
+
+
+</style>
+
+<div class="table-container">
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Sunday">
+      <tr><th>Sunday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Monday">
+      <tr><th>Monday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Tuesday">
+      <tr><th>Tuesday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Wednesday">
+      <tr><th>Wednesday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Thursday">
+      <tr><th>Thursday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Friday">
+      <tr><th>Friday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Saturday">
+      <tr><th>Saturday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+</div>
+
+  <!--
+</style>
+<div class="table-container">
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Sunday">
+      <tr><th>Sunday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Monday">
+      <tr><th>Monday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Tuesday">
+      <tr><th>Tuesday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Wednesday">
+      <tr><th>Wednesday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Thursday">
+      <tr><th>Thursday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Friday">
+      <tr><th>Friday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+  <div style="flex-grow: 8">
+    <table style="table-layout: auto;" id="Saturday">
+      <tr><th>Saturday</th></tr>
+      <tr>
+        <th>Todo</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr></tr>
+    </table>
+  </div>
+</div>
+-->
+  </body>
+
+  
+</html>
