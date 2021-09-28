@@ -10,8 +10,8 @@ const http = require( 'http' ),
       port = 3000
 
 //const {user, pass} = require('/env.js')
-//const user = process.env.username
-//const pass = process.env.password
+const user = process.env.username
+const pass = process.env.password
 
 const express = require('express');
 const app = express();
@@ -39,8 +39,7 @@ app.use(responseTime())
 app.use(compression())
 
 const MongoClient = mongodb.MongoClient;
-//const uri =`mongodb+srv://${user}:${pass}@cluster0.kt8ex.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-const uri = 'mongodb+srv://admin:admin@cluster0.kt8ex.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri =`mongodb+srv://${user}:${pass}@cluster0.kt8ex.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:true });
 let collection = null
 
