@@ -7,14 +7,15 @@ import React from "react";
 class Entry extends React.Component {
   // our .render() method creates a block of HTML using the .jsx format
   render() {
-    return <tr>{this.props.name, this.props.feet, this.props.inches, this.props.weight, this.props.bmi, this.props.status} : 
+    return <tbody>{this.props.name} : 
+    
       <td><this.props.name/></td>
       <td><this.props.feet/></td>
       <td><this.props.inches/></td>
       <td><this.props.weight/></td>
       <td><this.props.bmi/></td>
       <td><this.props.status/></td>
-    </tr>
+      </tbody>
   }
   // call this method when the checkbox for this component is clicked
   // change(e) {
@@ -33,24 +34,47 @@ class App extends React.Component {
 
   // load in our data from the server
   load() {
-    fetch( '/read', { method:'GET', 'no-cors':true })
-      .then( response => response.json() )
+    fetch( '/read', { method:'get', 'no-cors':true })
+    .then( response => response.json() )
       .then( json => {
          this.setState({ entries:json }) 
       })
+      .catch(err => console.log(err))
   }
 
   // render component HTML using JSX 
   render() {
+    const button = document.querySelector('button')
     return (
       <div className="App">
-        <table id="results">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Height(feet)</th>
+              <th>Height(inches)</th>
+              <th>Weight</th>
+              <th>BMI</th>
+              <th>Weight Status</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
           <tbody>
-        <tr>
-          { this.state.entries.map( (todo,i) => <Entry key={i} name={entries.name} feet={entries.feet} inches={entries.inches} weight={entries.weight} bmi={entries.bmi} status={entries.status} onclick={ this.toggle } /> ) }
-       </tr> 
-       </tbody>
-       </table>
+          { this.state.entries.map( (entry) => 
+            <tr>
+              <td>{entry.name}</td>
+              <td>{entry.feet}</td>
+              <td>{entry.inches}</td>
+              <td>{entry.weight}</td>
+              <td>{entry.bmi}</td>
+              <td>{entry.status}</td>
+              <td><button >Edit</button></td>
+              <td><button >Delete</button></td>
+            </tr>
+            ) }
+          </tbody>
+        </table>
       </div>
     )
   }

@@ -3,7 +3,7 @@ const express  = require( 'express' ),
       cors = require('cors')
 
 const entries = [
-  {name:'jeff', height:'5', weight:'1'}
+  {name:'jeff', feet:'5', inches:'10', weight:'150', bmi:'25', status:'Healthy'}
 ]
 
 app.use( express.json() )
@@ -11,6 +11,8 @@ app.use(cors())
 
 // this will most likely be 'build' or 'public'
 app.use( express.static( 'build' ) )
+
+
 
 app.get( '/read', ( req, res ) => res.json( entries ) )
 
