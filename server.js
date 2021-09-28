@@ -9,7 +9,7 @@ const http = require( 'http' ),
       dir  = 'public/',
       port = 3000
 
-const {user, pass} = require('./env.js')
+const {user, pass} = require('/env.js')
 //const user = process.env.username
 //const pass = process.env.password
 
