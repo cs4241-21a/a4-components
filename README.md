@@ -1,30 +1,10 @@
-# empty-project
+your hosting link e.g. http://a4-maylee-gagnon.glitch.me
 
-Empty project.
+This project updated my A2 project and uses react. 
 
-## How to run on localhost
+I changed the way a user modifies and deletes an entry to make it more consistent for the user. I also changed the format from a table to a list. 
 
-First install dependencies:
+This project keeps track of a simple contact list including each person's name, phone number and birthday. It also indicts whether to give the person a gift for their birthday. Using this indication and the birthday, the program generates a date 30 days before the birthday as the date to get a gift by.
 
-```sh
-npm install
-```
-
-To run in dev mode mode:
-
-```sh
-npm start
-```
-
-Then go to http://localhost:8080
-
-To create a production build:
-
-```sh
-npm run build
-```
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
+The new technology improved the way I displayed the list of contacts. It made the process a lot simpler and also made the initial list easier to load. This project came together more easily than previous ones, partly due to the new technology, but also using express and general familarity with the code. 
 
