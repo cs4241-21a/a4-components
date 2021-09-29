@@ -79,7 +79,7 @@ app.use( async function( request, response, next ) {
 })
 
 app.use( express.static( 'build/src' ) )
-app.use( express.static( 'build' ))
+app.use( express.static( 'build' ) )
 
 app.post( '/add|/edit|/remove|/update', async ( request, response) => {
   // get user's tasks from database
