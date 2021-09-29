@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm dist/bundle.js",
     "start": "snowpack dev",
-    "build": "snowpack build --verbose"
+    "build": "snowpack build"
   },
   "keywords": [],
   "author": "Ryan Stebe",
