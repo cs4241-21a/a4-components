@@ -1,0 +1,108 @@
+:root {
+    --dark-blue: #91bdd3;
+    --light-blue: #57C7FF;
+    --blue: #3BB7F5;
+    --dark-brown: #000000;
+    --light-brown: #000000;
+}
+
+
+body {
+    -webkit-transition:background-color 1s ease;
+    -moz-transition:background-color 1s ease;
+    -o-transition:background-color 1s ease;
+    transition:background-color .1s ease;
+    background-color: var(--dark-blue);
+}
+
+#mainGame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+section {
+    display: flex;
+    flex-direction: row;;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+.loginText{
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
+    width: 100%;
+}
+.loginTextDetails{
+    padding-top: 1%;
+}
+
+.loginButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2%;
+}
+
+.gameForm{
+    display: flex;
+    flex-direction: column;
+    padding-top: 1%;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameForms{
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameLabel{
+    font-family: 'Source Code Pro', serif;
+    color: var(--dark-brown);
+}
+
+#mainContainer{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#game-leaderboard{
+    border-collapse: separate;
+    border-radius: 13px;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: 'Press Start 2P', serif;
+    text-align: center;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0,0,0, 0.15);
+}
+
+#game-leaderboard thead tr{
+    background-color: var(--dark-blue);
+    color: var(--light-brown);
+}
+
+#game-leaderboard th,
+#game-leaderboard td{
+    padding: 12px 15px;
+}
+
+#game-leaderboard tbody tr{
+    border-bottom: 1px solid #dddddd;
+    color: var(--dark-brown);
+}
