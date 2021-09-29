@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import Results from "./components/Results";
-import "./css/tailwind.css";
+import "./styles.css";
 
 class App extends React.Component {
   render() {

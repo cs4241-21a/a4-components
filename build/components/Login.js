@@ -1,8 +1,9 @@
 import React from "../_snowpack/pkg/react.js";
 import {Link} from "../_snowpack/pkg/react-router-dom.js";
-import "../css/tailwind.css.proxy.js";
 const Login = () => {
   return /* @__PURE__ */ React.createElement("div", {
+    className: "\r\n    flex\r\n    h-screen\r\n    font-body\r\n    text-2xl\r\n    bg-gray-800\r\n    text-gray-300\r\n    w-full\r\n    h-full\r\n  "
+  }, /* @__PURE__ */ React.createElement("div", {
     className: "rounded-xl m-auto border border-gray-600 w-1/5"
   }, /* @__PURE__ */ React.createElement("header", {
     className: "rounded-t-xl bg-gray-900 mx-auto text-center"
@@ -17,6 +18,6 @@ const Login = () => {
     className: "fa fa-github"
   }), " GitHub")), /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement(Link, {
     to: "/results"
-  }, "Link")));
+  }, "Link"))));
 };
 export default Login;

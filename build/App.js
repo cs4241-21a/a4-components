@@ -2,7 +2,7 @@ import React from "./_snowpack/pkg/react.js";
 import {BrowserRouter as Router, Switch, Route, Link} from "./_snowpack/pkg/react-router-dom.js";
 import Login from "./components/Login.js";
 import Results from "./components/Results.js";
-import "./css/tailwind.css.proxy.js";
+import "./styles.css.proxy.js";
 class App extends React.Component {
   render() {
     return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Router, null, /* @__PURE__ */ React.createElement(Switch, null, /* @__PURE__ */ React.createElement(Route, {

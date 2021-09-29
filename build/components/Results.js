@@ -1,5 +1,4 @@
 import React from "../_snowpack/pkg/react.js";
-import "../css/tailwind.css.proxy.js";
 const Results = () => {
   const submit = function(e) {
     e.preventDefault();
@@ -135,7 +134,9 @@ const Results = () => {
     return deleteNode;
   }
   getData();
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("header", {
+  return /* @__PURE__ */ React.createElement("div", {
+    className: "\r\n    bg-gray-800\r\n    text-gray-300"
+  }, /* @__PURE__ */ React.createElement("header", {
     class: "flex py-3 bg-gray-900 w-full"
   }, /* @__PURE__ */ React.createElement("h1", {
     class: "pl-5 text-5xl float-left",

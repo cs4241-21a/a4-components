@@ -1,5 +1,4 @@
 import React from "react";
-import "../css/tailwind.css";
 
 const Results = () => {
   /* function to submit new/modified data to the server */
@@ -182,7 +181,11 @@ const Results = () => {
 
   getData();
   return (
-    <>
+    <div
+      className="
+    bg-gray-800
+    text-gray-300"
+    >
       <header class="flex py-3 bg-gray-900 w-full">
         <h1 class="pl-5 text-5xl float-left" id="title">
           Race Results
@@ -308,7 +311,7 @@ const Results = () => {
           </tr>
         </table>
       </main>
-    </>
+    </div>
   );
 };
 
