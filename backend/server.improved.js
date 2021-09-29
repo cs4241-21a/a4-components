@@ -98,7 +98,7 @@ app.post('/api/create', validateLoginMiddleware, (req, res) => {
     'where' : data.where,
     'description' : data.description,
     'photo' : data.photo,
-    'emailme' : data.emailme,
+    'emailme' : req.user.emails[0].value,
     'timestamp' : Date.now()
   }
   let collection = "lostItems"

@@ -1,40 +1,29 @@
 import React from "react";
-import { Heading, ThemeProvider, Button, Spinner } from '@primer/components'
+import { Heading, ThemeProvider, Button } from '@primer/components'
 import { getRequest, postRequest } from "../requests-helper"
 
 class Table extends React.Component {
   constructor(props) {
     super(props)
-    let { title, endpoint } = this.props;
-    this.state = { collection: [], title, endpoint }
-  }
-
-  componentDidMount() {
-    this.loadCollection()
   }
 
   onEdit(e) {
     let id = e.target.parentElement.parentElement.id
     console.log("Edit pressed for " + id)
-    // this.props.onChange(e.target)
+    let obj = this.props.collection.find( x => x._id === id)
+    this.props.editHandler(obj)
   }
 
-  async onDelete(e) {
+  onDelete(e) {
     let id = e.target.parentElement.parentElement.id
     console.log("Delete pressed for " + id)
     postRequest('/api/delete', { _id: id })
-    .then(res => this.loadCollection())
+    .then(this.props.deleteHandler)
   }
-
-  loadCollection() {
-    getRequest('/api/' + this.state.endpoint, {}, (data) => {
-      this.setState({ collection : data })
-    })
-  }  
 
   computeRows() {
     var tbody = [];
-    for (let info of this.state.collection) {
+    for (let info of this.props.collection) {
       let row = []
       row.push(<td>{info.item}</td>)
       row.push(<td>{info.when}</td>)
@@ -43,7 +32,7 @@ class Table extends React.Component {
       row.push(<td>{info.photo}</td>)
       row.push(<td>{info.emailme}</td>)
       row.push(<td>{info.created} days ago</td>)
-      if (true || info.permissions === 'write') {
+      if (info.permissions === 'write') {
         row.push(<td><Button onClick={ this.onDelete.bind(this) }>Delete</Button><Button onClick={ this.onEdit.bind(this) }>Edit</Button></td>)
       }
       tbody.push(<tr key={info._id} id={info._id}>{row}</tr>)
