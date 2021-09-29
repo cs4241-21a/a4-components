@@ -28,7 +28,11 @@ class App extends React.Component {
   // render component HTML using JSX 
   render() {
     return (
-      <div className="App">      
+      <div className="App">
+      <h3>Update</h3>    
+      <h4> To add a new entry fill in the fields with a unique name, and click Submit. To modify an entry 
+        fill in the fields with the name of the entry to update. To delete enter the name of the entry to be
+        deleted and click Delete. Also, Gift selected with no birthday will default to the Jan. 1st of the coming year. </h4>  
       <label for ="name">Name:</label>
       <input type='text' id='name' placeholder="Name"></input>
 
@@ -38,21 +42,22 @@ class App extends React.Component {
       <label for='birthday'>Birthday:</label>
       <input type="date" id="birthday"></input>
 
-      <label for ="toGift">Gift:</label>
+      <label for ="toGift">To buy a gift?:</label>
       <input type="checkbox" id="toGift"></input>
 
       <button id = 'submit' onClick={ e => this.add( e )}>Submit</button>
       <button id = 'delete' onClick={ e => this.delete(e)}>Delete</button>
 
-      <ul>Name | Phone Number | Birthday | To buy a gift? | If so, buy gift by...</ul>
+      <h3>Contacts</h3>
+      <ul>Name | Phone Number | Birthday | To buy a gift? | If so, buy gift by...</ul> 
       <ul>
         { this.state.todos.map( (todo,i) => <Contact key={i} name={todo.name} phoneNum = {todo.phoneNum} birthday = {todo.birthday} toGift = {todo.toGift} giftBy = {todo.giftBy}/> ) }
-      </ul> 
+      </ul>
       </div>
     )
   }
 
-  //Add another entry 
+  //Add an entry 
   add( evt ) {
     const name = document.querySelector('#name').value
     const phone = document.querySelector('#phoneNum').value
@@ -62,7 +67,6 @@ class App extends React.Component {
         toGift = "yes"
     }
     
-
     fetch( '/add', { 
       method:'POST',
       body: JSON.stringify({ name:name, phoneNum:phone, birthday:birthday, toGift:toGift}),

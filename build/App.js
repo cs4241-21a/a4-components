@@ -18,7 +18,7 @@ class App extends React.Component {
   render() {
     return /* @__PURE__ */ React.createElement("div", {
       className: "App"
-    }, /* @__PURE__ */ React.createElement("label", {
+    }, /* @__PURE__ */ React.createElement("h3", null, "Update"), /* @__PURE__ */ React.createElement("h4", null, " To add a new entry fill in the fields with a unique name, and click Submit. To modify an entry fill in the fields with the name of the entry to update. To delete enter the name of the entry to be deleted and click Delete. Also, Gift selected with no birthday will default to the Jan. 1st of the coming year. "), /* @__PURE__ */ React.createElement("label", {
       for: "name"
     }, "Name:"), /* @__PURE__ */ React.createElement("input", {
       type: "text",
@@ -39,7 +39,7 @@ class App extends React.Component {
       id: "birthday"
     }), /* @__PURE__ */ React.createElement("label", {
       for: "toGift"
-    }, "Gift:"), /* @__PURE__ */ React.createElement("input", {
+    }, "To buy a gift?:"), /* @__PURE__ */ React.createElement("input", {
       type: "checkbox",
       id: "toGift"
     }), /* @__PURE__ */ React.createElement("button", {
@@ -48,7 +48,7 @@ class App extends React.Component {
     }, "Submit"), /* @__PURE__ */ React.createElement("button", {
       id: "delete",
       onClick: (e) => this.delete(e)
-    }, "Delete"), /* @__PURE__ */ React.createElement("ul", null, "Name | Phone Number | Birthday | To buy a gift? | If so, buy gift by..."), /* @__PURE__ */ React.createElement("ul", null, this.state.todos.map((todo, i) => /* @__PURE__ */ React.createElement(Contact, {
+    }, "Delete"), /* @__PURE__ */ React.createElement("h3", null, "Contacts"), /* @__PURE__ */ React.createElement("ul", null, "Name | Phone Number | Birthday | To buy a gift? | If so, buy gift by..."), /* @__PURE__ */ React.createElement("ul", null, this.state.todos.map((todo, i) => /* @__PURE__ */ React.createElement(Contact, {
       key: i,
       name: todo.name,
       phoneNum: todo.phoneNum,
