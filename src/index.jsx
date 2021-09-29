@@ -1,3 +1,7 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import Tasks from "./Tasks";
+/*
 // Add some Javascript code here, to run on the front end.
 const form = document.getElementById( "form" )
 const formTitle = document.getElementById( "form-title" )
@@ -14,20 +18,12 @@ const taskTemplate = document.getElementById( "task-template" ).content.children
 
 let _id = NaN;
 let requestType = "/add";
-
+*/
+ReactDOM.render(<Tasks/>, taskContainer);
+/*
 window.onload = function() {
     submitButton.onclick = submit
     addButton.onclick = add
-
-    fetch( "/update", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: "{}"
-    })
-    .then( ( response ) => response.json() )
-    .then( function( appData ) {
-        update( appData )
-    })
 }
 
 const submit = function( e ) {
@@ -175,3 +171,4 @@ const timeToNumber = function( time ) {
     let hours = parseInt(components[0]) + Math.round( parseInt( components[1] ) / 60 )
     return hours * interval
 }
+*/

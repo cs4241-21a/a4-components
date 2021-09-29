@@ -1,9 +1,10 @@
 const express = require( 'express' ),
       mongodb = require( 'mongodb' ),
       cookie = require( 'cookie-session' ),
-      dir = 'public',
+      dir = 'build/src',
       app = express(),
       dbclient = new mongodb.MongoClient( process.env.DBURI, { useNewUrlParser: true, useUnifiedTopology:true })
+require( 'dotenv' ).config()
 
 let users
 let userdata
@@ -184,7 +185,7 @@ const recalculateStarts = async function() {
   // update database with tasklist start data
   tasklist.forEach( async function( task ) {
     await userdata.updateOne(
-      { _id: task._id},
+      { _id: task._id },
       { $set: { start: task.start } }
     )
   })
