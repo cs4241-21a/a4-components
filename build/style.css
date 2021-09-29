@@ -1,0 +1,33 @@
+body{
+    font-family: 'Montserrat'
+}
+
+.App{
+    background-color: lightgray;
+    display: grid; 
+    grid-gap: 9px; 
+    padding: 15px; 
+    margin: 50px; 
+    width: 50%; 
+}
+
+.App > input {
+    font-family: 'Montserrat';
+    border: none; 
+    padding: 5px; 
+}
+
+button{
+    border: none; 
+    font-family: 'Montserrat';
+    padding: 5px; 
+}
+
+button{
+    cursor: grab;
+}
+
+ul{
+    font-family: 'Montserrat'
+}
+
