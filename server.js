@@ -56,4 +56,4 @@ app.post('/delete', (req, res) => {
     res.json(contacts)
 })
 
-app.listen( process.env.PORT | 8080 )
+app.listen( process.env.PORT || 8080 || port )

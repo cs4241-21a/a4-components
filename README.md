@@ -1,4 +1,4 @@
-http://a4-maylee-gagnon.glitch.me  [trying heroku]
+http://a4-maylee-gagnon.glitch.me 
 
 This project updated my A2 project and uses react. 
 
