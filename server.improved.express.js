@@ -11,13 +11,13 @@ const { report } = require("process"),
   // IMPORTANT: you must run `npm install` in the directory for this assignment
   // to install the mime library used in the following line of code
   mime = require("mime"),
-  dir = "public/",
+  dir = "build/",
   port = 3000,
   path = require("path"),
   cors = require("cors"),
   morgan = require("morgan"),
   dotenv = require("dotenv"),
-  scopes = ['identify'];
+  scopes = ["identify"];
 
 dotenv.config();
 
@@ -112,19 +112,23 @@ client
 
 // Get request for both possible forum_page links, only allow is authorized
 app.get(
-  ["/public/html/forum_page.html", "/html/forum_page.html"],
+  // ["/public/html/forum_page.html", "/html/forum_page.html"],
+  ["/build/html/forum_page.html", "/html/forum_page.html"],
   userIsAuthorized,
   (req, res) => {
-    sendFile(res, "public/html/forum_page.html");
+    sendFile(res, "build/html/forum_page.html");
+    // sendFile(res, "public/html/forum_page.html");
   }
 );
 
 // route to get index page, only allowed if not logged in
 app.get("/", (req, res) => {
   if (req.user != undefined) {
-    return res.redirect("public/html/forum_page.html");
+    // return res.redirect("public/html/forum_page.html");
+    return res.redirect("build/html/forum_page.html");
   }
-  sendFile(res, "public/index.html");
+  sendFile(res, "build/index.html");
+  // sendFile(res, "public/index.html");
 });
 
 // Logs the user out
@@ -144,7 +148,8 @@ app.get(
     // Successful authentication, redirect home.
     console.log("I successfully go to the right page! ");
     console.log(req.user.id);
-    res.redirect(302, "../../public/html/forum_page.html");
+    // res.redirect(302, "../../public/html/forum_page.html");
+    res.redirect(302, "../../build/html/forum_page.html");
   }
 );
 
@@ -388,4 +393,5 @@ function getStudentHours(studentRole) {
   }
 }
 
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static("build"));
