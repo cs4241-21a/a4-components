@@ -5,8 +5,10 @@ const form = document.getElementById( "form" )
 const formTitle = document.getElementById( "form-title" )
 const task = document.getElementById( "name" )
 const period = document.getElementById( "period" )
-const deadlineDate = M.Datepicker.init( document.getElementById( "deadline-date" ) )
-const deadlineHour = M.Timepicker.init( document.getElementById( "deadline-hour" ) )
+const deadlineDateElement = document.getElementById( "deadline-date" )
+let deadlineDate = M.Datepicker.init( deadlineDateElement, {defaultDate: new Date(), setDefaultDate: true})
+const deadlineHourElement = document.getElementById( "deadline-hour" )
+let deadlineHour = M.Timepicker.init( deadlineHourElement, {defaultTime: "12:00AM"} )
 const submitButton = document.getElementById( "submit-form-button" )
 
 const addButton = document.getElementById( "add-button" )
@@ -18,34 +20,41 @@ let requestType = "/add";
 class Task extends React.Component {
     // our .render() method creates a block of HTML using the .jsx format
     render() {
-        return <tr>
+        return (
+        <tr>
             <td>{this.props.name}</td>
             <td>{numberToDateText(this.props.start)}</td>
             <td>{numberToHoursText(this.props.period)}</td>
             <td>{numberToDateText(this.props.deadline)}</td>
             <td>
-                <a class="waves-effect waves-light indigo btn-small" onclick={e => this.edit(e)}>Edit</a>
-                <a class="waves-effect waves-light red darken-2 btn-small" onclick={e => this.remove(e)}>Remove</a>
+                <a class="waves-effect waves-light indigo btn-small" onClick={this.edit}>Edit</a>
+                <a class="waves-effect waves-light red darken-2 btn-small" onClick={this.remove}>Remove</a>
             </td>
-        </tr>
+        </tr>)
     }
-    
-    edit = function( e ) {
+
+    edit = ( e ) => {
         e.preventDefault()
     
         form.hidden = false
         formTitle.innerText = "Edit task:"
         task.value = this.props.name
         period.value = this.props.period
-        deadlineDate.value = new Date( this.props.deadline )
-        deadlineHour.value = new Date( this.props.deadline ).getHours() + ":00"
+
+        deadlineDate = M.Datepicker.init( deadlineDateElement, {defaultDate: new Date( this.props.deadline ), setDefaultDate: true})
+        deadlineDate.setDate( new Date() )
+        deadlineHour = M.Timepicker.init( deadlineHourElement, {defaultTime: new Date( this.props.deadline ).getHours() + ":00"})
+        deadlineHour._updateTimeFromInput()
+        deadlineHour.done()
+        M.updateTextFields()
+
         requestType = "/edit"
         _id = this.props._id
     
         return false
     }
 
-    remove = function( e ) {
+    remove = ( e ) => {
         e.preventDefault()
     
         fetch( "/remove", {
@@ -54,7 +63,7 @@ class Task extends React.Component {
             body: JSON.stringify( { _id:this.props._id } )
         })
         .then( ( response ) => response.json() )
-        .then( function( appData ) {
+        .then( ( appData ) => {
             this.props.tasks.update( appData )
         })
     
@@ -72,23 +81,33 @@ class Tasks extends React.Component {
         this.update()
     }
 
-    add = function ( e ) {
+    add = ( e ) => {
         e.preventDefault()
     
         form.hidden = false
         formTitle.innerText = "Add new task:"
+        task.value = ""
+        period.value = 1
+
+        deadlineDate = M.Datepicker.init( deadlineDateElement, {defaultDate: new Date(), setDefaultDate: true})
+        deadlineDate.setDate( new Date() )
+        deadlineHour = M.Timepicker.init( deadlineHourElement, {defaultTime: "12:00AM"})
+        deadlineHour._updateTimeFromInput()
+        deadlineHour.done()
+        M.updateTextFields()
+
         requestType = "/add"
     
         return false
     }
 
-    submit( e ) {
+    submit = ( e ) => {
         // prevent default form action from being carried out
         e.preventDefault()
         form.hidden = true
     
         let interval = 60 * 60 * 1000 // number of milliseconds in an hour
-        let deadline = Date.parse( deadlineDate.date ) + timeToNumber( deadlineHour.time )
+        let deadline = Date.parse( deadlineDate.date ) + timeToNumber( deadlineHour.time, deadlineHour.amOrPm)
     
         let json
         switch( requestType ) {
@@ -108,32 +127,42 @@ class Tasks extends React.Component {
             body
         })
         .then( ( response ) => response.json() )
-        .then( function( appData ) {
+        .then( ( appData ) => {
             this.update( appData )
         })
     
         return false
     }
 
-    update() {
+    update = () => {
         fetch( "/update", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: "{}"
         })
         .then( ( response ) => response.json() )
-        .then( function( appData ) {
+        .then( ( appData ) => {
             this.setState({ tasks: appData })
         })
     }
 
     // render component HTML using JSX 
     render() {
-        submitButton.onclick = submit
         return (
-            <tbody id="task-container">
-                { this.state.tasks.map( (task, i) => <Task tasks={this} _id={task._id} name={task.name} start={task.start} period={task.period} deadline={task.deadline}/> ) }
-            </tbody>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Start Date</th>
+                        <th>Period (hr)</th>
+                        <th>Deadline</th>
+                        <th>Modify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { this.state.tasks.map( (task, i) => <Task tasks={this} _id={task._id} name={task.name} start={task.start} period={task.period} deadline={task.deadline}/> ) }
+                </tbody>
+            </table>
         )
     }
 }
@@ -168,10 +197,18 @@ const numberToDateText = function( number ) {
     return "" + hours + ":00 " + pm + " " + month + "/" + day + "/" + year
 }
 
-const timeToNumber = function( time ) {
+const timeToNumber = function( time, amOrPm ) {
     const interval = 60 * 60 * 1000 // number of milliseconds in an hour
 
+    console.log(time)
+    console.log(amOrPm)
     let components = time.split(':')
     let hours = parseInt(components[0]) + Math.round( parseInt( components[1] ) / 60 )
+    if (hours === 12){
+        hours = 0
+    }
+    if (amOrPm === "PM"){
+        hours += 12
+    }
     return hours * interval
 }

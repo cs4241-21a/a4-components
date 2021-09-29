@@ -1,10 +1,10 @@
+require( 'dotenv' ).config()
+
 const express = require( 'express' ),
       mongodb = require( 'mongodb' ),
       cookie = require( 'cookie-session' ),
-      dir = 'build/src',
       app = express(),
       dbclient = new mongodb.MongoClient( process.env.DBURI, { useNewUrlParser: true, useUnifiedTopology:true })
-require( 'dotenv' ).config()
 
 let users
 let userdata
@@ -78,7 +78,8 @@ app.use( async function( request, response, next ) {
   }
 })
 
-app.use( express.static( dir ) )
+app.use( express.static( 'build/src' ) )
+app.use( express.static( 'build' ))
 
 app.post( '/add|/edit|/remove|/update', async ( request, response) => {
   // get user's tasks from database

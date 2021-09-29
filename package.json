@@ -1,7 +1,7 @@
 {
-  "name": "a4-components",
+  "name": "procrast-inator",
   "version": "1.0.0",
-  "description": "Assignment 4 - Components\r ===",
+  "description": "To-do list and task scheduler that enables aggressive procrastination",
   "main": "server.improved.js",
   "scripts": {
     "clean": "rm dist/bundle.js",
@@ -9,7 +9,7 @@
     "build": "snowpack build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ryan Stebe",
   "license": "ISC",
   "devDependencies": {
     "snowpack": "^3.8.8"

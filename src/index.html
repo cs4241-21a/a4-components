@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" defer>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" defer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
-    <script src="js/index.js" defer></script>
+    <script type="module" src="index.js" defer></script>
   </head>
 
   <body class="row deep-purple">
@@ -61,20 +61,8 @@
 
         <a class="waves-effect waves-light green darken-3 btn" id="add-button" href="#form"><i class="material-icons left">add</i>New Task</a>
   
-        <table class="striped">
-          <thead>
-            <tr>
-              <th>Task</th>
-              <th>Start Date</th>
-              <th>Period (hr)</th>
-              <th>Deadline</th>
-              <th>Modify</th>
-            </tr>
-          </thead>
-          <tbody id="task-container">
-            <!-- Empty to start -->
-          </tbody>
-        </table>
+        <div id="tasklist-container">
+        </div>
       </div>
     </div>
   </body>

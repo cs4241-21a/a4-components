@@ -19,6 +19,7 @@ const taskTemplate = document.getElementById( "task-template" ).content.children
 let _id = NaN;
 let requestType = "/add";
 */
+const taskContainer = document.getElementById( "tasklist-container" )
 ReactDOM.render(<Tasks/>, taskContainer);
 /*
 window.onload = function() {
