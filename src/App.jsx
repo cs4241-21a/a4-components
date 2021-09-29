@@ -28,26 +28,26 @@ class App extends React.Component {
   constructor( props ) {
     super( props )
     // initialize our state
-    this.state = { entries:[] }
-    this.load()
+    this.state = { loading: true, entries:[] }
+    //this.load()
   }
 
   // load in our data from the server
-  load() {
-    fetch( '/read', { method:'get', 'no-cors':true })
+  componentDidMount() {
+    fetch( '/read', { method:'GET', 'no-cors':true })
     .then( response => response.json() )
       .then( json => {
-         this.setState({ entries:json }) 
+         this.setState({ loading: false, entries:json })
       })
       .catch(err => console.log(err))
   }
 
   // render component HTML using JSX 
   render() {
-    const button = document.querySelector('button')
     return (
       <div className="App">
-        <table>
+        <button id="submitnew" onClick={e =>this.add(e)}>submit</button>
+        <table id="results">
           <thead>
             <tr>
               <th>Name</th>
@@ -89,14 +89,14 @@ toggle( name, feet, inches, weight, bmi, status ) {
 
 // add a new entry table item
 add( evt ) {
-  const newname = document.querySelector('yourname').value
-  const newfeet = document.querySelector('feet').value
-  const newinches = document.querySelector('inches').value
-  const newweight = document.querySelector('weight').value
+  const newname = document.getElementById('yourname').value
+  const newfeet = document.getElementById('feet').value
+  const newinches = document.getElementById('inches').value
+  const newweight = document.getElementById('weight').value
 
   fetch( '/add', { 
     method:'POST',
-    body: JSON.stringify({ name:newname, feet:newfeet, inches: newinches, weight: newweight}),
+    body: JSON.stringify({ name:newname, feet:newfeet, inches: newinches, weight: newweight, bmi:0, status:"Healthy"}),
     headers: { 'Content-Type': 'application/json' }
   })
   .then( response => response.json() )

@@ -2,8 +2,8 @@ const express  = require( 'express' ),
       app      = express(),
       cors = require('cors')
 
-const entries = [
-  {name:'jeff', feet:'5', inches:'10', weight:'150', bmi:'25', status:'Healthy'}
+const data = [
+  {name:'jeff', feet:5, inches:10, weight:150, bmi:25, status:'Healthy'}
 ]
 
 app.use( express.json() )
