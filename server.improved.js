@@ -10,17 +10,6 @@ let users
 let userdata
 let tasklist
 
-//open connection to database and save account data
-dbclient.connect()
-  .then( () => {
-    // will only create collection if it doesn't exist
-    return dbclient.db( 'userdata' ).collection( 'userinfo' )
-  })
-  .then( collection => {
-    users = collection
-    return users.find( { } ).toArray()
-  })
-
 // -------------------------------------------------------------
 // ---------- Express request handling and middleware ----------
 // -------------------------------------------------------------
@@ -111,7 +100,19 @@ app.post( '/add|/edit|/remove|/update', async ( request, response) => {
   response.end( JSON.stringify( tasklist ) )
 })
 
-app.listen( process.env.PORT || 3000 )
+//open connection to database and save account data
+dbclient.connect()
+  .then( () => {
+    // will only create collection if it doesn't exist
+    return dbclient.db( 'userdata' ).collection( 'userinfo' )
+  })
+  .then( collection => {
+    users = collection
+    return users.find( { } ).toArray()
+  })
+  .then( () => {
+    app.listen( process.env.PORT || 3000 )
+  })
 
 // -----------------------------------------------------------------
 // ---------- Database Actions and Startdate Calculations ----------
