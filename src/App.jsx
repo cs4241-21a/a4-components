@@ -1,4 +1,3 @@
-
 import React from "react";
 
 
@@ -49,7 +48,7 @@ class App extends React.Component {
     console.log(this.state)
     return (
       <div className='App'>
-         {/* <button id="submitnew" onClick={e =>this.add(e)}>submit</button>  */}
+         <button id="submitnew" onClick={e =>this.add(e)}>submit</button>
         <table id='results'>
           <thead>
             <tr>
