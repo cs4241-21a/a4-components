@@ -1,12 +1,13 @@
 {
   "name": "cs4241-assignment3-wpi_cs_sa_ta_and_gla_tracking_sheet",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A tracking sheet that can be used for SAs, TAs, and GLAs of the WPI Computer Science Department. This was done as an assignment for CS 4241 to work on server and client javascript communication along with stylized elements.",
   "author": "Christopher Vieira",
   "scripts": {
     "clean": "rm dist/bundle.js",
-    "start": "snowpack dev",
-    "build": "snowpack build"
+    "dev": "snowpack dev",
+    "build": "snowpack build",
+    "start": "snowpack build && node server.js"
   },
   "dependencies": {
     "connect-timeout": "^1.9.0",

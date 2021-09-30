@@ -1,5 +1,6 @@
 import React from "react";
 
+// A function responsible for getting the fields from the input area
 function getNewStudentFromFields() {
   let radio_elements = document.getElementsByName("year_radio"),
     radio_result = "";
@@ -22,12 +23,10 @@ function getNewStudentFromFields() {
   return json;
 }
 
-// we could place this Todo component in a separate file, but it's
-// small enough to alternatively just include it in our App.js file.
-
+// This Todo class represents each row in our forum entry used for dynamic table creation
 class Todo extends React.Component {
-  // our .render() method creates a block of HTML using the .jsx format
   render() {
+    // Returns a single row for the data provided
     return (
       <tr class="forum_row">
         <td class="forum_cell">{this.props.StudentName} </td>
@@ -56,28 +55,10 @@ class Todo extends React.Component {
         </td>
       </tr>
     );
-
-    // </td><td class="forum_cell">CS 1102</td><td class="forum_cell">SA</td><td class="forum_cell">10</td><td class="forum_cell">Fourth</td><td class="forum_cell">2022-05-16</td><td class="forum_cell"><button id="r6144f558ead9c9d6f9a017ad" class="forum_cell_button">Remove Entry</button></td><td class="forum_cell"><button id="u6144f558ead9c9d6f9a017ad" class="forum_cell_button">Update Entry</button>
-    // StudentName: dataStringParsed.StudentName,
-    //       StudentClass: dataStringParsed.StudentClass,
-    //       StudentRole: dataStringParsed.StudentRole,
-    //       StudentHours: studentHours,
-    //       GitHubUserID: request.user,
-    //       StudentYear: dataStringParsed.StudentYear,
-    //       StudentGradDate: dataStringParsed.StudentGradDate
-    // <li>{this.props.name} :
-    //   <input type="checkbox" defaultChecked={this.props.completed} onChange={e => this.change(e)} />
-    // </li>
   }
 
-  // call this method when the checkbox for this component is clicked
+  // A method used to update an entry based on its id field
   async updateEntry(id_value) {
-    // prevent default form action from being carried out
-    // e.preventDefault();
-    // console.log("Update");
-    // console.log(e)
-    // console.log(idVal);
-    // this.props.onclick(this.props.name, e.target.checked)
     const json = getNewStudentFromFields();
     json._id = id_value;
     let body = JSON.stringify(json);
@@ -94,43 +75,15 @@ class Todo extends React.Component {
         return response.json();
       })
       .then(function (data) {
-        // Create table
-        // initialize_list(data);
-
-        // Update data
-        // previous_app_data = data;
-
-        // return data;
-        // App.load()
+        // Set data value
         data_value = data;
-        // console.log("Before inside");
-        // console.log(data);
-        // console.log(this_representation);
-        // this_representation.setState({ todos: data_value });
-        // this_representation.setState({ todos: data_value });
-        // console.log("After inside");
       });
-
-    // console.log(fetch_response)
-    // console.log("Before outside");
-    // console.log(data_value);
-    // console.log(this);
-    // console.log(this.props.app_class);
-    // this.setState({ todos: data_value });
     this.props.app_class.setState({ todos: data_value });
-    // console.log("After outside");
   }
-  
+
   // call this method when the checkbox for this component is clicked
   async removeEntry(id_value) {
-    // prevent default form action from being carried out
-    // e.preventDefault();
-    // console.log("Update");
-    // console.log(e)
-    // console.log(idVal);
-    // this.props.onclick(this.props.name, e.target.checked)
-    const json = {_id : id_value}
-    // json._id = id_value;
+    const json = { _id: id_value };
     let body = JSON.stringify(json);
 
     let data_value = {};
@@ -144,78 +97,22 @@ class Todo extends React.Component {
         return response.json();
       })
       .then(function (data) {
-        // Create table
-        // initialize_list(data);
-
-        // Update data
-        // previous_app_data = data;
-
-        // return data;
-        // App.load()
         data_value = data;
-        // console.log("Before inside");
-        // console.log(data);
-        // console.log(this_representation);
-        // this_representation.setState({ todos: data_value });
-        // this_representation.setState({ todos: data_value });
-        // console.log("After inside");
       });
-
-    // console.log(fetch_response)
-    // console.log("Before outside");
-    // console.log(data_value);
-    // console.log(this);
-    // console.log(this.props.app_class);
-    // this.setState({ todos: data_value });
     this.props.app_class.setState({ todos: data_value });
-    // console.log("After outside");
   }
 }
 
-// main component
+// Main table component
 class App extends React.Component {
   constructor(props) {
     super(props);
     // initialize our state
     this.state = { todos: [] };
     this.load();
-    // console.log(props.submitButton)
-    // props.submitButton.onClick = this.addItem;
-    // console.log(props.submitButton)
   }
 
-  // Function that is responsible for adding an item to our forum
-  // addItem = function (e) {
-  //   // prevent default form action from being carried out
-  //   e.preventDefault();
-
-  //   console.log("Hello there")
-
-  //   const json = getNewStudentFromFields(),
-  //     body = JSON.stringify(json);
-
-  //   // Submit the POST request
-  //   fetch("/submit", {
-  //     method: "POST",
-  //     body,
-  //   })
-  //     .then(function (response) {
-  //       return response.json();
-  //     })
-  //     .then(function (data) {
-  //       // Initialize the table
-  //       // initialize_list(data);
-
-  //       // Reset the data list
-  //       // previous_app_data = data;
-
-  //       return data;
-  //     });
-
-  //   return false;
-  // };
-
-  // load in our data from the server
+  // Load in our data from the server
   load() {
     fetch("/initializeData", {
       method: "POST",
@@ -226,17 +123,12 @@ class App extends React.Component {
           todos: json,
         });
       });
-    // .then((response) => {
-    //   this.setState({
-    //     todos: response,
-    //   });
-    // });
   }
 
-  // render component HTML using JSX
+  // Render component HTML using JSX
   render() {
     return (
-      // <table class="table_area" id="forum_section">
+      // Return a fragment so we can return all rows in the existing table
       <React.Fragment>
         <tr class="forum_header">
           <th class="forum_header">Student Name</th>
@@ -260,41 +152,9 @@ class App extends React.Component {
             app_class={this}
           />
         ))}
-        {/* </table> */}
       </React.Fragment>
-      // <div className="App">
-      //   <input type='text' /><button onClick={e => this.add(e)}>add</button>
-      //   <ul>
-      //     {this.state.todos.map((todo, i) => <Todo key={i} name={todo.name} completed={todo.completed} onclick={this.toggle} />)}
-      //   </ul>
-      // </div>
     );
   }
-
-  // // when an Todo is toggled, send data to server
-  // toggle(name, completed) {
-  //   fetch('/change', {
-  //     method: 'POST',
-  //     body: JSON.stringify({ name, completed }),
-  //     headers: { 'Content-Type': 'application/json' }
-  //   })
-  // }
-
-  // // add a new todo list item
-  // add(evt) {
-  //   const value = document.querySelector('input').value
-
-  //   fetch('/add', {
-  //     method: 'POST',
-  //     body: JSON.stringify({ name: value, completed: false }),
-  //     headers: { 'Content-Type': 'application/json' }
-  //   })
-  //     .then(response => response.json())
-  //     .then(json => {
-  //       // changing state triggers reactive behaviors
-  //       this.setState({ todos: json })
-  //     })
-  // }
 }
 
 export default App;
