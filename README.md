@@ -1,30 +1,7 @@
-Assignment 4 - Components
-===
+# Reactive Calorie Tracker
 
-Due: October 4th, by 11:59 AM.
+Jack Ayvazian (jpayvazian) [link]
 
-For this assignment you will re-implement the client side portion of A3 using either React or Svelte components.
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+This is my __React__ Calorie Tracker application derived from A2, where a user can track their calorie intake by inputing food items, calories per serving, and number of servings consumed. The server derives the total calories for each item based on how many servings were entered. The "Update" form will be filled in with the fields of a selected item by clicking edit besides it, and items can also be deleted.  
+From my A2 peer feedback, I added a total calorie count for the entire table which automatically refreshes, and I updated the styling to center and widen the content.  
+I revamped the entire frontend with React, adding components for the forms, table, table row, and calorie total. Although there was a modest learning curve to implement it, this would definetly benefit the development process in the long term. I liked the Components structure and how code can be modularized away from long html files, and props can be passed as parameters to child components instead. I also enjoyed using the .jsx file type, where I could use a hybrid of html/js.

@@ -1,0 +1,38 @@
+h1 {
+  color: white;
+  background-color: black;
+  text-align:center;
+  padding: 10px;
+}
+h2 {
+  color: white;
+  background-color: black;
+  padding: 10px;
+  text-align: center;
+}
+h3 {
+  text-align: center;
+}
+body {
+  background-color: #f1f1f1;
+  font-family: Verdana, sans-serif;
+}
+table, th, td {
+  border:1.5px solid black;
+}
+table {
+  margin:auto;
+  width:100%;
+}
+.flex-container {
+  display:flex;
+  justify-content: space-between;
+}
+.flex-item {
+  width:40%;
+  margin:20px;
+  padding-left:20px;
+  padding-right:20px;
+  padding-bottom: 20px;
+  border: 3px solid black;
+}
