@@ -1,33 +1,24 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
-  "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
-  "main": "server.js",
+  "name": "a4-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "scripts": {
-    "start": "node server.js"
+    "clean": "rm dist/bundle.js",
+    "start": "snowpack dev",
+    "build": "snowpack build"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "compression": "^1.7.4",
-    "cookie-session": "^1.4.0",
     "express": "^4.17.1",
-    "mongodb": "^4.1.2",
-    "morgan": "^1.10.0",
-    "response-time": "^2.3.2"
+    "i": "^0.3.7",
+    "npm": "^7.24.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
-  "engines": {
-    "node": "12.x"
-  },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+  "devDependencies": {
+    "snowpack": "^3.8.8"
+  }
 }
