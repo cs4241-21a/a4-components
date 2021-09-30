@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import Login from "./Login";
+import Register from "./Login";
 
-let appNode = document.getElementById("app");
-ReactDOM.render(<App/>, appNode);
+let loginNode = document.getElementById("login");
+ReactDOM.render(<Login/>, loginNode);
+
+let registerNode = document.getElementById("register");
+ReactDOM.render(<Register/>, registerNode);

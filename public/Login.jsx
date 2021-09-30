@@ -1,7 +1,7 @@
 class Login extends React.Component {
     //Make a block of HTML using the jsx format
     render() {
-        return <form action='/login' class="loginForm" method='POST'>
+        return <form action='/login' classname="login" class="loginForm" method='POST'>
         <label>Returning player?</label>
         <label>Log in to start playing!</label>
         <div class="loginTextDiv">
@@ -22,7 +22,7 @@ class Login extends React.Component {
 class Register extends React.Component {
     //Make a block of HTML using the jsx format
     render(){
-        return <form action='/register' class="loginForm" method='POST'>
+        return <form action='/register' classname="register" class="loginForm" method='POST'>
         <label>New player?</label>
         <label> Create your account here!</label>
         <div class="loginTextDiv">

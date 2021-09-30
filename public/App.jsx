@@ -1,7 +1,7 @@
 import React from 'react';
 
 let usernameVar = "sample";
-
+/*
 window.onload = function() {
     const button = document.getElementById( 'submit' )
     button.onclick = submit
@@ -9,6 +9,7 @@ window.onload = function() {
     const deleteButton = document.getElementById('deleteButton');
     deleteButton.onclick = deleteScore;
 }
+*/
 
 class App extends React.Component{
     constructor( props ) {
@@ -19,20 +20,20 @@ class App extends React.Component{
 
     //load in data
     load() {
-        fetch('/currentUser', {
-            method: 'GET',
-            headers:{
-              "Content-Type":"application/json"
-            }
-          }).then(function(response) {
-            response.text().then(function(textdata) {
-              //console.log(JSON.parse(textdata)[0].name);
-              usernameVar = JSON.parse(textdata)[0].name;
-              document.getElementById("playername").innerHTML = usernameVar;
-          
-              //makeTableFromData(newAppdata);
-            })
+      fetch('/currentUser', {
+          method: 'GET',
+          headers:{
+            "Content-Type":"application/json"
+          }
+        }).then(function(response) {
+          response.text().then(function(textdata) {
+            //console.log(JSON.parse(textdata)[0].name);
+            usernameVar = JSON.parse(textdata)[0].name;
+            document.getElementById("playername").innerHTML = usernameVar;
+        
+            //makeTableFromData(newAppdata);
           })
+        })
     }
 
     submit(e) {
@@ -143,7 +144,7 @@ class App extends React.Component{
 
     //render HTML
     render() {
-        return <body>
+        return <div classname="app">
         <main id="mainGame">
           <div id="directions" class="gameLabel"><h3>Press the key before time runs out!</h3></div>
           <section id="message" class="gameLabel"><h1>Start the game to get prompts!</h1></section>
@@ -165,12 +166,12 @@ class App extends React.Component{
                 <th><label id="savedScore" class="gameLabel">0</label></th>
               </tr>
             </table>
-            <button id = "submit" class="nes-btn is-success">Enter Score</button>
+            <button id = "submit" class="nes-btn is-success" onclick={this.submit}>Enter Score</button>
           </form>
       
           <form action="/delete-player-score" id ="deleteScoreForm" class="gameForm" method="post">
             
-            <button id = "deleteButton" class="nes-btn is-warning">Delete Player Account</button>
+            <button id = "deleteButton" class="nes-btn is-warning" onclick={this.deleteScore()}>Delete Player Account</button>
           </form>
     
           <table id="game-leaderboard">
@@ -178,6 +179,6 @@ class App extends React.Component{
           </table>
         </section>
         
-      </body>
+      </div>
     }
 }
