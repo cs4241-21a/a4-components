@@ -1,6 +1,6 @@
 # Reactive Calorie Tracker
 
-Jack Ayvazian (jpayvazian) [link]
+Jack Ayvazian (jpayvazian) https://a4-jack-ayvazian.herokuapp.com/
 
 This is my __React__ Calorie Tracker application derived from A2, where a user can track their calorie intake by inputing food items, calories per serving, and number of servings consumed. The server derives the total calories for each item based on how many servings were entered. The "Update" form will be filled in automatically upon clicking edit besides an item, and items can also be deleted.  
 
