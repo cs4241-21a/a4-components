@@ -100,7 +100,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      callbackURL: "https://contact-log.herokuapp.com/github/logs",
+      callbackURL: "https://react-contact-log.herokuapp.com/github/logs",
     },
     function (accessToken, refreshToken, profile, done) {
       return done(null, profile);
