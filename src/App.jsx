@@ -1,10 +1,11 @@
 
 import React from "react";
 
+
 // we could place this Todo component in a separate file, but it's
 // small enough to alternatively just include it in our App.js file.
 
-class Entry extends React.Component {
+/* class Entry extends React.Component {
   // our .render() method creates a block of HTML using the .jsx format
   render() {
     return <tbody>{this.props.name} : 
@@ -21,7 +22,7 @@ class Entry extends React.Component {
   // change(e) {
   //   this.props.onclick( this.props.name, e.target.checked )
   // }
-}
+} */
 
 // main component
 class App extends React.Component {
@@ -29,25 +30,27 @@ class App extends React.Component {
     super( props )
     // initialize our state
     this.state = { loading: true, entries:[] }
-    //this.load()
+   this.load()
   }
 
   // load in our data from the server
-  componentDidMount() {
+  load() {
     fetch( '/read', { method:'GET', 'no-cors':true })
     .then( response => response.json() )
       .then( json => {
          this.setState({ loading: false, entries:json })
       })
+     // .then(data => console.log(data))
       .catch(err => console.log(err))
   }
 
   // render component HTML using JSX 
   render() {
+    console.log(this.state)
     return (
-      <div className="App">
-        <button id="submitnew" onClick={e =>this.add(e)}>submit</button>
-        <table id="results">
+      <div className='App'>
+         {/* <button id="submitnew" onClick={e =>this.add(e)}>submit</button>  */}
+        <table id='results'>
           <thead>
             <tr>
               <th>Name</th>
@@ -89,6 +92,7 @@ toggle( name, feet, inches, weight, bmi, status ) {
 
 // add a new entry table item
 add( evt ) {
+  evt.preventDefault()
   const newname = document.getElementById('yourname').value
   const newfeet = document.getElementById('feet').value
   const newinches = document.getElementById('inches').value

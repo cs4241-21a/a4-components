@@ -2,12 +2,14 @@ const express  = require( 'express' ),
       app      = express(),
       cors = require('cors')
 
-const data = [
+const entries = [
   {name:'jeff', feet:5, inches:10, weight:150, bmi:25, status:'Healthy'}
 ]
 
 app.use( express.json() )
 app.use(cors())
+
+
 
 // this will most likely be 'build' or 'public'
 app.use( express.static( 'build' ) )
@@ -33,4 +35,9 @@ app.post( '/change', function( req,res ) {
   res.sendStatus( 200 )
 })
 
-app.listen( 8080 )
+app.post('/delete', function(req, res){
+  const idx = entries.findIndex( v => v.name === req.body.name )
+  entries.splice((entries[idx]), 1)
+})
+
+app.listen( process.env.PORT || 8080 )
