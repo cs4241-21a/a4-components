@@ -21,17 +21,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression())
 
+
+app.use(express.static('../frontend/build'))
+
+
 app.get('/auth/github', passport.authenticate('github', {
   scope: [ 'user:email' ]
 }));
 
 app.get('/auth/github/callback', passport.authenticate('github', {
-  failureRedirect: '/auth/error'
-}), function(req, res) {
-  console.log("Logged in correctly")
-  res.writeHeader( 200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify({ 'username': req.user.username , 'status': 200}))
-});
+  failureRedirect: '/auth/error',
+  successRedirect: '/'
+}));
 
 app.get('/auth/error', (req, res) => {
   res.writeHeader( 400, { 'Content-Type': 'text/plain' })
@@ -43,12 +44,6 @@ app.get('/auth/getUserID', validateLoginMiddleware, (req, res) => {
   res.end(JSON.stringify({ 'username': req.user.emails[0].value , 'status': 200}))
 })
 
-
-
-app.get('/', (req, res) => {
-  console.log('Getting /')
-  res.sendFile(path.join(__dirname, '../frontend/build/main.html'));
-})
 
 app.get('/api/lostitems', validateLoginMiddleware, (req, res) => {
   mongodbclient.getLostItems()
