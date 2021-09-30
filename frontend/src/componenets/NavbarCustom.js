@@ -32,16 +32,12 @@ function NavbarCustom(props) {
 
   return (
     <Navbar bg="dark" variant="dark" className={classes.paddingLeft}>
-      <Navbar.Brand href="#home">Contacts</Navbar.Brand>
+      <Navbar.Brand href="">Contacts</Navbar.Brand>
       <Nav className="me-auto">
         <Button onClick={handleShow}> Add Contact </Button>
       </Nav>
       <Nav>
-        <Button
-          variant="danger"
-          onClick={handleLogout}
-          className={classes.paddingRight}
-        >
+        <Button variant="danger" onClick={handleLogout}>
           Logout
         </Button>
       </Nav>

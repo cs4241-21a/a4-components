@@ -2,13 +2,16 @@ import "./App.css";
 
 import LoginPage from "./pages/LoginPage";
 import ContactsPage from "./pages/ContactsPage";
-import { useState } from "react";
 import NavbarCustom from "./componenets/NavbarCustom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
-  const [token, setToken] = useState();
+import { ContactsContextProvider } from "./store/website-context";
+
+import useToken from "./store/useToken";
+
+function App(props) {
+  const { token, setToken } = useToken();
 
   if (!token) {
     return (
@@ -28,10 +31,12 @@ function App() {
 
   return (
     <div>
-      <NavbarCustom setToken={setToken} />
-      <div className="wrapper">
-        <ContactsPage />
-      </div>
+      <ContactsContextProvider>
+        <NavbarCustom reload={props.reload} setToken={setToken} />
+        <div className="wrapper">
+          <ContactsPage />
+        </div>
+      </ContactsContextProvider>
     </div>
   );
 }

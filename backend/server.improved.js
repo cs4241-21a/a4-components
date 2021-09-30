@@ -128,7 +128,7 @@ app.get("/route", (req, res) => {
       .then((response) => {
         req.session.login = true;
         req.session.username = req.query.id;
-        res.redirect("main.html");
+        response.json({ worked: true });
       });
   }
 });
@@ -214,9 +214,10 @@ app.post("/delete", bodyParser.json(), function (request, response) {
 });
 
 app.post("/update", bodyParser.json(), function (request, response) {
+  console.log("in update " + request.body._id);
   collection
     .updateOne(
-      { _id: mongodb.ObjectId(request.body.modifyInput) },
+      { _id: mongodb.ObjectId(request.body._id) },
       {
         $set: {
           name: request.body.name,

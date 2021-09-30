@@ -1,4 +1,3 @@
-import "./LoginPage.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
@@ -88,16 +87,27 @@ function LoginPage(props) {
           </Form.Group>
 
           <Form.Group>
-            <Button variant="success" onClick={handleSubmit}>
+            <Button
+              variant="success"
+              className="mx-auto"
+              onClick={handleSubmit}
+            >
               Login
             </Button>
             <span> </span>
-            <Button
-              variant="primary"
-              className="registerBtn"
-              onClick={handleShow}
-            >
+            <Button variant="primary" className="mx-auto" onClick={handleShow}>
               Register
+            </Button>
+          </Form.Group>
+
+          <p></p>
+          <Form.Group>
+            <span> </span>
+            <Button
+              variant="dark"
+              href="https://github.com/login/oauth/authorize?client_id=79276fefd02f393cc68b"
+            >
+              Github Login
             </Button>
           </Form.Group>
         </Card.Body>
