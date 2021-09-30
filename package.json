@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rm dist/bundle.js",
     "start": "snowpack dev",
+    "heroku-prebuild": "npm install --dev",
     "build": "snowpack build"
   },
   "keywords": [],

@@ -149,7 +149,7 @@ class Tasks extends React.Component {
     // render component HTML using JSX 
     render() {
         return (
-            <table class="striped">
+            <table className="striped">
                 <thead>
                     <tr>
                         <th>Task</th>
