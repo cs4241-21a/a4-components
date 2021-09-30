@@ -1,33 +1,5 @@
-Assignment 4 - Components
-===
+## Procrast-inator
 
-Due: October 4th, by 11:59 AM.
+https://a4-ryan-stebe.herokuapp.com
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
-
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+Procrast-inator is a To-Do list and task scheduler that enables aggressive procrastination. From assignment 3, I replaced the update behavior of the frontend with a React class called Tasks. I also fixed some issues with pre-filling data into the form when editing or adding a new task. Overall React was far simpler and easier than manually changing the html of the tasklist. It also cut down on a lot of complicated frontend code involving an html template and using closure to procedurally assign a different callback for each task's edit and remove buttons. Snowpack caused a lot of issues on Heroku, mostly involving a config file that isn't needed on local but is on remote. Additionally, createapp's package.json start script needed to be changed from snowpack dev to node server.improved.js in order to run properly since snowpack is pruned from heroku after the build process since it is a dev dependency.
