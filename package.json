@@ -5,8 +5,7 @@
   "main": "server.improved.js",
   "scripts": {
     "clean": "rm dist/bundle.js",
-    "start": "snowpack dev",
-    "heroku-prebuild": "npm install --dev",
+    "start": "server.improved.js",
     "build": "snowpack build"
   },
   "keywords": [],
