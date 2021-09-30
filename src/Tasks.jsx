@@ -103,9 +103,8 @@ class Tasks extends React.Component {
         // prevent default form action from being carried out
         e.preventDefault()
         form.hidden = true
-    
-        let interval = 60 * 60 * 1000 // number of milliseconds in an hour
-        let deadline = Date.parse( deadlineDate.date ) + timeToNumber( deadlineHour.time, deadlineHour.amOrPm)
+        
+        let deadline = Date.parse( deadlineDate.date ) + timeToNumber( deadlineHourElement.value )
     
         let json
         switch( requestType ) {
@@ -207,13 +206,13 @@ const numberToTimeText = function( number ) {
     return "" + hoursString + ":00 " + pm
 }
 
-const timeToNumber = function( time, amOrPm ) {
+const timeToNumber = function( time ) {
     const interval = 60 * 60 * 1000 // number of milliseconds in an hour
 
-    console.log(time)
-    console.log(amOrPm)
-    let components = time.split(':')
-    let hours = parseInt(components[0]) + Math.round( parseInt( components[1] ) / 60 )
+    let components = time.split(' ')
+    let hoursMinutes = components[0].split(':')
+    let hours = parseInt(hoursMinutes[0]) + Math.round( parseInt( hoursMinutes[1] ) / 60 )
+    let amOrPm = components[1]
     if (hours === 12){
         hours = 0
     }
