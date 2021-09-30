@@ -41,11 +41,10 @@ class Task extends React.Component {
         task.value = this.props.name
         period.value = this.props.period
 
-        deadlineDate = M.Datepicker.init( deadlineDateElement, {defaultDate: new Date( this.props.deadline ), setDefaultDate: true})
-        deadlineDate.setDate( new Date() )
-        deadlineHour = M.Timepicker.init( deadlineHourElement, {defaultTime: new Date( this.props.deadline ).getHours() + ":00"})
-        deadlineHour._updateTimeFromInput()
-        deadlineHour.done()
+        deadlineDate = M.Datepicker.init( deadlineDateElement, {defaultDate: new Date( this.props.deadline ), setDefaultDate: true} )
+        deadlineDate.setDate( new Date( this.props.deadline ) )
+        deadlineHour = M.Timepicker.init( deadlineHourElement, {defaultTime: numberToTimeText( this.props.deadline )} )
+        deadlineHourElement.value = numberToTimeText( this.props.deadline )
         M.updateTextFields()
 
         requestType = "/edit"
@@ -89,11 +88,10 @@ class Tasks extends React.Component {
         task.value = ""
         period.value = 1
 
-        deadlineDate = M.Datepicker.init( deadlineDateElement, {defaultDate: new Date(), setDefaultDate: true})
-        deadlineDate.setDate( new Date() )
-        deadlineHour = M.Timepicker.init( deadlineHourElement, {defaultTime: "12:00AM"})
-        deadlineHour._updateTimeFromInput()
-        deadlineHour.done()
+        deadlineDate = M.Datepicker.init( deadlineDateElement, {defaultDate: new Date(), setDefaultDate: true} )
+        deadlineDate.setDate( new Date( this.props.deadline ) )
+        deadlineHour = M.Timepicker.init( deadlineHourElement, {defaultTime: "12:00 AM"} )
+        deadlineHourElement.value = "12:00 AM"
         M.updateTextFields()
 
         requestType = "/add"
@@ -114,7 +112,7 @@ class Tasks extends React.Component {
             case "/add":
                 json = { name: task.value, period: Number.parseInt( period.value ), deadline };
                 break;
-            case "/edit": 
+            case "/edit":
                 json = { _id, name: task.value, period: Number.parseInt( period.value ), deadline };
                 break;
         }
@@ -184,7 +182,15 @@ const numberToDateText = function( number ) {
     let year = date.getFullYear()
     let month = date.getMonth() + 1
     let day = date.getDate()
+
+    return numberToTimeText( number ) + " " + month + "/" + day + "/" + year
+}
+
+const numberToTimeText = function( number ) {
+    let date = new Date( number )
+
     let hours = date.getHours()
+    let hoursString = ""
     let pm = "AM"
     if ( hours >= 12 ) {
         pm = "PM"
@@ -193,8 +199,12 @@ const numberToDateText = function( number ) {
     if ( hours === 0 ) {
         hours = 12
     }
+    if ( !( hours >= 10 ) ) {
+        hoursString += "0"
+    }
+    hoursString += hours
 
-    return "" + hours + ":00 " + pm + " " + month + "/" + day + "/" + year
+    return "" + hoursString + ":00 " + pm
 }
 
 const timeToNumber = function( time, amOrPm ) {
