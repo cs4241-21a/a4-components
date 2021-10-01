@@ -24,7 +24,9 @@ app.post( '/add', ( req,res ) => {
 })
 
 app.post( '/change', function( req,res ) {
-  const idx = entries.findIndex( v => v.name === req.body.name )
+  const idx = req.body.index
+  console.log(entries[idx])
+  entries[idx].name = req.body.name
   entries[ idx ].feet = req.body.feet
   entries[idx].inches = req.body.inches
   entries[idx].weight = req.body.weight
@@ -37,7 +39,9 @@ app.post( '/change', function( req,res ) {
 
 app.post('/delete', function(req, res){
   const idx = entries.findIndex( v => v.name === req.body.name )
+  console.log(idx)
   entries.splice((entries[idx]), 1)
+  console.log(entries)
 })
 
 app.listen( process.env.PORT || 8080 )

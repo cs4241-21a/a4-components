@@ -63,7 +63,7 @@ class App extends React.Component {
             </tr>
           </thead>
           <tbody>
-          { this.state.entries.map( (entry) => 
+          { this.state.entries.map( (entry, i) => 
             <tr>
               <td>{entry.name}</td>
               <td>{entry.feet}</td>
@@ -71,8 +71,8 @@ class App extends React.Component {
               <td>{entry.weight}</td>
               <td>{entry.bmi}</td>
               <td>{entry.status}</td>
-              <td><button >Edit</button></td>
-              <td><button >Delete</button></td>
+              <td><button id = "edit" onClick ={e => this.editEntry(this.state.entries[i], i)} >Edit</button></td>
+              <td><button id="delete" onClick={e => this.deleteEntry(this.state.entries[i], e)}>Delete</button></td>
             </tr>
             ) }
           </tbody>
@@ -81,13 +81,36 @@ class App extends React.Component {
     )
   }
 // when an entry is toggled, send data to server
-toggle( name, feet, inches, weight, bmi, status ) {
+editEntry( entry, index) {
+  const newname = document.getElementById('yourname')
+  const newfeet = document.getElementById('feet')
+  const newinches = document.getElementById('inches')
+  const newweight = document.getElementById('weight')
+  const button = document.getElementById('edit')
+
+  newname.value = entry.name
+  newfeet.value = entry.feet
+  newinches.value = entry.inches
+  newweight.value = entry.weight
+  button.innerHTML = 'Save'
+
+  button.onclick = function(){
+
   fetch( '/change', {
     method:'POST',
-    body: JSON.stringify({ name, feet, inches, weight, bmi, status }),
+    body: JSON.stringify({index: index, name:newname.value, feet: newfeet.value, inches:newinches.value, weight: newweight.value, bmi:'0', status:'Healthy'}),
     headers: { 'Content-Type': 'application/json' }
   })
+  .then(response => response.json())
+  .then(json => {
+    this.setState({entries:json})
+  })
+  button.innerHTML = 'Edit'
 }
+this.load()
+ 
+}
+
 
 // add a new entry table item
 add( evt ) {
@@ -107,6 +130,20 @@ add( evt ) {
      // changing state triggers reactive behaviors
      this.setState({ entries:json }) 
   })
+}
+
+deleteEntry(ent, evt){
+  evt.preventDefault()
+  fetch('/delete', {
+    method:'POST',
+    body: JSON.stringify(ent),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(response => response.json())
+  .then(json => {
+    this.setState({loading: true, entries: entries})
+  })
+  this.load()
 }
 }
 
