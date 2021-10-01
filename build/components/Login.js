@@ -1,6 +1,26 @@
-import React from "../_snowpack/pkg/react.js";
-import {Link} from "../_snowpack/pkg/react-router-dom.js";
+import React, {useEffect, useState} from "../_snowpack/pkg/react.js";
+import {Redirect} from "../_snowpack/pkg/react-router.js";
 const Login = () => {
+  const [redirect, setRedirect] = useState("");
+  const userlogin = () => {
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=6293d146755b88e66857`;
+  };
+  useEffect(() => {
+    fetch("/id", {
+      method: "GET"
+    }).then(function(response) {
+      return response.text();
+    }).then(function(res) {
+      if (res !== "") {
+        setRedirect(true);
+      }
+    });
+  });
+  if (redirect) {
+    return /* @__PURE__ */ React.createElement(Redirect, {
+      to: "/myresults"
+    });
+  }
   return /* @__PURE__ */ React.createElement("div", {
     className: "\r\n    flex\r\n    h-screen\r\n    font-body\r\n    text-2xl\r\n    bg-gray-800\r\n    text-gray-300\r\n    w-full\r\n    h-full\r\n  "
   }, /* @__PURE__ */ React.createElement("div", {
@@ -11,13 +31,11 @@ const Login = () => {
     id: "title"
   }, " Connect Using: ")), /* @__PURE__ */ React.createElement("main", {
     className: "flex flex-col justify-center m-auto text-center"
-  }, /* @__PURE__ */ React.createElement("a", {
+  }, /* @__PURE__ */ React.createElement("p", {
     className: "text-3xl",
-    href: `https://github.com/login/oauth/authorize?client_id=6293d146755b88e66857`
+    onClick: userlogin
   }, /* @__PURE__ */ React.createElement("span", {
     className: "fa fa-github"
-  }), " GitHub")), /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement(Link, {
-    to: "/results"
-  }, "Link"))));
+  }), " GitHub"))));
 };
 export default Login;

@@ -1,7 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router";
 
 const Login = () => {
+  const [redirect, setRedirect] = useState("");
+
+  const userlogin = () => {
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=6293d146755b88e66857`;
+  };
+
+  useEffect(() => {
+    fetch("/id", {
+      method: "GET",
+    })
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (res) {
+        if (res !== "") {
+          setRedirect(true);
+        }
+      });
+  });
+
+  if (redirect) {
+    return <Redirect to="/myresults" />;
+  }
+
   return (
     <div
       className="
@@ -20,16 +44,10 @@ const Login = () => {
           <h1 id="title"> Connect Using: </h1>
         </header>
         <main className="flex flex-col justify-center m-auto text-center">
-          <a
-            className="text-3xl"
-            href={`https://github.com/login/oauth/authorize?client_id=6293d146755b88e66857`}
-          >
+          <p className="text-3xl" onClick={userlogin}>
             <span className="fa fa-github"></span> GitHub
-          </a>
+          </p>
         </main>
-        <li>
-          <Link to="/results">Link</Link>
-        </li>
       </div>
     </div>
   );

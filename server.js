@@ -12,7 +12,11 @@ const app = express();
 const clientID = "6293d146755b88e66857";
 const clientSecret = "5c1676202596fb930a9a5b4e94d469b95d184d1f";
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 app.use(serveStatic("build", { index: ["index.html"] }));
 
@@ -57,13 +61,23 @@ app.get(
   "/github/callback",
   passport.authenticate("github", { failureRedirect: "/auth/error" }),
   function (req, res) {
+    // req.session.id = req.user.id;
     res.redirect("/res?id=" + req.user.id);
+    // res.redirect("/");
   }
 );
 
+app.get("/logininfo", (req, res) => {
+  res.send(req.session.id);
+});
+
 app.get("/res", (req, res) => {
   req.session.id = req.query.id;
-  res.send({ err: 0, redirectUrl: "/results" });
+  res.redirect("/");
+});
+
+app.get("/id", (req, res) => {
+  res.send(req.session.id);
 });
 
 app.get("/logout", (req, res) => {
@@ -72,7 +86,7 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-app.use(express.static("public"));
+app.use(express.static("build"));
 app.use(express.json());
 
 const uri =
@@ -96,11 +110,6 @@ client
     // blank query returns all documents
     return collection.find({}).toArray();
   });
-
-app.get("/test", (req, res) => {
-  console.log("recieved");
-  res.send("dsfds");
-});
 
 app.get("/results", (req, res) => {
   if (collection !== null) {
