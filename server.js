@@ -1,27 +1,109 @@
 const express  = require( 'express' ),
       app      = express()
 
-const todos = [
-  { name:'buy groceries', completed:false }
-]
+const appdata = []
 
 app.use( express.json() )
-
-// this will most likely be 'build' or 'public'
 app.use( express.static( 'build' ) )
 
-app.get( '/read', ( req, res ) => res.json( todos ) )
+app.get( '/read', ( req, res ) => res.json( appdata ) )
 
 app.post( '/add', ( req,res ) => {
-  todos.push( req.body )
-  res.json( todos )
+    let entry = req.body
+
+    //adds expected delivery time
+    let dTime = "unknown";
+    const d = new Date();
+    let hours;
+    let minutes;
+    if(entry.distance === "Not Far"){
+      if(d.getHours() > 12){
+        hours = d.getHours() - 16;
+      }
+      else{
+        hours = d.getHours() - 4;
+      }
+
+      if(d.getMinutes() + 10 > 60){
+        if(hours === 12){
+          hours = 0
+        }
+        hours = hours + 1;
+        minutes = d.getMinutes() + 10 - 60;
+      }
+      else{
+        minutes = d.getMinutes() + 10;
+      }
+    }
+    if(entry.distance === "Decently Far"){
+      if(d.getHours() > 12){
+        hours = d.getHours() - 16;
+      }
+      else{
+        hours = d.getHours() - 4;
+      }
+
+      if(d.getMinutes() + 25 > 60){
+        if(hours === 12){
+          hours = 0
+        }
+        hours = hours + 1;
+        minutes = d.getMinutes() + 25 - 60;
+      }
+      else{
+        minutes = d.getMinutes() + 25;
+      }
+    }
+    if(entry.distance === "Far"){
+      if(d.getHours() > 12){
+        hours = d.getHours() - 16;
+      }
+      else{
+        hours = d.getHours() - 4;
+      }
+
+      if(d.getMinutes() + 40 > 60){
+        if(hours === 12){
+          hours = 0
+        }
+        hours = hours + 1;
+        minutes = d.getMinutes() + 40 - 60;
+      }
+      else{
+        minutes = d.getMinutes() + 40;
+      }
+      
+    }
+    if(minutes < 10){
+      dTime = hours + ":0" + minutes
+    }
+    else{
+      dTime = hours + ":" + minutes
+    }
+
+    if(d.getHours() > 12){
+      timePlaced = (d.getHours() - 16) + ":" + d.getMinutes(); 
+    }
+    else{
+      timePlaced = (d.getHours() - 4) + ":" + d.getMinutes(); 
+    }
+
+    entry.time = timePlaced;
+    entry.dropTime = dTime;
+    console.log(entry);
+
+  appdata.push(entry)
+  console.log(appdata)
+  res.json(appdata)
 })
 
-app.post( '/change', function( req,res ) {
-  const idx = todos.findIndex( v => v.name === req.body.name )
-  todos[ idx ].completed = req.body.completed
-  
-  res.sendStatus( 200 )
+app.post( '/update', function( req,res ) {
+
+})
+
+app.post( '/remove', function( req,res ){
+    appdata.splice(req.body.i, 1)
+    res.json(appdata)
 })
 
 app.listen( 3000 )

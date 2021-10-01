@@ -12,7 +12,9 @@
     "build": "snowpack build"
   },
   "dependencies": {
+    "app": "^0.1.0",
     "express": "^4.17.1",
+    "jss": "^10.8.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
