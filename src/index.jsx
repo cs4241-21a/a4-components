@@ -1,7 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import Tables from "./Tables";
 
 
-var mountNode = document.getElementById("app");
-ReactDOM.render(<App name="Ben" />, mountNode);
+
+let mountNode = document.getElementById("app");
+ReactDOM.render(<App/>, mountNode)
+
+//let mountNode2 = document.getElementById("table");
+//ReactDOM.render(<Tables/>, mountNode2)

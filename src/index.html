@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Empty project</title>
+        <title>CS4241 Assignment 4</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="This is a simple todo app. This is the main page">
+        <link rel="stylesheet" href="https://unpkg.com/chota">
+        <script type="module" src="index.js"></script>
     </head>
     <body>
+        <h1>A simple todo list app</h1>
+        <form method="post">
         <div id="app"></div>
-        <script type="module" src="index.js"></script>
+        </form>
+        <p>In the table, click on a delete button to delete that todo, 
+            and the update button to replace any part of that todo with what's in the inputs above!</p>
+            <h2>Your Todos:</h2>
+            <style>
+                td:nth-child(1){
+                  width:60%;
+                }
+              
+                .table-container{
+                  display: flex;
+                  flex-direction: row;
+                }
+                table{
+                  border:2px solid grey;
+                }
+            </style>
+        <div id="tables"></div>
     </body>
 </html>
