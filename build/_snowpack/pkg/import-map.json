@@ -1,5 +1,7 @@
 {
   "imports": {
+    "@fortawesome/free-brands-svg-icons": "./@fortawesome/free-brands-svg-icons.js",
+    "@fortawesome/react-fontawesome": "./@fortawesome/react-fontawesome.js",
     "react": "./react.js",
     "react-dom": "./react-dom.js",
     "react-router": "./react-router.js",

@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "../_snowpack/pkg/react.js";
 import {Redirect} from "../_snowpack/pkg/react-router.js";
+import {FontAwesomeIcon} from "../_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faGithub} from "../_snowpack/pkg/@fortawesome/free-brands-svg-icons.js";
 const Login = () => {
   const [redirect, setRedirect] = useState("");
   const userlogin = () => {
@@ -34,8 +36,8 @@ const Login = () => {
   }, /* @__PURE__ */ React.createElement("p", {
     className: "text-3xl",
     onClick: userlogin
-  }, /* @__PURE__ */ React.createElement("span", {
-    className: "fa fa-github"
-  }), " GitHub"))));
+  }, /* @__PURE__ */ React.createElement(FontAwesomeIcon, {
+    icon: faGithub
+  }), " Github"))));
 };
 export default Login;

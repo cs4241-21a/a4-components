@@ -13,6 +13,9 @@
     "dev": "snowpack dev"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "helmet": "^4.6.0",

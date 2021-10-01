@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Login = () => {
   const [redirect, setRedirect] = useState("");
@@ -45,7 +47,7 @@ const Login = () => {
         </header>
         <main className="flex flex-col justify-center m-auto text-center">
           <p className="text-3xl" onClick={userlogin}>
-            <span className="fa fa-github"></span> GitHub
+            <FontAwesomeIcon icon={faGithub} /> Github
           </p>
         </main>
       </div>

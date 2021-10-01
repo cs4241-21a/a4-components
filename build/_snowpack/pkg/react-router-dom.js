@@ -1,6 +1,7 @@
-import { _ as _inheritsLoose, c as createBrowserHistory, a as Router, b as createHashHistory, d as _objectWithoutPropertiesLoose, e as _extends, f as context, i as invariant, g as createLocation, h as createPath, m as matchPath } from './common/react-router-c7100d21.js';
-export { j as Route, S as Switch } from './common/react-router-c7100d21.js';
+import { _ as _inheritsLoose, c as createBrowserHistory, a as Router, b as createHashHistory, d as _objectWithoutPropertiesLoose, e as _extends, f as context, i as invariant, g as createLocation, h as createPath, m as matchPath } from './common/react-router-252584e7.js';
+export { j as Route, S as Switch } from './common/react-router-252584e7.js';
 import { r as react } from './common/index-ae389540.js';
+import './common/index-ffbe0e60.js';
 
 /**
  * The public API for a <Router> that uses HTML5 history.

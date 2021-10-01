@@ -67,6 +67,10 @@ app.get(
   }
 );
 
+app.get("/myresults", (req, res) => {
+  res.redirect("/");
+});
+
 app.get("/logininfo", (req, res) => {
   res.send(req.session.id);
 });
