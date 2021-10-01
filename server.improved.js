@@ -3,6 +3,36 @@
 //INITIAL SETUP/MIDDLEWARE//
 ////////////////////////////
 
+/*
+const express  = require( 'express' ),
+      app      = express()
+
+const todos = [
+  { name:'buy groceries', completed:false }
+]
+
+app.use( express.json() )
+
+
+
+app.get( '/read', ( req, res ) => res.json( todos ) )
+
+app.post( '/add', ( req,res ) => {
+  todos.push( req.body )
+  res.json( todos )
+})
+
+app.post( '/change', function( req,res ) {
+  const idx = todos.findIndex( v => v.name === req.body.name )
+  todos[ idx ].completed = req.body.completed
+  
+  res.sendStatus( 200 )
+})
+
+app.listen( 8080 )
+*/
+
+
 const res = require('express/lib/response')
 
 const express = require( 'express' ),
@@ -12,7 +42,7 @@ const express = require( 'express' ),
       morgan = require("morgan"),
       app = express()
 
-app.use( express.static('public') )
+app.use( express.static('build') )
 app.use( express.json() )
 app.use(morgan('combined'))
 
@@ -104,11 +134,11 @@ app.post( '/login', bodyParser.json(), (req,res)=> {
       } else {
 
         //reject user for bad password
-        res.sendFile( __dirname + '/public/badLogin.html' )
+        res.sendFile( __dirname + '/build/badLogin.html' )
       }
     } else {
       //reject user for bad username
-      res.sendFile( __dirname + '/public/usernameNotExist.html' )
+      res.sendFile( __dirname + '/build/usernameNotExist.html' )
     }
   }  
   )
@@ -144,11 +174,11 @@ app.post( '/logout', bodyParser.json(), (req,res)=> {
       } else {
 
         //reject user for bad password
-        res.sendFile( __dirname + '/public/index.html' )
+        res.sendFile( __dirname + '/build/index.html' )
       }
     } else {
       //reject user for bad username
-      res.sendFile( __dirname + '/public/index.html' )
+      res.sendFile( __dirname + '/build/index.html' )
     }
   }  
   )
@@ -172,7 +202,7 @@ app.post( '/register', bodyParser.json(), (req,res)=> {
 
       //make a new user entry and insert it into the user collection
       let newUserObject = makeUserObject(regUsername, regPassword);
-      collection.insertOne( newUserObject ).then( res.sendFile( __dirname + '/public/registered.html' ) )
+      collection.insertOne( newUserObject ).then( res.sendFile( __dirname + '/build/registered.html' ) )
       //reject user for bad username
       
       return;
@@ -188,7 +218,7 @@ app.post( '/register', bodyParser.json(), (req,res)=> {
       // https://stackoverflow.com/questions/10827242/understanding-the-post-redirect-get-pattern 
       
     }else{
-      res.sendFile( __dirname + '/public/badRegister.html' )
+      res.sendFile( __dirname + '/build/badRegister.html' )
     }
   })
   
@@ -199,11 +229,11 @@ app.use( function( req,res,next) {
   if( req.session.login === true )
     next()
   else
-    res.sendFile( __dirname + '/public/index.html' )
+    res.sendFile( __dirname + '/build/index.html' )
 })
 
-// serve up static files in the directory public
-app.use( express.static('public') )
+// serve up static files in the directory build
+app.use( express.static('build') )
 
 app.post( '/submit', bodyParser.json(), (req,res) => {
 
@@ -279,6 +309,7 @@ app.listen( process.env.PORT || 3000 )
 
 
 
+
 ////////////////////
 //HELPER FUNCTIONS//
 ////////////////////
@@ -305,3 +336,4 @@ function deletePlayerScore(playerName){
 function makeUserObject(username, userPassword){
   return {name: username, password: userPassword, score: 0, rank: 0};
 }
+

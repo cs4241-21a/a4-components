@@ -1,22 +1,24 @@
 import React from 'react';
 
-let usernameVar = "sample";
-/*
-window.onload = function() {
-    const button = document.getElementById( 'submit' )
-    button.onclick = submit
-
-    const deleteButton = document.getElementById('deleteButton');
-    deleteButton.onclick = deleteScore;
-}
-*/
-
 class App extends React.Component{
     constructor( props ) {
-        super( props )
-        //initialize state here
-        this.load();
+      super( props )
+      //initialize state here
+      this.load();
+
+      //game variables
+      this.gameOver = false;
+      this.timeInterval = 1500;
+      this.playerScore = 0;
+      this.displayMessage = document.getElementById("message");
+      this.displayScore = document.getElementById("score");
+      this.displaySavedScore = document.getElementById("savedScore");
+      this.isKeyPressed = true;
+      this.wrongKeyPressed = false;
+      this.gameTimer;
     }
+
+
 
     //load in data
     load() {
@@ -142,14 +144,102 @@ class App extends React.Component{
         } 
     }
 
+    gameLoopSetup(){
+      this.playerScore = 0;
+      this.gameOver = false;
+      this.timeInterval = 1500;
+      this.isKeyPressed = true;
+      this.displayScore.innerHTML = "Score: " + playerScore;
+    
+    
+      this.gameLoop();
+    }
+
+    gameLoop(){
+
+      //If the correct key was pressed at the end of the interval, the game continues
+      if(isKeyPressed){
+        gameOver = false;
+      } else {
+        gameOver = true;
+      }
+    
+      //Primary game loop
+      if(!gameOver){
+        isKeyPressed = false;
+    
+        //Increase game speed over time
+        if(playerScore % 10 === 0 && playerScore <= 100 && playerScore !== 0){
+          timeInterval -= 50;
+        }
+    
+        //Make a new timeout
+        clearTimeout(gameLoop);
+        gameTimer = setTimeout(gameLoop, timeInterval);
+    
+        //Set a randomized key
+        let keyArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        let currentKey = keyArray[this.getRandomInt(0,25)];
+        let currentKeyCode = "Key"+currentKey;
+    
+    
+        displayMessage.innerHTML = "Press " + currentKey + "!";
+    
+        //Make a key event listener that removes itself after success
+        document.addEventListener("keydown", function(event){
+    
+          let timesActivated = 0;
+    
+          if(event.code === currentKeyCode){
+    
+            displayMessage.innerHTML = currentKey + " was pressed!";
+            isKeyPressed = true;
+            playerScore += 1;
+            displayScore.innerHTML = "Score: " + playerScore;
+            timesActivated += 1;
+    
+          } else {
+            if(timesActivated > 0){
+              displayMessage.innerHTML = currentKey + " was not pressed! Game over!";
+              wrongKeyPressed = true;
+              gameOver = true;
+              clearTimeout(gameLoop);
+            }
+           
+            timesActivated += 1;
+          }
+        }, {once: true});
+      } else if(gameOver) {
+        if(!wrongKeyPressed){
+          displayMessage.innerHTML = " The key was not pressed in time! Game over!";
+        }
+    
+        displaySavedScore.innerHTML = playerScore;
+        clearTimeout(gameLoop);
+      }
+    }
+
+     /**
+     * Returns a random integer between min (inclusive) and max (inclusive).
+     * The value is no lower than min (or the next integer greater than min
+     * if min isn't an integer) and no greater than max (or the next integer
+     * lower than max if max isn't an integer).
+     * Using Math.round() will give you a non-uniform distribution!
+     */
+    getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     //render HTML
     render() {
-        return <div classname="app">
+        return <body classname="app">
         <main id="mainGame">
           <div id="directions" class="gameLabel"><h3>Press the key before time runs out!</h3></div>
           <section id="message" class="gameLabel"><h1>Start the game to get prompts!</h1></section>
           <div id="score" class="gameLabel">Score: 0</div>
-          <button id="start-button" class="nes-btn is-primary" type="button" onclick="gameLoopSetup()">Start Game</button>
+          <button id="start-button" class="nes-btn is-primary" type="button" onclick={this.gameLoopSetup()}>Start Game</button>
         </main>
     
         <section id="gameForms">
@@ -171,14 +261,14 @@ class App extends React.Component{
       
           <form action="/delete-player-score" id ="deleteScoreForm" class="gameForm" method="post">
             
-            <button id = "deleteButton" class="nes-btn is-warning" onclick={this.deleteScore()}>Delete Player Account</button>
+            <button id = "deleteButton" class="nes-btn is-warning" onclick={this.deleteScore}>Delete Player Account</button>
           </form>
     
           <table id="game-leaderboard">
     
           </table>
         </section>
-        
-      </div>
+      </body>
     }
 }
+export default App;
