@@ -51,6 +51,35 @@ class App extends React.Component {
       )
   }
 
+  edit = (index) => {
+    let form = document.querySelector('form')
+
+    form.elements['yourname'].value = this.state.appdata[index].yourname
+    form.elements['order'].value = this.state.appdata[index].yourorder
+    form.elements['distance'].value = this.state.appdata[index].distance
+    form.elements['custId'].value = index;
+
+  }
+
+  update() {
+    let name = document.getElementById( 'yourname' ),
+    order = document.getElementById('order'),
+    dist = document.getElementById('distance'),
+    ind = document.getElementById('custId'),
+      json = { yourname: name.value, yourorder: order.value, distance: dist.value, i: ind.value},
+      body = JSON.stringify( json );
+    
+    fetch('/update', {
+      method: 'post',
+      body,
+      headers: {'Content-type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then(json =>
+      this.setState({ appdata:json })
+      )
+  }
+
   render() {
     return (
       <div className="App">
@@ -58,9 +87,8 @@ class App extends React.Component {
         <h1>ORDER DELIVERY ONLINE</h1> 
         <h2>PLEASE FILL OUT ALL FIELDS</h2>
         <hr style={{width: '70%'}}/>
-        <OrderForm onClick={() => this.add()}/>
-        <center><button class="update_button" id='update_button' onclick="updateCell()">Update</button></center>
-        <DataTable entries={this.state.appdata} remove={this.remove}/>
+        <OrderForm onClick={() => this.add()} onClick2={() => this.update()}/>
+        <DataTable entries={this.state.appdata} remove={this.remove} edit={this.edit}/>
       </div>
     );
   }
@@ -69,6 +97,7 @@ class App extends React.Component {
 
 class Row extends React.Component {
   remove=() => this.props.remove(this.props.index)
+  edit=() => this.props.edit(this.props.index)
 
   render(){
     return(
@@ -79,6 +108,7 @@ class Row extends React.Component {
         <td>{this.props.dist}</td>
         <td>{this.props.dTime}</td>
         <td><button onClick={this.remove}>Delete</button></td>
+        <td><button onClick={this.edit}>Edit</button></td>
       </tr>
     );
   }
@@ -86,6 +116,7 @@ class Row extends React.Component {
 
 class DataTable extends React.Component{
   remove=(index) => this.props.remove(index)
+  edit=(index) => this.props.edit(index)
 
   render(){
     return(
@@ -106,6 +137,7 @@ class DataTable extends React.Component{
           dist={entry.distance}
           dTime={entry.dropTime}
           remove={this.remove}
+          edit={this.edit}
             /> ) } 
         </tbody>
       </table>
@@ -129,8 +161,10 @@ class OrderForm extends React.Component{
             <option value='Decently Far'>Decently Far</option>
             <option value='Far'>Far</option>
       </select>
+      <input type="hidden" id="custId"/>
       <br/>
       <button class="button" type='button' onClick={this.props.onClick}>Submit</button>
+      <button class="update_button" id='update_button' onClick={this.props.onClick2}>Update</button>
       </center>
       </form>
     )

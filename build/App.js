@@ -26,6 +26,21 @@ class App extends React.Component {
       headers: {"Content-type": "application/json"}
     }).then((response) => response.json()).then((json2) => this.setState({appdata: json2}));
   };
+  edit = (index) => {
+    let form = document.querySelector("form");
+    form.elements["yourname"].value = this.state.appdata[index].yourname;
+    form.elements["order"].value = this.state.appdata[index].yourorder;
+    form.elements["distance"].value = this.state.appdata[index].distance;
+    form.elements["custId"].value = index;
+  };
+  update() {
+    let name = document.getElementById("yourname"), order = document.getElementById("order"), dist = document.getElementById("distance"), ind = document.getElementById("custId"), json = {yourname: name.value, yourorder: order.value, distance: dist.value, i: ind.value}, body = JSON.stringify(json);
+    fetch("/update", {
+      method: "post",
+      body,
+      headers: {"Content-type": "application/json"}
+    }).then((response) => response.json()).then((json2) => this.setState({appdata: json2}));
+  }
   render() {
     return /* @__PURE__ */ React.createElement("div", {
       className: "App"
@@ -37,27 +52,29 @@ class App extends React.Component {
     })), /* @__PURE__ */ React.createElement("h1", null, "ORDER DELIVERY ONLINE"), /* @__PURE__ */ React.createElement("h2", null, "PLEASE FILL OUT ALL FIELDS"), /* @__PURE__ */ React.createElement("hr", {
       style: {width: "70%"}
     }), /* @__PURE__ */ React.createElement(OrderForm, {
-      onClick: () => this.add()
-    }), /* @__PURE__ */ React.createElement("center", null, /* @__PURE__ */ React.createElement("button", {
-      class: "update_button",
-      id: "update_button",
-      onclick: "updateCell()"
-    }, "Update")), /* @__PURE__ */ React.createElement(DataTable, {
+      onClick: () => this.add(),
+      onClick2: () => this.update()
+    }), /* @__PURE__ */ React.createElement(DataTable, {
       entries: this.state.appdata,
-      remove: this.remove
+      remove: this.remove,
+      edit: this.edit
     }));
   }
 }
 class Row extends React.Component {
   remove = () => this.props.remove(this.props.index);
+  edit = () => this.props.edit(this.props.index);
   render() {
     return /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("td", null, this.props.name), /* @__PURE__ */ React.createElement("td", null, this.props.time), /* @__PURE__ */ React.createElement("td", null, this.props.order), /* @__PURE__ */ React.createElement("td", null, this.props.dist), /* @__PURE__ */ React.createElement("td", null, this.props.dTime), /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("button", {
       onClick: this.remove
-    }, "Delete")));
+    }, "Delete")), /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("button", {
+      onClick: this.edit
+    }, "Edit")));
   }
 }
 class DataTable extends React.Component {
   remove = (index) => this.props.remove(index);
+  edit = (index) => this.props.edit(index);
   render() {
     return /* @__PURE__ */ React.createElement("center", null, /* @__PURE__ */ React.createElement("table", {
       id: "dataTable"
@@ -69,7 +86,8 @@ class DataTable extends React.Component {
       order: entry.yourorder,
       dist: entry.distance,
       dTime: entry.dropTime,
-      remove: this.remove
+      remove: this.remove,
+      edit: this.edit
     })))));
   }
 }
@@ -92,11 +110,18 @@ class OrderForm extends React.Component {
       value: "Decently Far"
     }, "Decently Far"), /* @__PURE__ */ React.createElement("option", {
       value: "Far"
-    }, "Far")), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("button", {
+    }, "Far")), /* @__PURE__ */ React.createElement("input", {
+      type: "hidden",
+      id: "custId"
+    }), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("button", {
       class: "button",
       type: "button",
       onClick: this.props.onClick
-    }, "Submit")));
+    }, "Submit"), /* @__PURE__ */ React.createElement("button", {
+      class: "update_button",
+      id: "update_button",
+      onClick: this.props.onClick2
+    }, "Update")));
   }
 }
 export default App;

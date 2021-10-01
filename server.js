@@ -16,12 +16,16 @@ app.post( '/add', ( req,res ) => {
     const d = new Date();
     let hours;
     let minutes;
+    let meridiem;
+    let meridiem2;
     if(entry.distance === "Not Far"){
       if(d.getHours() > 12){
         hours = d.getHours() - 16;
+        meridiem = "PM"
       }
       else{
         hours = d.getHours() - 4;
+        meridiem = "AM"
       }
 
       if(d.getMinutes() + 10 > 60){
@@ -38,9 +42,11 @@ app.post( '/add', ( req,res ) => {
     if(entry.distance === "Decently Far"){
       if(d.getHours() > 12){
         hours = d.getHours() - 16;
+        meridiem = "PM"
       }
       else{
         hours = d.getHours() - 4;
+        meridiem = "AM"
       }
 
       if(d.getMinutes() + 25 > 60){
@@ -57,9 +63,11 @@ app.post( '/add', ( req,res ) => {
     if(entry.distance === "Far"){
       if(d.getHours() > 12){
         hours = d.getHours() - 16;
+        meridiem = "PM"
       }
       else{
         hours = d.getHours() - 4;
+        meridiem = "AM"
       }
 
       if(d.getMinutes() + 40 > 60){
@@ -75,17 +83,18 @@ app.post( '/add', ( req,res ) => {
       
     }
     if(minutes < 10){
-      dTime = hours + ":0" + minutes
+      dTime = hours + ":0" + minutes + meridiem
     }
     else{
-      dTime = hours + ":" + minutes
+      dTime = hours + ":" + minutes + meridiem
     }
 
     if(d.getHours() > 12){
-      timePlaced = (d.getHours() - 16) + ":" + d.getMinutes(); 
+      meridiem2 = "PM"
+      timePlaced = (d.getHours() - 16) + ":" + d.getMinutes() + meridiem2; 
     }
     else{
-      timePlaced = (d.getHours() - 4) + ":" + d.getMinutes(); 
+      timePlaced = (d.getHours() - 4) + ":" + d.getMinutes() + meridiem2; 
     }
 
     entry.time = timePlaced;
@@ -98,7 +107,93 @@ app.post( '/add', ( req,res ) => {
 })
 
 app.post( '/update', function( req,res ) {
+    appdata[req.body.i].yourname = req.body.yourname
+    appdata[req.body.i].yourorder = req.body.yourorder
+    appdata[req.body.i].distance = req.body.distance
 
+    let entry = req.body
+
+        //adds expected delivery time
+        let dTime = "unknown";
+        const d = new Date();
+        let hours;
+        let minutes;
+        let meridiem;
+        if(entry.distance === "Not Far"){
+          if(d.getHours() > 12){
+            hours = d.getHours() - 16;
+            meridiem = "PM"
+          }
+          else{
+            hours = d.getHours() - 4;
+            meridiem = "AM"
+          }
+    
+          if(d.getMinutes() + 10 > 60){
+            if(hours === 12){
+              hours = 0
+            }
+            hours = hours + 1;
+            minutes = d.getMinutes() + 10 - 60;
+          }
+          else{
+            minutes = d.getMinutes() + 10;
+          }
+        }
+        if(entry.distance === "Decently Far"){
+          if(d.getHours() > 12){
+            hours = d.getHours() - 16;
+            meridiem = "PM"
+          }
+          else{
+            hours = d.getHours() - 4;
+            meridiem = "AM"
+          }
+    
+          if(d.getMinutes() + 25 > 60){
+            if(hours === 12){
+              hours = 0
+            }
+            hours = hours + 1;
+            minutes = d.getMinutes() + 25 - 60;
+          }
+          else{
+            minutes = d.getMinutes() + 25;
+          }
+        }
+        if(entry.distance === "Far"){
+          if(d.getHours() > 12){
+            hours = d.getHours() - 16;
+            meridiem = "PM"
+          }
+          else{
+            hours = d.getHours() - 4;
+            meridiem = "AM"
+          }
+    
+          if(d.getMinutes() + 40 > 60){
+            if(hours === 12){
+              hours = 0
+            }
+            hours = hours + 1;
+            minutes = d.getMinutes() + 40 - 60;
+          }
+          else{
+            minutes = d.getMinutes() + 40;
+          }
+          
+        }
+        if(minutes < 10){
+          dTime = hours + ":0" + minutes + meridiem
+        }
+        else{
+          dTime = hours + ":" + minutes + meridiem
+        }
+    
+        entry.dropTime = dTime;
+        appdata[req.body.i].dropTime = dTime;
+
+    res.json(appdata)
 })
 
 app.post( '/remove', function( req,res ){
