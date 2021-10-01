@@ -58,7 +58,7 @@ form{
     grid-gap:15px;
 }
 
-#submit{
+#submitnew{
     grid-column: span 2;
     font-size:20px;
     background-color:#7BC3FF

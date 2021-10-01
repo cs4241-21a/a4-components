@@ -45,7 +45,7 @@ class App extends React.Component {
 
   // render component HTML using JSX 
   render() {
-    console.log(this.state)
+   // console.log(this.state)
     return (
       <div className='App'>
          <button id="submitnew" onClick={e =>this.add(e)}>submit</button>
@@ -64,15 +64,15 @@ class App extends React.Component {
           </thead>
           <tbody>
           { this.state.entries.map( (entry, i) => 
-            <tr>
+            <tr key = {i}>
               <td>{entry.name}</td>
               <td>{entry.feet}</td>
               <td>{entry.inches}</td>
               <td>{entry.weight}</td>
               <td>{entry.bmi}</td>
               <td>{entry.status}</td>
-              <td><button id = "edit" onClick ={e => this.editEntry(this.state.entries[i], i)} >Edit</button></td>
-              <td><button id="delete" onClick={e => this.deleteEntry(this.state.entries[i], e)}>Delete</button></td>
+              <td><button id = "edit + {i}"  onClick ={e => this.editEntry(entry, i)} >Edit</button></td>
+              <td><button id= {i} onClick={e => this.deleteEntry(this.state.entries[i], e)}>Delete</button></td>
             </tr>
             ) }
           </tbody>
@@ -132,16 +132,16 @@ add( evt ) {
   })
 }
 
-deleteEntry(ent, evt){
-  evt.preventDefault()
+deleteEntry(entry, e) {
+ e.preventDefault()
   fetch('/delete', {
     method:'POST',
-    body: JSON.stringify(ent),
+    body: JSON.stringify({index: e.target.id, name: entry.name, feet: entry.feet, inches: entry.inches, bmi: entry.bmi, status: entry.status}),
     headers: { 'Content-Type': 'application/json' }
   })
   .then(response => response.json())
   .then(json => {
-    this.setState({loading: true, entries: entries})
+    this.setState({loading: true, entries: json})
   })
   this.load()
 }

@@ -38,10 +38,10 @@ app.post( '/change', function( req,res ) {
 })
 
 app.post('/delete', function(req, res){
-  const idx = entries.findIndex( v => v.name === req.body.name )
-  console.log(idx)
-  entries.splice((entries[idx]), 1)
-  console.log(entries)
+  const idx =  entries.findIndex( v => v.name === req.body.name )
+ // console.log(entries[idx])
+  entries.splice(idx, 1)
+  //console.log(entries)
 })
 
 app.listen( process.env.PORT || 8080 )
