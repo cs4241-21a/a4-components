@@ -1,4 +1,5 @@
 import React from "./_snowpack/pkg/react.js";
+import Tables from "./Tables.js";
 class App extends React.Component {
   render() {
     return /* @__PURE__ */ React.createElement("ul", null, /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("label", {

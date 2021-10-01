@@ -1,5 +1,7 @@
 
 import React from "react";
+import Tables from "./Tables";
+
 
 class App extends React.Component {
   render() {
