@@ -10,7 +10,6 @@ const path = require("path");
 const app = express();
 
 const clientID = "6293d146755b88e66857";
-const clientSecret = "5c1676202596fb930a9a5b4e94d469b95d184d1f";
 
 app.use(
   helmet({
@@ -44,8 +43,8 @@ passport.use(
   new GitHubStrategy(
     {
       clientID: clientID,
-      clientSecret: clientSecret,
-      callbackURL: "http://localhost:8080/github/callback",
+      clientSecret: process.env.GITHUB_SECRET,
+      callbackURL: "https://a4-andrew-whitney.glitch.me/github/callback",
     },
     function (accessToken, refreshToken, profile, done) {
       return done(null, profile);
@@ -94,7 +93,11 @@ app.use(express.static("build"));
 app.use(express.json());
 
 const uri =
-  "mongodb+srv://mydbuser:sd4A47HHLOuJ7rQJ@cluster0.yb8hn.mongodb.net/";
+  "mongodb+srv://" +
+  process.env.DB_USERNAME +
+  ":" +
+  process.env.DB_PASSWORD +
+  "@cluster0.yb8hn.mongodb.net/";
 
 const client = new mongodb.MongoClient(uri, {
   useNewUrlParser: true,
@@ -163,4 +166,4 @@ app.post("/remove", (req, res) => {
   collection.deleteOne(req.body).then((result) => res.json(result));
 });
 
-app.listen(8080, () => console.log(`Listening on 8080`));
+app.listen(8080);

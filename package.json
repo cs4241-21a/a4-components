@@ -12,6 +12,9 @@
     "build": "snowpack build",
     "dev": "snowpack dev"
   },
+  "engines": {
+    "node": "14.15.4"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",

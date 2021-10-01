@@ -7,7 +7,7 @@ const Login = () => {
   const [redirect, setRedirect] = useState("");
 
   const userlogin = () => {
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=6293d146755b88e66857`;
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=87698aca25a1ca0690a6`;
   };
 
   useEffect(() => {
