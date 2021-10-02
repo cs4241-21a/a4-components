@@ -63,7 +63,7 @@ handleScoreChange = e => {
   render() {
     return (
       <div className="App">
-         <h1>Bookkeeper App</h1>
+         <h1>Book Keeper App</h1>
         <div class="flex-container">
           <div style={{width: "60%" }}>
             <h2>Books</h2>
