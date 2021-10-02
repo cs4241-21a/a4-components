@@ -15,14 +15,32 @@ module.exports.checkLogin = (req, res, next) => {
     next();
 }
 
+// Verify that a token is valid in the authentication header
+const verifyToken = (token) => {
+        // valid token
+        if (token) {
+            try {
+                const user = jwt.verify(token, process.env.JWT_SECRET);
+
+                return [user, token];
+            } catch {
+                return null;
+            }
+        }
+
+        return null;
+}
+
+
 module.exports.checkAuth = (req, res, next) => {
+    const { token } = req.body;
+    const tokenStuff = verifyToken(token);
 
     const gitauth = req.isAuthenticated();
-    const myauth = !req.cookies.loginCookie
 
     // not logged in
-    if (myauth && !gitauth) {
-        res.redirect(`/login`);
+    if (tokenStuff && !gitauth) {
+        res.json({ errors: { login: 'Not logged in' } })
         return;
     }
 

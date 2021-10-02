@@ -2,25 +2,24 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 const User = require('../schemas/users');
-const { createDeadline } = require('../util');
-const { checkLogin } = require('../middleware');
 
 const loginCookieName = 'loginCookie';
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  // res.render('index', { title: 'TODOList', tasks: appdata });
-  res.redirect('/login');
-});
+function generateToken(user) {
+  return jwt.sign({
+    id: user.id,
+    username: user.username,
+  },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: '1 hour'
+    });
+}
 
 // Login endpoints
-router.get('/login', checkLogin, (req, res, next) => {
-
-  res.render('login', { title: 'TODOList' });
-});
-
 router.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
 
@@ -28,8 +27,7 @@ router.post('/login', async (req, res, next) => {
 
     const user = await User.findOne({ username });
     if (!user) {
-      res.render('login', {
-        title: 'TODOList',
+      res.json({
         errors: { username: `User with username ${username} does not exist` },
         formData: { username }
       });
@@ -38,18 +36,25 @@ router.post('/login', async (req, res, next) => {
 
     const match = await bcrypt.compare(password, user.passwordHash);
     if (!match) {
-      res.render('login', {
-        title: 'TODOList',
+      res.json({
         errors: { password: 'Password Does Not Match' },
         formData: { username }
       });
+      return;
     }
 
     // login success
     res.cookie(loginCookieName, { userId: user._id }, { maxAge: 21600000 });
-    res.redirect(`/user/${user._id}`);
-  } catch {
-    res.redirect('/login');
+    res.json({
+      status: 'success',
+      userId: user._id, token: generateToken({
+        id: user._id,
+        username
+      })
+    });
+  } catch (err){
+    console.log(err);
+    res.json({ errors: { error: 'error' } });
   }
 });
 
@@ -75,10 +80,6 @@ router.get('/logout', (req, res, next) => {
 });
 
 // Register Account endpoints
-router.get('/register', checkLogin, (req, res, next) => {
-  res.render('register', { title: 'TODOList' });
-});
-
 router.post('/register', async (req, res, next) => {
   const { username, password, confirmPassword } = req.body;
   let passwordHash;
@@ -87,21 +88,20 @@ router.post('/register', async (req, res, next) => {
   if (password === confirmPassword) {
     passwordHash = await bcrypt.hash(password, 12);
   } else {
-    res.render('register', {
-      title: 'TODOList',
-      errors: { password: `Passwords to not match` },
-      formData: { username }
+    res.json({
+      formData: {username},
+      errors: {password: `Passwords to not match`}
     });
+
     return;
   }
 
   const user = await User.findOne({ username });
   if (user) {
-    res.render('register', {
-      title: 'TODOList',
-      errors: { username: `User with username ${username} already exists` },
-      formData: { username }
-    });
+    res.json({
+      formData: {username},
+      errors: {password: `User with username ${username} already exists`}
+    })
     return;
   }
 
@@ -117,32 +117,20 @@ router.post('/register', async (req, res, next) => {
 
   } catch (err) {
     console.log(err);
-    res.render('register', { title: 'TODOList' });
+    res.json({ errors: 'error' });
     return;
   }
 
   // register success
   res.cookie(loginCookieName, { userId: newUser._id }, { maxAge: 21600000 });
-  res.redirect(`/user/${newUser._id}`);
-});
-
-router.post('/edit', (req, res, next) => {
-  const data = req.body;
-
-  console.log('working')
-
-  appdata = appdata.map((element) => {
-    if (data.oldTitle === element.title) {
-      element.title = data.newTitle;
-      element.description = data.description;
-      element.priority = data.priority;
-      element.deadline = createDeadline(element.dateCreated, data.priority);
-    }
-
-    return element;
+  res.json({
+    status: 'success',
+    userId: newUser._id, 
+    token: generateToken({
+      id: newUser._id,
+      username
+    })
   });
-
-  res.json(appdata);
 });
 
 module.exports = router;

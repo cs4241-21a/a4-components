@@ -1,44 +1,121 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+
+import Navbar from "../components/Navbar";
+import { LoginContext } from "../context/LoginContextProvider";
 
 const LoginPage = () => {
+    const history = useHistory();
+    const { token, login } = useContext(LoginContext);
+
+    const [state, setState] = useState({
+        formData: { username: '', password: '' },
+        errors: { username: null, password: null }
+    });
+
+    useEffect(() => {
+        if (token) {
+            history.push(`/user/${jwt_decode(token).id}`);
+        }
+    },[token]);
+
+    // Set state on input field change
+    const onInputChange = (name, value) => {
+        setState({
+            ...state,
+            formData: {
+                ...state.formData,
+                [name]: value
+            }
+        });
+    };
+
+    // Do api call on login form submission
+    const onSubmit = () => {
+        console.log('Login form submission');
+
+        fetch(`http://localhost:3001/api/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: state.formData.username,
+                password: state.formData.password
+            })
+        })
+            .then(async function (response) {
+                const data = await response.json();
+
+                if (data.errors) {
+                    setState({
+                        ...state,
+                        errors: {
+                            ...state.errors,
+                            ...data.errors
+                        }
+                    });
+                    return;
+                }
+
+                if (data.status && data.status === 'success') {
+                    login(data.token);
+                    console.log(data);
+                    console.log('push to tasks list')
+                    history.push(`/user/${data.id}`)
+                }
+            });
+    };
 
     return (
         <>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 offset-md-2 col-md-8">
-                        <div class="p-5 mb-4 bg-light rounded-3 border">
-                            <h2 class="text-center">Login</h2>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-12 col-xs-12">
+            <Navbar user={token && jwt_decode(token)} />
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-12 offset-md-2 col-md-8">
+                        <div className="p-5 mb-4 bg-light rounded-3 border">
+                            <h2 className="text-center">Login</h2>
+                            <div className="row">
+                                <div className="col-sm-12 col-md-12 col-xs-12">
                                     {/* Login form */}
-                                    <form action="/login" method="POST">
-                                        <div class="form-group">
+                                    <form onSubmit={(e) => {
+                                        e.preventDefault();
+                                        onSubmit();
+                                    }}>
+                                        <div className="form-group">
 
-                                            <label class="small mb-1 mt-3" for="username">Username: </label>
-                                            <input class="form-control"
+                                            <label className="small mb-1 mt-3" htmlFor="username">Username: </label>
+                                            <input className="form-control"
                                                 placeholder="Enter Your Username" name="username" type="text"
-                                                value={formData ? formData.username : ''} required />
+                                                value={state.formData.username} onChange={(e) => {
+                                                    onInputChange('username', e.target.value);
+                                                }} required />
                                             {
-                                                errors && errors.username &&
-                                                <p class="small text-danger">{errors.username}</p>
+                                                state.errors.username &&
+                                                <p className="small text-danger">{state.errors.username}</p>
                                             }
 
-                                            <label class="small mb-1 mt-3" for="password">Password: </label>
-                                            <input class="form-control"
-                                                placeholder="Password" name="password" type="password" required />
+                                            <label className="small mb-1 mt-3" htmlFor="password">Password: </label>
+                                            <input className="form-control" placeholder="Password" name="password" type="password"
+                                                onChange={(e) => {
+                                                    onInputChange('password', e.target.value);
+                                                }} required />
                                             {
-                                                errors && errors.password &&
-                                                <p class="small text-danger">{errors.password}</p>
+                                                state.errors.password &&
+                                                <p className="small text-danger">{state.errors.password}</p>
                                             }
 
-                                            <button class="mt-3 btn btn-primary" type="submit">Log in</button>
-                                            <p class="bg-dark rounded rounded-5 mt-3 p-2 d-flex align-items-center">
-                                                <i class="fa fa-github text-light fa-3x"></i>
-                                                <a href="/auth/github" class="link-info ms-3" >Login with Github</a>
+                                            <button className="mt-3 btn btn-primary" type="submit" onSubmit={(e) => {
+                                                e.preventDefault();
+                                                onSubmit();
+                                            }}>Log in</button>
+                                            <p className="bg-dark rounded rounded-5 mt-3 p-2 d-flex align-items-center">
+                                                <i className="fa fa-github text-light fa-3x"></i>
+                                                <a href="/auth/github" className="link-info ms-3" >Login with Github</a>
                                             </p>
-                                            <p class="m=0 bg-dark text-light p-2 my-1 rounded rounded-5">Don't have an account?
-                                                <a href="/register" class="link-info"> Sign up here</a>
+                                            <p className="m=0 bg-dark text-light p-2 my-1 rounded rounded-5">Don't have an account?
+                                                <a href="/register" className="link-info"> Sign up here</a>
                                             </p>
                                         </div>
                                     </form>

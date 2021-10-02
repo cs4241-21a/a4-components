@@ -15,7 +15,7 @@ function App() {
         <Route path='/register' component={RegisterPage} />
         <Route path='/user/:userId/' component={TODOListPage} />
         <Route path='*'>
-          <ErrorPage errorCodeMsg={'404 Not Found'} />
+          <ErrorPage errorCode={'404 Not Found'} errorMessage={'The page you are looking for does not exist.'} />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -6,26 +6,44 @@ const Task = require('../schemas/tasks');
 const { createDeadline } = require('../util');
 const { checkAuth } = require('../middleware');
 
-router.get('/get-login-cookie', checkAuth, (req, res, next) => {
+router.get('/get-login-cookie', (req, res, next) => {
+  console.log('GET Login Cookie');
   if (req.cookies.loginCookie)
     res.json(req.cookies.loginCookie);
   else
     res.json({ userId: req.user._id });
 });
 
-// Show the tasks list page to a user with id
-router.get('/:id', checkAuth, async function (req, res, next) {
+router.post('/exists', async (req, res, next) => {
+  console.log("POST exists");
+  const { id } = req.body;
+  console.log(req.body);
+  const user = await checkUserExists(id, res);
+  if(!user) return;
+
+  res.json({ exists: true });
+});
+
+
+// Get the tasks list page to a user with id
+router.post('/:id', checkAuth, async function (req, res, next) {
   const id = req.params.id;
   let tasks;
+  console.log('GET user')
 
   const user = await checkUserExists(id, res);
+
+  if(!user) {
+    return;
+  }
 
   try {
 
     tasks = await Task.find({ owner: id });
 
   } catch (err) {
-    res.redirect('/login');
+    console.log(err);
+    res.json({ errors: { error: { tasks: 'Error getting tasks' } } });
     return;
   }
 
@@ -40,17 +58,11 @@ router.get('/:id', checkAuth, async function (req, res, next) {
     }
   });
 
-  res.render('index', {
-    title: 'TODOList',
-    tasks,
-    userId: id,
-    user: { username: user.username }
-  });
+  res.json(tasks);
 });
 
 // Submit a task from a user
 router.post('/:id/submit', checkAuth, async (req, res, next) => {
-
   const id = req.params.id;
 
   await checkUserExists(id, res);
@@ -96,6 +108,7 @@ router.post('/:id/edit', checkAuth, async (req, res, next) => {
   const data = req.body;
   const id = req.params.id;
   await checkUserExists(id, res);
+  console.log(req.body);
 
   // Upate the task
   const oldTask = await Task.findOne({ title: data.oldTitle });
@@ -134,16 +147,22 @@ router.post('/:id/delete', checkAuth, async (req, res, next) => {
 
 });
 
+
 const checkUserExists = async (id, res) => {
+  console.log(id);
   try {
     const user = await User.findById(id);
     if (!user) {
-      res.redirect('/login');
+      console.log('error1')
+      res.json({ errors: { user: `User with id: ${id} does not exist` } });
+      return;
     }
 
     return user;
   } catch (err) {
-    res.redirect('/login');
+    console.log('error2')
+    res.json({ errors: { user: `Cannot find user with id: ${id}` } });
+    return;
   }
 }
 
