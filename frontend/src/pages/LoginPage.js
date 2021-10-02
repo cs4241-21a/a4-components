@@ -101,15 +101,6 @@ function LoginPage(props) {
           </Form.Group>
 
           <p></p>
-          <Form.Group>
-            <span> </span>
-            <Button
-              variant="dark"
-              href="https://github.com/login/oauth/authorize?client_id=79276fefd02f393cc68b"
-            >
-              Github Login
-            </Button>
-          </Form.Group>
         </Card.Body>
       </Card>
 

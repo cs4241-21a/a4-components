@@ -116,6 +116,7 @@ app.get(
   "/github/logs",
   passport.authenticate("github", { failureRedirect: "/auth/error" }),
   function (req, res) {
+    console.log(req);
     res.redirect("/route?id=" + req.user.id);
   }
 );
