@@ -1,33 +1,19 @@
-Assignment 4 - Components
+Assignment 2 - Short Stack: Basic Two-tier Web Application using HTML/CSS/JS and Node.js  
 ===
+## Book Keeper App
 
-Due: October 4th, by 11:59 AM.
+https://a2-mcaten-maddison-caten.glitch.me
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+My book keeper application keeps track of the books that a person has read. I used the flexbox layout to position the table of books read and the form to add a book side-by-side. The form includes the title, author, score (rating of the book 1-5), notes about the book, and the year the book was finished.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
+## Design Achievements
+(Grasso)
+The user had problems with my table not updating
+They said that my form is very clear and obvious what to fill in for each input
+I would change the way the table updates so when the submit button is clicked the new element is visible in the table
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+(Jaeger)
+The user had issues with elements duplicating when adding a new element and not having modify/delete buttons and the webpage was not very aesthetically pleasing.
+When I fixed the add element function they said the table updates correctly and the webpage is very clear
+I would change the modify/delete functions when I make them functional and the layout of the webpage
 
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
