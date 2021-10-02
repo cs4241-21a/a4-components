@@ -1,30 +1,16 @@
 Assignment 4 - Components
 ===
 
-Due: October 4th, by 11:59 AM.
+## Contact Log
 
-For this assignment you will re-implement the client side portion of A3 using either React or Svelte components.
+Heroku link: https://react-contact-log.herokuapp.com/
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+Account for Testing-  
+Username: admin  
+Password: Mike  
 
-Deliverables
----
+The application is a simple contact logging system for users. This can be used for contact tracing, possibly for COVID, or for keeping an up-to-date list of personal or work-related connections. The app implements a MongoDB server for user creation and data storage. React was used in unison to build a responsive database system. For CSS, a common framework, called React-Bootrap, was implemented for all the basic needs. React-Bootrap is a free framework with tons of common CSS features, such as Cards and Modal screens. Custom CSS was added to implement the proper Fonts and spacing required for the interface. To run the server, Node, Express, and common middlewares were used for development. Some challenges faced during development were launching the app on Heroku and creating a user registration system. The authentication strategy chosen was a simple Username + Password system. This type of authentication is common across the majority of applications. Changes from a3 include using react, which is a more component-based system, increased server management, and better CSS. React is a framework that relies heavily on components and component-based building blocks. React was used in unison with the backend structure to build a client-side application. React-Bootstrap was implemented for CSS reasons and helped improve the overall look of the website. 
 
-Do the following to complete this assignment:
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+## Technical Achievements
+- **Tech Achievement 1**: I used Heroku to host the website instead of Glitch.
