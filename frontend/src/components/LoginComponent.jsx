@@ -17,7 +17,7 @@ class LoginComponent extends React.Component {
             <Avatar src="https://github.com/octocat.png" size={40} square alt="@octocat" />
           </Header.Item>
         </Header>
-        <Button><Link href="http://localhost:3000/auth/github">Login with GitHub</Link></Button>
+        <Button><Link href="/auth/github">Login with GitHub</Link></Button>
       </ThemeProvider>
       </>
     );
