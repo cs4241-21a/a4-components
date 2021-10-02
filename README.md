@@ -1,30 +1,13 @@
-Assignment 4 - Components
-===
+## Simple College Survery
 
-Due: October 4th, by 11:59 AM.
+PR: a4-Aditya-Kumar
 
-For this assignment you will re-implement the client side portion of A3 using either React or Svelte components.
+Name: Aditya Kumar
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+Email: akumar6@wpi.edu
 
-Deliverables
----
+Github Username: hellofellowkids
 
-Do the following to complete this assignment:
+Link: (insert later)
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+The new technology I used for re-developing my A2 assignment is React.js. The purpose of this app is to have users add responses to a survey, see the responses in a table, and be able to edit / delete those responses. React made the development experience intially harder as I was unfamilar with how to utilize it effectively. After loooking up videos online, I got the hang of it and find that React really helps from a development standpoint due to having the HTML embedded inside of JS files. By utilzing hooks, it was much simpler to retrieve data inside the server and manage your webpage. Overall, React has made developing an apps with the requirements of A2 much simplier.
