@@ -19,7 +19,7 @@ class App extends React.Component{
     }
 
 
-
+ 
     //load in data
     load() {
       fetch('/currentUser', {
