@@ -68,9 +68,9 @@ router.get('/auth/github',
 
 // Github authentication callback
 router.get("/login/oauth2/code/github",
-  passport.authenticate('github', { failureRedirect: 'http://localhost:3000/login' }),
+  passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
-    res.redirect(`http://localhost:3000/user/${req.user._id}`);
+    res.redirect(`/user/${req.user._id}`);
   });
 
 router.get('/logout', (req, res, next) => {

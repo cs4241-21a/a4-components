@@ -5,15 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../schemas/users');
 const Task = require('../schemas/tasks');
 const { createDeadline } = require('../util');
-const { checkAuth, verifyToken } = require('../middleware');
-
-// router.get('/get-login-cookie', (req, res, next) => {
-//   console.log('GET Login Cookie');
-//   if (req.cookies.loginCookie)
-//     res.json(req.cookies.loginCookie);
-//   else
-//     res.json({ userId: req.user._id });
-// });
+const { verifyToken } = require('../middleware');
 
 router.post('/check-auth', async (req, res, next) => {
   console.log("POST check auth");
@@ -143,6 +135,17 @@ router.post('/:id/submit', async (req, res, next) => {
 
     let tasks = await Task.find({ owner: id });
 
+    // sort based on priority
+    tasks.sort((elem1, elem2) => {
+      if (elem1.priority > elem2.priority) {
+        return -1;
+      } else if (elem1.priority === elem2.priority) {
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+
     res.json(tasks);
 
   } catch (err) {
@@ -177,7 +180,18 @@ router.post('/:id/edit', async (req, res, next) => {
       deadline: createDeadline(oldTask.dateCreated, data.priority)
     });
 
-  const tasks = await Task.find({ owner: id })
+  const tasks = await Task.find({ owner: id });
+
+  // sort based on priority
+  tasks.sort((elem1, elem2) => {
+    if (elem1.priority > elem2.priority) {
+      return -1;
+    } else if (elem1.priority === elem2.priority) {
+      return 0;
+    } else {
+      return 1;
+    }
+  });
 
   res.json(tasks);
 });

@@ -43,7 +43,7 @@ const RegisterPage = () => {
         e.preventDefault();
         console.log('Register form submission');
 
-        fetch(`http://localhost:3001/api/register`, {
+        fetch(`/api/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -12,7 +12,7 @@ const TODOListPage = () => {
     const { token, login } = useContext(LoginContext);
 
     // Get all user tasks from the server
-    const getTasks = useCallback(() => fetch(`http://localhost:3001/user/${userId}`, {
+    const getTasks = useCallback(() => fetch(`/user/${userId}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const TODOListPage = () => {
         if (!token) {
             let loggedIn = false;
 
-            fetch('http://localhost:3001/user/check-auth', {
+            fetch('/user/check-auth', {
                 method: 'POST',
                 credentials: 'include'
             }).then(async (response) => {
@@ -73,7 +73,7 @@ const TODOListPage = () => {
             if (!loggedIn) return;
         }
 
-        fetch(`http://localhost:3001/user/exists`, {
+        fetch(`/user/exists`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -108,7 +108,7 @@ const TODOListPage = () => {
         }
 
         // Send request to server
-        fetch(`http://localhost:3001/user/${userId}/edit`, {
+        fetch(`/user/${userId}/edit`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -139,7 +139,7 @@ const TODOListPage = () => {
     // Callback to delete a task
     const delTask = async (title) => {
 
-        fetch(`http://localhost:3001/user/${userId}/delete`, {
+        fetch(`/user/${userId}/delete`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -186,7 +186,7 @@ const TODOListPage = () => {
         const body = JSON.stringify(json);
 
         // Send data
-        fetch(`http://localhost:3001/user/${userId}/submit`, {
+        fetch(`/user/${userId}/submit`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

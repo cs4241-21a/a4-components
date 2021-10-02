@@ -9,7 +9,7 @@ const Navbar = ({ user }) => {
 
     // Navbar logout callback
     const onLogout = () => {
-        fetch('http://localhost:3001/api/logout', {
+        fetch('/api/logout', {
             method: 'GET',
             credentials: 'include'
         }).then(async (response) => {
