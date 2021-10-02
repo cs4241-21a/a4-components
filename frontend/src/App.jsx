@@ -8,9 +8,12 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = { authenticated: false };
-    this.isAuthenticated()
   }
 
+  componentDidMount() {
+    this.isAuthenticated()
+  }
+  
   isAuthenticated() {
     getRequest('/auth/getUserID', {}, (response) => {
       console.log("Login status: " + response.status)

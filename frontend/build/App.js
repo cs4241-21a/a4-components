@@ -6,6 +6,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {authenticated: false};
+  }
+  componentDidMount() {
     this.isAuthenticated();
   }
   isAuthenticated() {

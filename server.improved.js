@@ -96,8 +96,7 @@ app.post('/api/create', validateLoginMiddleware, (req, res) => {
     'emailme' : req.user.emails[0].value,
     'timestamp' : Date.now()
   }
-  let collection = "lostItems"
-  if (data.found === true) { collection = "foundItems"; }
+  let collection = data.type + "Items"
   mongodbclient.create(collection, filtered)
   .then(e => {
     if (e) {

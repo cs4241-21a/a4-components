@@ -8,6 +8,7 @@ class Form extends React.Component {
     this.state = this.props.fields
     if (this.state._id === undefined) {
       this.state = {
+        type: "lost",
         item: "",
         when: "",
         where: "",
@@ -21,6 +22,7 @@ class Form extends React.Component {
     let fields = props.fields
     if (fields._id === undefined) {
       fields = {
+        type: "lost",
         item: "",
         when: "",
         where: "",
@@ -59,6 +61,14 @@ class Form extends React.Component {
     }
   }
 
+  handleTypeLost() {
+    this.setState({type: "lost"});
+  }
+
+  handleTypeFound() {
+    this.setState({type: "found"});
+  }
+
   handleItem(e) {
     this.setState({item: e.target.value});
   }
@@ -86,6 +96,16 @@ class Form extends React.Component {
       <ThemeProvider>
           <FormGroup id="editform">
             <Heading as="h2">{title}</Heading>
+            { this.state._id == null &&
+            <div>
+              <input type="radio" name="type" value="lost" id="type1-create" onChange={this.handleTypeLost.bind(this)}
+              checked={this.state.type === "lost"}/>
+              <label htmlFor="type1-create">Lost</label>
+              <input type="radio" name="type" value="found" id="type2-create"  onChange={this.handleTypeFound.bind(this)}
+              checked={this.state.type === "found"}/>
+              <label htmlFor="type2-create">Found</label>
+            </div>
+            }
             <FormGroup.Label htmlFor="item">*Item: </FormGroup.Label>
             <TextInput onChange={this.handleItem.bind(this)} value={this.state.item} type="text" placeholder="Apple Pen" />
             <FormGroup.Label htmlFor="when">*When: </FormGroup.Label>
