@@ -1,33 +1,12 @@
 Assignment 4 - Components
 ===
+Ivan Martinovic
 
-Due: October 4th, by 11:59 AM.
-
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
-
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
+## XXXL Gym Membership Managment Page
 ---
+This web page is supposed to be a web page for managing gym memberships of a gym I used to go to back home in Bosnia (the gym doesn't have any official website, except for a facebook page: https://m.facebook.com/profile.php?id=100057309077774&refsrc=deprecated&_rdr
 
-Do the following to complete this assignment:
+Hosting Link: https://a4-ivan-martinovic.herokuapp.com/
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
+I've built upon a2. I've updated the server to use Express. Then I've updated the client side to use React. At first React was fun to use, since it allowed me to only edit 1 file for both my Javacsript and HTML. However, as time went onwards I've encountered many strange issues. Worst of which were that once I've finished the conversion, certain rules from the CSS styling sheet were not applied to elements, which took 2 office hours to fix. The other nightmare was trying to set onClick functions, to functions outside the defined class. Initially I was going to have 3 classes, 1 Form class, 1 Row class and 1 App class. But this difficulty of calling member functions from different classes made me drop the Form class entirely. Finally, the Row class had functions which were supposed to change the onClick funcitonality of my "primary" and "secondary" form button. This turned out to be a nightmare as well, and I ended up changing the logic of the callback functions. There was also the issue of debugging... the console printouts would point to App.js instead of App.jsx. So then I would have to have both files open, and I would sometimes accidentally edit the .js file instead of the .jsx file, which was frustrating. All said and done, I'd say the new technology hindered the development experience mostly because of my inexperience :(  
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
