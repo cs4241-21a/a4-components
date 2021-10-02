@@ -13,7 +13,7 @@ class LoginComponent extends React.Component {
       square: true,
       alt: "@octocat"
     }))), /* @__PURE__ */ React.createElement(Button, null, /* @__PURE__ */ React.createElement(Link, {
-      href: "http://localhost:3000/auth/github"
+      href: "/auth/github"
     }, "Login with GitHub"))));
   }
 }
