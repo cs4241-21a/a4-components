@@ -54,13 +54,13 @@ class LostFoundComponent extends React.Component {
     }, /* @__PURE__ */ React.createElement(Table, {
       title: "Found items",
       endpoint: "founditems",
-      collection: this.state.lostItems,
+      collection: this.state.foundItems,
       deleteHandler: this.deleteHandler.bind(this),
       editHandler: this.editHandler.bind(this)
     }), /* @__PURE__ */ React.createElement(Table, {
       title: "Lost items",
       endpoint: "lostitems",
-      collection: this.state.foundItems,
+      collection: this.state.lostItems,
       deleteHandler: this.deleteHandler.bind(this),
       editHandler: this.editHandler.bind(this)
     })), /* @__PURE__ */ React.createElement(Box, {

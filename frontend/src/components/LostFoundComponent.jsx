@@ -56,9 +56,9 @@ class LostFoundComponent extends React.Component {
         </Header>
         <Box display="flex">
           <Box flexGrow={1} p={3} borderColor="border.default" borderWidth={1} borderStyle="solid">
-            <Table title="Found items" endpoint="founditems" collection={this.state.lostItems} 
+            <Table title="Found items" endpoint="founditems" collection={this.state.foundItems} 
                    deleteHandler={this.deleteHandler.bind(this)} editHandler={this.editHandler.bind(this)}/>
-            <Table title="Lost items" endpoint="lostitems" collection={this.state.foundItems}
+            <Table title="Lost items" endpoint="lostitems" collection={this.state.lostItems}
                    deleteHandler={this.deleteHandler.bind(this)} editHandler={this.editHandler.bind(this)}/>
           </Box>
           <Box p={3} borderColor="border.default" borderWidth={1} borderStyle="solid">
