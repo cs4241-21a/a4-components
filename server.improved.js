@@ -1,6 +1,6 @@
 const express  = require( 'express' ),
       app      = express()
-      port     = 3100
+      port     = 3000
 
 class TableEntry {
  
@@ -18,7 +18,7 @@ class TableEntry {
 
 const appdata = [
   new TableEntry([1, 'John', 'Stewart', 'Male', 'Master1', '2020-01-11', 'Yearly', '2021-01-11']),
-  new TableEntry([5, 'Jimmy', 'McGill', 'Male', 'Junior', '2019-02-15', 'Yearly', '2020-02-15']),
+  new TableEntry([2, 'Jimmy', 'McGill', 'Male', 'Junior', '2019-02-15', 'Yearly', '2020-02-15']),
   new TableEntry([3, 'Stewart', 'Johnson', 'Male', 'Open', '2020-03-16', 'Monthly', '2020-04-16'])
 ]
 
@@ -62,6 +62,7 @@ app.post( '/add', (req, res) => {
 })
 
 app.post( '/modify', (req, res) =>  {
+  console.log("Inside post /modify")
   console.log(req.body)
   verifyEntry(req, res)
   calculateExpireDate(req)
@@ -142,6 +143,7 @@ function modifyEntry(req, res) {
     if (entry.id == req.body.id) {
       entry.fname = req.body.fname
       entry.lname = req.body.lname
+      entry.sex = req.body.sex
       entry.ageClass = req.body.ageClass
       entry.dateJoined = req.body.dateJoined
       entry.membershipType = req.body.membershipType

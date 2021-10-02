@@ -2,24 +2,46 @@ import React from 'react';
 
 
 class Row extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { appData:[] }
+    this.modifyInputBoxes = this.modifyInputBoxes.bind(this)
+    this.delete = this.delete.bind(this)
+    
+  }
+
   // our .render() method creates a block of HTML using the .jsx format
   render() {
     return (
       <tr>  
-        <td id={'id'+ this.props.id}>  {this.props.id}  </td> 
-        <td id={'fname'+ this.props.id}> {this.props.fname} </td> 
-        <td id={'lname'+ this.props.id}> {this.props.lname} </td>
-        <td id={'sex'+ this.props.id}> {this.props.sex} </td>
-        <td id={'class' + this.props.id}> {this.props.ageClass} </td> 
-        <td id={'dateJoined'+ this.props.id}> {this.props.dateJoined} </td>
-        <td id={'membershipType'+ this.props.id}> {this.props.membershipType} </td>
-        <td id={'expireDate'+ this.props.id}> {this.props.expireDate} </td>
-        <td> <span title='Modify this entry' class='modifyButtons' onClick={this.modifyInputBoxes}> </span> </td>
-        <td> <span title ='Delete this entry' class='deleteButtons' onClick={this.delete}> </span> </td>
+        <td id={'id'+ this.props.id}>{this.props.id}</td> 
+        <td id={'fname'+ this.props.id}>{this.props.fname}</td> 
+        <td id={'lname'+ this.props.id}>{this.props.lname}</td>
+        <td id={'sex'+ this.props.id}>{this.props.sex}</td>
+        <td id={'class' + this.props.id}>{this.props.ageClass}</td> 
+        <td id={'dateJoined'+ this.props.id}>{this.props.dateJoined}</td>
+        <td id={'membershipType'+ this.props.id}>{this.props.membershipType}</td>
+        <td id={'expireDate'+ this.props.id}>{this.props.expireDate}</td>
+        <td> <span title='Modify this entry' class='modifyButtons' onClick={() => this.modifyInputBoxes(this.props.id)}> </span> </td>
+        <td> <span title ='Delete this entry' class='deleteButtons' onClick={() =>this.delete(this.props.id)}> </span> </td>
     </tr>
     )
   }
-
+   
+delete(id) {
+  fetch( '/delete', { 
+    method:'POST',
+    body: JSON.stringify({ 
+      id: id,
+    }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then( response => response.json() )
+  .then( json => {
+     // changing state triggers reactive behaviors
+     this.setState({ appData:json }) 
+  })
+}
   modifyInputBoxes(id) {
 
     const  primaryButton = document.getElementById( 'primaryButton' )
@@ -32,9 +54,6 @@ class Row extends React.Component {
     primaryButton.style.borderColor = '#ffd814'
     primaryButton.style.color = '0x000000'
     secondaryButton.innerHTML = 'Cancel Modifying'
-
-    primaryButton.onclick = modify;
-    secondaryButton.onclick = cancelModify
     
   }
 
@@ -66,9 +85,8 @@ class App extends React.Component {
     super( props )
     // initialize our state
     this.state = { appData:[] }
-    this.add = this.add.bind(this)
-    this.modify = this.modify.bind(this)
-    this.delete = this.delete.bind(this)
+    this.primaryButtonAction = this.primaryButtonAction.bind(this)
+    this.secondaryButtonAction = this.secondaryButtonAction.bind(this)
     this.load()
   }
 
@@ -81,38 +99,6 @@ class App extends React.Component {
       })
     }
 
-    add( evt ) {
-      evt.preventDefault()
-    
-      const inputId = document.getElementById( 'id' )
-      const inputFname = document.getElementById( 'fname' )
-      const inputLname = document.getElementById( 'lname' )
-      const inputSex = document.getElementById( 'sex' )
-      const inputClass = document.getElementById( 'class' )
-      const inputDateJoined = document.getElementById( 'dateJoined' )
-      const inputMembershipType = document.getElementById( 'membershipType' )
-      const newExpireDate = document.getElementById( 'expireDate' )
-    
-      fetch( '/add', { 
-        method:'POST',
-        body: JSON.stringify({ 
-          id: inputId.value,
-          fname: inputFname.value,
-          lname: inputLname.value,
-          sex: inputSex.value,
-          ageClass: inputClass.value,
-          dateJoined: inputDateJoined.value,
-          membershipType: inputMembershipType.value,
-          expireDate: newExpireDate.value
-        }),
-        headers: { 'Content-Type': 'application/json' }
-      }).then( response => response.json() )
-          .then( json => {
-         this.setState({ appData:json }) 
-      })
-    }
-
-  
   // render component HTML using JSX 
   render() {
     return (
@@ -146,10 +132,10 @@ class App extends React.Component {
         </select> <br></br>
       
         <label for='dateJoined'>Date Joined:</label><br></br>
-        <input type='date' id='dateJoined' name='fname' onchange={this.updateExpireDate}></input> <br></br>
+        <input type='date' id='dateJoined' name='fname' onChange={this.updateExpireDate}></input> <br></br>
       
         <label for='membershipType'>Membership Type:</label><br></br>
-        <select id='membershipType' name='membershipType' onchange={this.updateExpireDate}>
+        <select id='membershipType' name='membershipType' onChange={this.updateExpireDate}>
           <option value='Monthly'>Monthly</option>
           <option value='Yearly'>Yearly</option>
           <option value='Lifetime'>Lifetime</option>
@@ -159,8 +145,8 @@ class App extends React.Component {
         <input type='date' id='expireDate' name='expireDate' disabled></input> <br></br>  
 
         <div id='formButtons'>
-          <button id='primaryButton' class='staticButtons' onClick={this.add}>Add New Member</button>
-          <button id='secondaryButton' class='staticButtons' onClick={this.clearForm}>Clear Contents</button>        
+          <button id='primaryButton' class='staticButtons' onClick={this.primaryButtonAction}>Add New Member</button><br></br>
+          <button id='secondaryButton' class='staticButtons' onClick={this.secondaryButtonAction}>Clear Form</button>        
         </div>
       </form>
         <table id='table'>
@@ -187,64 +173,99 @@ class App extends React.Component {
         </tr>
 
         <tbody id='oldTbody'>
-          { this.state.appData.map( (row,i) => <Row id={row.id} fname={row.fname} lname={row.lname} sex={row.sex} ageClass={row.ageClass} dateJoined={row.dateJoined} membershipType={row.membershipType} expireDate={row.expireDate}/> ) }
+          { this.state.appData.map( (row,i) => <Row id={row.id} fname={row.fname} lname={row.lname} sex={row.sex} ageClass={row.ageClass} dateJoined={row.dateJoined} membershipType={row.membershipType} expireDate={row.expireDate} modifyFunc={this.modify}/> ) }
         </tbody>
     </table>
       </div>
     )
   }
 
+     //returns false if there are empty fields in the form
+     verifyFields( ) {
+      const inputId = document.getElementById( 'id' )
+      const inputFname = document.getElementById( 'fname' )
+      const inputLname = document.getElementById( 'lname' )
+      const inputSex = document.getElementById( 'sex' )
+      const inputClass = document.getElementById( 'class' )
+      const inputDateJoined = document.getElementById( 'dateJoined' )
+      const inputMembershipType = document.getElementById( 'membershipType' )
+      const newExpireDate = document.getElementById( 'expireDate' )
   
-
-  modify( evt ) {
-    evt.preventDefault()
-
-    const inputId = document.getElementById( 'id' )
-    const inputFname = document.getElementById( 'fname' )
-    const inputLname = document.getElementById( 'lname' )
-    const inputSex = document.getElementById( 'sex' )
-    const inputClass = document.getElementById( 'class' )
-    const inputDateJoined = document.getElementById( 'dateJoined' )
-    const inputMembershipType = document.getElementById( 'membershipType' )
-    const newExpireDate = document.getElementById( 'expireDate' )
-
-    fetch( '/modify', { 
-      method:'POST',
-      body: JSON.stringify({ 
-        id: inputId.value,
-        fname: inputFname.value,
-        lname: inputLname.value,
-        sex: inputSex.value,
-        ageClass: inputClass.value,
-        dateJoined: inputDateJoined.value,
-        membershipType: inputMembershipType.value,
-        expireDate: newExpireDate.value
-      }),
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then( response => response.json() )
-    .then( json => {
-       // changing state triggers reactive behaviors
-       this.setState({ appData:json }) 
-    })
-  }
-
+      let d  = new Date(inputDateJoined.value)
+      let dateIsValid = (d.getTime() === d.getTime())
+      if (inputFname.value === '' || inputLname.value === '' || !dateIsValid
+        ||  inputClass.value === '' || inputMembershipType.value === '')
+        {
+        return false
+        }
   
-  delete(id) {
-    fetch( '/delete', { 
-      method:'POST',
-      body: JSON.stringify({ 
-        id: id,
-      }),
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then( response => response.json() )
-    .then( json => {
-       // changing state triggers reactive behaviors
-       this.setState({ appData:json }) 
-    })
-  }
+      return true
+    }
+  
+      primaryButtonAction( evt ) {
+        evt.preventDefault()
+      
+        const inputId = document.getElementById( 'id' )
+        const inputFname = document.getElementById( 'fname' )
+        const inputLname = document.getElementById( 'lname' )
+        const inputSex = document.getElementById( 'sex' )
+        const inputClass = document.getElementById( 'class' )
+        const inputDateJoined = document.getElementById( 'dateJoined' )
+        const inputMembershipType = document.getElementById( 'membershipType' )
+        const newExpireDate = document.getElementById( 'expireDate' )
+        
+        const primaryButtonText = document.getElementById('primaryButton').innerHTML
 
+        if (this.verifyFields()) {
+          let body = JSON.stringify({ 
+            id: inputId.value,
+            fname: inputFname.value,
+            lname: inputLname.value,
+            sex: inputSex.value,
+            ageClass: inputClass.value,
+            dateJoined: inputDateJoined.value,
+            membershipType: inputMembershipType.value,
+            expireDate: newExpireDate.value})
+
+            if(primaryButtonText === 'Add New Member') {
+              fetch( '/add', { 
+                method:'POST',
+                body: body,
+                headers: { 'Content-Type': 'application/json' }
+              }).then( response => response.json() )
+                  .then( json => {
+                 this.setState({ appData:json }) 
+              })
+            } else {
+              fetch( '/modify', { 
+                method:'POST',
+                body: body,
+                headers: { 'Content-Type': 'application/json' }
+              }).then( response => response.json() )
+                  .then( json => {
+                 this.setState({ appData:json }) 
+              })
+            }
+        } else {
+          alert('One or more form fields are empty')
+        }
+      }
+
+      secondaryButtonAction(e) {
+        const primaryButton = document.getElementById( 'primaryButton' )
+        const secondaryButton = document.getElementById( 'secondaryButton' )
+
+        let secondaryButtonText = secondaryButton.innerHTML
+        this.clearForm(e)
+
+        if (secondaryButtonText === 'Cancel Modifying') {
+          primaryButton.innerHTML = 'Add New Member'
+          primaryButton.style.backgroundColor = '#42B72A'
+          primaryButton.style.borderColor = '#42B72A'
+          primaryButton.style.color = '0xffffff'
+          secondaryButton.innerHTML = 'Clear Form' 
+        }
+      }
 
   clearForm(e) {
     e.preventDefault()
@@ -269,30 +290,13 @@ class App extends React.Component {
   }
 
   
-  cancelModify(e) {
-    const  primaryButton = document.getElementById( 'primaryButton' )
-    const secondaryButton = document.getElementById( 'secondaryButton' )
-
-    e.preventDefault()
-    clearForm(e);
-
-    primaryButton.innerHTML = 'Add New Member'
-    primaryButton.style.backgroundColor = '#42B72A'
-    primaryButton.style.borderColor = '#42B72A'
-    primaryButton.style.color = '0xffffff'
-    secondaryButton.innerHTML = 'Clear Contents'
-
-    primaryButton.onclick = addEntry;
-    secondaryButton.onclick = clearForm;
- 
-  }
 
   updateExpireDate( ) {
-    newDate = new Date(inputDateJoined.value)
-
     const inputDateJoined = document.getElementById( 'dateJoined' )
     const inputMembershipType = document.getElementById( 'membershipType' )
     const newExpireDate = document.getElementById( 'expireDate' )
+
+    let newDate = new Date(inputDateJoined.value)
 
    switch (inputMembershipType.value) { 
      case 'Monthly':
@@ -308,8 +312,8 @@ class App extends React.Component {
        console.log('Unknown membership type' + inputMembershipType.value)
    }
 
-   month = (newDate.getMonth() + 1)
-   date = newDate.getDate()
+   let month = (newDate.getMonth() + 1)
+   let date = newDate.getDate()
 
    let stringMonth = month
    if (month < 10) {

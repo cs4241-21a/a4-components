@@ -1,31 +1,48 @@
 import React from "./_snowpack/pkg/react.js";
 class Row extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {appData: []};
+    this.modifyInputBoxes = this.modifyInputBoxes.bind(this);
+    this.delete = this.delete.bind(this);
+  }
   render() {
     return /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("td", {
       id: "id" + this.props.id
-    }, "  ", this.props.id, "  "), /* @__PURE__ */ React.createElement("td", {
+    }, this.props.id), /* @__PURE__ */ React.createElement("td", {
       id: "fname" + this.props.id
-    }, " ", this.props.fname, " "), /* @__PURE__ */ React.createElement("td", {
+    }, this.props.fname), /* @__PURE__ */ React.createElement("td", {
       id: "lname" + this.props.id
-    }, " ", this.props.lname, " "), /* @__PURE__ */ React.createElement("td", {
+    }, this.props.lname), /* @__PURE__ */ React.createElement("td", {
       id: "sex" + this.props.id
-    }, " ", this.props.sex, " "), /* @__PURE__ */ React.createElement("td", {
+    }, this.props.sex), /* @__PURE__ */ React.createElement("td", {
       id: "class" + this.props.id
-    }, " ", this.props.ageClass, " "), /* @__PURE__ */ React.createElement("td", {
+    }, this.props.ageClass), /* @__PURE__ */ React.createElement("td", {
       id: "dateJoined" + this.props.id
-    }, " ", this.props.dateJoined, " "), /* @__PURE__ */ React.createElement("td", {
+    }, this.props.dateJoined), /* @__PURE__ */ React.createElement("td", {
       id: "membershipType" + this.props.id
-    }, " ", this.props.membershipType, " "), /* @__PURE__ */ React.createElement("td", {
+    }, this.props.membershipType), /* @__PURE__ */ React.createElement("td", {
       id: "expireDate" + this.props.id
-    }, " ", this.props.expireDate, " "), /* @__PURE__ */ React.createElement("td", null, " ", /* @__PURE__ */ React.createElement("span", {
+    }, this.props.expireDate), /* @__PURE__ */ React.createElement("td", null, " ", /* @__PURE__ */ React.createElement("span", {
       title: "Modify this entry",
       class: "modifyButtons",
-      onClick: this.modifyInputBoxes
+      onClick: () => this.modifyInputBoxes(this.props.id)
     }, " "), " "), /* @__PURE__ */ React.createElement("td", null, " ", /* @__PURE__ */ React.createElement("span", {
       title: "Delete this entry",
       class: "deleteButtons",
-      onClick: this.delete
+      onClick: () => this.delete(this.props.id)
     }, " "), " "));
+  }
+  delete(id) {
+    fetch("/delete", {
+      method: "POST",
+      body: JSON.stringify({
+        id
+      }),
+      headers: {"Content-Type": "application/json"}
+    }).then((response) => response.json()).then((json) => {
+      this.setState({appData: json});
+    });
   }
   modifyInputBoxes(id) {
     const primaryButton = document.getElementById("primaryButton");
@@ -36,8 +53,6 @@ class Row extends React.Component {
     primaryButton.style.borderColor = "#ffd814";
     primaryButton.style.color = "0x000000";
     secondaryButton.innerHTML = "Cancel Modifying";
-    primaryButton.onclick = modify;
-    secondaryButton.onclick = cancelModify;
   }
   copyCellsToInputFields(id) {
     const inputId = document.getElementById("id");
@@ -62,40 +77,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {appData: []};
-    this.add = this.add.bind(this);
-    this.modify = this.modify.bind(this);
-    this.delete = this.delete.bind(this);
+    this.primaryButtonAction = this.primaryButtonAction.bind(this);
+    this.secondaryButtonAction = this.secondaryButtonAction.bind(this);
     this.load();
   }
   load() {
     fetch("/retrieve", {method: "get", "no-cors": true}).then((response) => response.json()).then((json) => {
-      this.setState({appData: json});
-    });
-  }
-  add(evt) {
-    evt.preventDefault();
-    const inputId = document.getElementById("id");
-    const inputFname = document.getElementById("fname");
-    const inputLname = document.getElementById("lname");
-    const inputSex = document.getElementById("sex");
-    const inputClass = document.getElementById("class");
-    const inputDateJoined = document.getElementById("dateJoined");
-    const inputMembershipType = document.getElementById("membershipType");
-    const newExpireDate = document.getElementById("expireDate");
-    fetch("/add", {
-      method: "POST",
-      body: JSON.stringify({
-        id: inputId.value,
-        fname: inputFname.value,
-        lname: inputLname.value,
-        sex: inputSex.value,
-        ageClass: inputClass.value,
-        dateJoined: inputDateJoined.value,
-        membershipType: inputMembershipType.value,
-        expireDate: newExpireDate.value
-      }),
-      headers: {"Content-Type": "application/json"}
-    }).then((response) => response.json()).then((json) => {
       this.setState({appData: json});
     });
   }
@@ -165,13 +152,13 @@ class App extends React.Component {
       type: "date",
       id: "dateJoined",
       name: "fname",
-      onchange: this.updateExpireDate
+      onChange: this.updateExpireDate
     }), " ", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("label", {
       for: "membershipType"
     }, "Membership Type:"), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("select", {
       id: "membershipType",
       name: "membershipType",
-      onchange: this.updateExpireDate
+      onChange: this.updateExpireDate
     }, /* @__PURE__ */ React.createElement("option", {
       value: "Monthly"
     }, "Monthly"), /* @__PURE__ */ React.createElement("option", {
@@ -190,12 +177,12 @@ class App extends React.Component {
     }, /* @__PURE__ */ React.createElement("button", {
       id: "primaryButton",
       class: "staticButtons",
-      onClick: this.add
-    }, "Add New Member"), /* @__PURE__ */ React.createElement("button", {
+      onClick: this.primaryButtonAction
+    }, "Add New Member"), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("button", {
       id: "secondaryButton",
       class: "staticButtons",
-      onClick: this.clearForm
-    }, "Clear Contents"))), /* @__PURE__ */ React.createElement("table", {
+      onClick: this.secondaryButtonAction
+    }, "Clear Form"))), /* @__PURE__ */ React.createElement("table", {
       id: "table"
     }, /* @__PURE__ */ React.createElement("colgroup", null, /* @__PURE__ */ React.createElement("col", {
       id: "idCol"
@@ -223,10 +210,27 @@ class App extends React.Component {
       ageClass: row.ageClass,
       dateJoined: row.dateJoined,
       membershipType: row.membershipType,
-      expireDate: row.expireDate
+      expireDate: row.expireDate,
+      modifyFunc: this.modify
     })))));
   }
-  modify(evt) {
+  verifyFields() {
+    const inputId = document.getElementById("id");
+    const inputFname = document.getElementById("fname");
+    const inputLname = document.getElementById("lname");
+    const inputSex = document.getElementById("sex");
+    const inputClass = document.getElementById("class");
+    const inputDateJoined = document.getElementById("dateJoined");
+    const inputMembershipType = document.getElementById("membershipType");
+    const newExpireDate = document.getElementById("expireDate");
+    let d = new Date(inputDateJoined.value);
+    let dateIsValid = d.getTime() === d.getTime();
+    if (inputFname.value === "" || inputLname.value === "" || !dateIsValid || inputClass.value === "" || inputMembershipType.value === "") {
+      return false;
+    }
+    return true;
+  }
+  primaryButtonAction(evt) {
     evt.preventDefault();
     const inputId = document.getElementById("id");
     const inputFname = document.getElementById("fname");
@@ -236,9 +240,9 @@ class App extends React.Component {
     const inputDateJoined = document.getElementById("dateJoined");
     const inputMembershipType = document.getElementById("membershipType");
     const newExpireDate = document.getElementById("expireDate");
-    fetch("/modify", {
-      method: "POST",
-      body: JSON.stringify({
+    const primaryButtonText = document.getElementById("primaryButton").innerHTML;
+    if (this.verifyFields()) {
+      let body = JSON.stringify({
         id: inputId.value,
         fname: inputFname.value,
         lname: inputLname.value,
@@ -247,22 +251,40 @@ class App extends React.Component {
         dateJoined: inputDateJoined.value,
         membershipType: inputMembershipType.value,
         expireDate: newExpireDate.value
-      }),
-      headers: {"Content-Type": "application/json"}
-    }).then((response) => response.json()).then((json) => {
-      this.setState({appData: json});
-    });
+      });
+      if (primaryButtonText === "Add New Member") {
+        fetch("/add", {
+          method: "POST",
+          body,
+          headers: {"Content-Type": "application/json"}
+        }).then((response) => response.json()).then((json) => {
+          this.setState({appData: json});
+        });
+      } else {
+        fetch("/modify", {
+          method: "POST",
+          body,
+          headers: {"Content-Type": "application/json"}
+        }).then((response) => response.json()).then((json) => {
+          this.setState({appData: json});
+        });
+      }
+    } else {
+      alert("One or more form fields are empty");
+    }
   }
-  delete(id) {
-    fetch("/delete", {
-      method: "POST",
-      body: JSON.stringify({
-        id
-      }),
-      headers: {"Content-Type": "application/json"}
-    }).then((response) => response.json()).then((json) => {
-      this.setState({appData: json});
-    });
+  secondaryButtonAction(e) {
+    const primaryButton = document.getElementById("primaryButton");
+    const secondaryButton = document.getElementById("secondaryButton");
+    let secondaryButtonText = secondaryButton.innerHTML;
+    this.clearForm(e);
+    if (secondaryButtonText === "Cancel Modifying") {
+      primaryButton.innerHTML = "Add New Member";
+      primaryButton.style.backgroundColor = "#42B72A";
+      primaryButton.style.borderColor = "#42B72A";
+      primaryButton.style.color = "0xffffff";
+      secondaryButton.innerHTML = "Clear Form";
+    }
   }
   clearForm(e) {
     e.preventDefault();
@@ -283,24 +305,11 @@ class App extends React.Component {
     inputMembershipType.value = "";
     newExpireDate.value = "";
   }
-  cancelModify(e) {
-    const primaryButton = document.getElementById("primaryButton");
-    const secondaryButton = document.getElementById("secondaryButton");
-    e.preventDefault();
-    clearForm(e);
-    primaryButton.innerHTML = "Add New Member";
-    primaryButton.style.backgroundColor = "#42B72A";
-    primaryButton.style.borderColor = "#42B72A";
-    primaryButton.style.color = "0xffffff";
-    secondaryButton.innerHTML = "Clear Contents";
-    primaryButton.onclick = addEntry;
-    secondaryButton.onclick = clearForm;
-  }
   updateExpireDate() {
-    newDate = new Date(inputDateJoined.value);
     const inputDateJoined = document.getElementById("dateJoined");
     const inputMembershipType = document.getElementById("membershipType");
     const newExpireDate = document.getElementById("expireDate");
+    let newDate = new Date(inputDateJoined.value);
     switch (inputMembershipType.value) {
       case "Monthly":
         newDate.setMonth(newDate.getMonth() + 1);
@@ -314,8 +323,8 @@ class App extends React.Component {
       default:
         console.log("Unknown membership type" + inputMembershipType.value);
     }
-    month = newDate.getMonth() + 1;
-    date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let date = newDate.getDate();
     let stringMonth = month;
     if (month < 10) {
       stringMonth = "0" + stringMonth;
