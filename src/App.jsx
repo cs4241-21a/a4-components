@@ -2,10 +2,36 @@
 import React from "react";
 import Tables from "./Tables";
 
+let appInstance
 
 class App extends React.Component {
+
+  constructor( props ) {
+    super( props )
+    // initialize our state
+    this.state = { todos:[] }
+    appInstance = this
+  }
+
+  loadTable(){
+    let json = null
+    fetch( '/loadTable', {
+      method:'POST',
+      body: null,
+      headers: {
+      'Content-Type': 'application/json'
+      }
+      })
+      .then( function( response ) {
+        json = response}
+      )
+    return json}
+
+
   render() {
     return (
+    <div>
+    <form method="post">
     <ul>
       <li>
         <label for="todo">Todo:</label>
@@ -39,9 +65,17 @@ class App extends React.Component {
         </select>
       </li>
       <li class="button">
-        <button type="button" onClick={this.submit} id="submitButton">submit</button>
+        <button type="button" onClick={appInstance.submit} id="submitButton">submit</button>
       </li>     
     </ul>
+    </form>
+
+    <p>In the table, click on a delete button to delete that todo, 
+    and the update button to replace any part of that todo with what's in the inputs above!</p>
+    <h2>Your Todos:</h2>
+    <Tables todos = {appInstance.state.todos} update = {appInstance.updateButton} delete = {appInstance.deleteButton} ></Tables>
+    </div>
+   
     );
   }
     submit(){
@@ -69,9 +103,73 @@ class App extends React.Component {
     })
     .then(function(json){
     console.log(json)
-    populateTable(json)
+    appInstance.setState({ todos:appInstance.loadTable()})
     });
     }
+
+    deleteButton(row){
+
+      const todoInput = document.querySelector( '#todo' )
+      const dayInput = document.querySelector( '#day' )
+      const difficultyInput = document.querySelector('#difficulty')
+
+      json = { todo: todoInput.value, 
+               day: dayInput.value, 
+               difficulty: difficultyInput.value,
+               type: 'todo' ,
+               _id: row._id,
+               user:null 
+       }
+       body = JSON.stringify( json )
+   
+       fetch( '/delete', {
+           method:'POST',
+           body:JSON.stringify({todo:row.todo, day:row.day, difficulty: row.difficulty, type: 'todo', _id:row._id, user:null}),
+           headers: {
+               'Content-Type': 'application/json'
+           }
+         })
+         .then( function( response ) {
+             return response.json()
+         })
+         .then(function(json){
+          appInstance.setState({ todos:appInstance.loadTable()})
+          //console.log(json)
+            // populateTable(json)
+         });
+   }
+  
+  updateButton(row){
+
+      const todoInput = document.querySelector( '#todo' )
+      const dayInput = document.querySelector( '#day' )
+      const difficultyInput = document.querySelector('#difficulty')
+
+      json = { todo: todoInput.value, 
+          day: dayInput.value, 
+          difficulty: difficultyInput.value,
+          type: 'todo', 
+          _id: row._id,
+          user:null 
+  }
+  body = JSON.stringify( json )
+  
+  fetch( '/update', {
+      method:'POST',
+      body:JSON.stringify({todo:todoInput.value, day:dayInput.value, difficulty:difficultyInput.value, type: 'todo', _id:row._id,user:null}),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    })
+    .then( function( response ) {
+        return response.json()
+    })
+    .then(function(json){
+      appInstance.setState({ todos:appInstance.loadTable()})
+      //console.log(json)
+       // populateTable(json)
+    });
+  }
 }
 
 export default App;

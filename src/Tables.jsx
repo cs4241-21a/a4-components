@@ -1,6 +1,18 @@
 import React from "react";
 
+let tableInstance
+
 class Tables extends React.Component{
+
+    constructor( props ) {
+        super( props )
+        // initialize our state
+        tableInstance = this
+      }
+    render(){
+        return tableInstance.populateTable()
+    }
+    /*
     render() {
       return (
       <div class="table-container">
@@ -78,74 +90,14 @@ class Tables extends React.Component{
       )}
     //style="table-layout: auto;"
     //style="flex-grow: 8"
-      deleteButton(row){
+*/
 
-        const todoInput = document.querySelector( '#todo' )
-        const dayInput = document.querySelector( '#day' )
-        const difficultyInput = document.querySelector('#difficulty')
+    populateTable(){
 
-        json = { todo: todoInput.value, 
-                 day: dayInput.value, 
-                 difficulty: difficultyInput.value,
-                 type: 'todo' ,
-                 _id: row._id,
-                 user:null 
-         }
-         body = JSON.stringify( json )
-     
-         fetch( '/delete', {
-             method:'POST',
-             body:JSON.stringify({todo:row.todo, day:row.day, difficulty: row.difficulty, type: 'todo', _id:row._id, user:null}),
-             headers: {
-                 'Content-Type': 'application/json'
-             }
-           })
-           .then( function( response ) {
-               return response.json()
-           })
-           .then(function(json){
-               //console.log(json)
-               populateTable(json)
-           });
-     }
-    
-    updateButton(row){
-
-        const todoInput = document.querySelector( '#todo' )
-        const dayInput = document.querySelector( '#day' )
-        const difficultyInput = document.querySelector('#difficulty')
-
-        json = { todo: todoInput.value, 
-            day: dayInput.value, 
-            difficulty: difficultyInput.value,
-            type: 'todo', 
-            _id: row._id,
-            user:null 
-    }
-    body = JSON.stringify( json )
-    
-    fetch( '/update', {
-        method:'POST',
-        body:JSON.stringify({todo:todoInput.value, day:dayInput.value, difficulty:difficultyInput.value, type: 'todo', _id:row._id,user:null}),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-      })
-      .then( function( response ) {
-          return response.json()
-      })
-      .then(function(json){
-          //console.log(json)
-          populateTable(json)
-      });
-    }
-
-    populateTable(json){
-
-        const todoInput = document.querySelector( '#todo' )
-        const dayInput = document.querySelector( '#day' )
-        const difficultyInput = document.querySelector('#difficulty')
-
+        //const todoInput = document.querySelector( '#todo' )
+        //const dayInput = document.querySelector( '#day' )
+       // const difficultyInput = document.querySelector('#difficulty')
+/*
         const tableDeleter = function(day){
             let table = document.getElementById(day);
             let rowCount = table.rows.length;
@@ -153,27 +105,22 @@ class Tables extends React.Component{
                 table.deleteRow(1);
             }
         }
-    
-        json = { todo: todoInput.value, 
-            day: dayInput.value, 
-            difficulty: difficultyInput.value,
-            type: 'todo',
-            user: null 
-            }
-            body = JSON.stringify( json )
-    
-        fetch( '/loadTable', {
-            method:'POST',
-            body:JSON.stringify({todo:todoInput.value, day:dayInput.value, difficulty:difficultyInput.value, type:'todo', user:null}),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-          })
-            .then(function(response){
-                return response.json()
-            })
-                .then(function(json){
-    
+        */
+
+        const tableStarter = function(day)
+        {
+            let table = document.createElement("table")
+            table.id = day
+            let tr = document.createElement('tr')
+            let th = document.createElement('th')
+            let item = document.createTextNode(day)
+            th.appendChild(item)
+            tr.appendChild(th)
+
+        }
+
+                    let json = tableInstance.props.todos
+
                     let tableItems = []
     
                     for(let count = 1; count < json.length; count++){
@@ -182,18 +129,20 @@ class Tables extends React.Component{
                         }
                     }
     
-                    tableDeleter('Sunday')
-                    tableDeleter('Monday')
-                    tableDeleter('Tuesday')
-                    tableDeleter('Wednesday')
-                    tableDeleter('Thursday')
-                    tableDeleter('Friday')
-                    tableDeleter('Saturday')
+                    tableStarter('Sunday')
+                    tableStarter('Monday')
+                    tableStarter('Tuesday')
+                    tableStarter('Wednesday')
+                    tableStarter('Thursday')
+                    tableStarter('Friday')
+                    tableStarter('Saturday')
+
+                    let table = null
                     
                     for(let count = 0; count < tableItems.length; count++){
                         let tr = document.createElement('tr')
                         let day = tableItems[count].day
-                        let table = document.getElementById(day)
+                        table = document.getElementById(day)
                         let td = document.createElement('td')
                         let item = document.createTextNode(tableItems[count].todo)
                         td.appendChild(item)
@@ -222,7 +171,7 @@ class Tables extends React.Component{
     
                         table.appendChild(tr)
                     }
-                })
+        return table
     }
 }
 

@@ -1,8 +1,29 @@
 import React from "./_snowpack/pkg/react.js";
 import Tables from "./Tables.js";
+let appInstance;
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {todos: []};
+    appInstance = this;
+  }
+  loadTable() {
+    let json2 = null;
+    fetch("/loadTable", {
+      method: "POST",
+      body: null,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(function(response) {
+      json2 = response;
+    });
+    return json2;
+  }
   render() {
-    return /* @__PURE__ */ React.createElement("ul", null, /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("label", {
+    return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("form", {
+      method: "post"
+    }, /* @__PURE__ */ React.createElement("ul", null, /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("label", {
       for: "todo"
     }, "Todo:"), /* @__PURE__ */ React.createElement("textarea", {
       id: "todo",
@@ -55,22 +76,26 @@ class App extends React.Component {
       class: "button"
     }, /* @__PURE__ */ React.createElement("button", {
       type: "button",
-      onClick: this.submit,
+      onClick: appInstance.submit,
       id: "submitButton"
-    }, "submit")));
+    }, "submit")))), /* @__PURE__ */ React.createElement("p", null, "In the table, click on a delete button to delete that todo, and the update button to replace any part of that todo with what's in the inputs above!"), /* @__PURE__ */ React.createElement("h2", null, "Your Todos:"), /* @__PURE__ */ React.createElement(Tables, {
+      todos: appInstance.state.todos,
+      update: appInstance.updateButton,
+      delete: appInstance.deleteButton
+    }));
   }
   submit() {
     const todoInput = document.querySelector("#todo");
     const dayInput = document.querySelector("#day");
     const difficultyInput = document.querySelector("#difficulty");
-    const json = {
+    const json2 = {
       todo: todoInput.value,
       day: dayInput.value,
       difficulty: difficultyInput.value,
       type: "todo",
       user: null
     };
-    const body = JSON.stringify(json);
+    const body2 = JSON.stringify(json2);
     fetch("/submit", {
       method: "POST",
       body: JSON.stringify({todo: todoInput.value, day: dayInput.value, difficulty: difficultyInput.value, type: "todo", user: null}),
@@ -79,9 +104,59 @@ class App extends React.Component {
       }
     }).then(function(response) {
       return response.json();
+    }).then(function(json3) {
+      console.log(json3);
+      appInstance.setState({todos: appInstance.loadTable()});
+    });
+  }
+  deleteButton(row) {
+    const todoInput = document.querySelector("#todo");
+    const dayInput = document.querySelector("#day");
+    const difficultyInput = document.querySelector("#difficulty");
+    json = {
+      todo: todoInput.value,
+      day: dayInput.value,
+      difficulty: difficultyInput.value,
+      type: "todo",
+      _id: row._id,
+      user: null
+    };
+    body = JSON.stringify(json);
+    fetch("/delete", {
+      method: "POST",
+      body: JSON.stringify({todo: row.todo, day: row.day, difficulty: row.difficulty, type: "todo", _id: row._id, user: null}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(function(response) {
+      return response.json();
     }).then(function(json2) {
-      console.log(json2);
-      populateTable(json2);
+      appInstance.setState({todos: appInstance.loadTable()});
+    });
+  }
+  updateButton(row) {
+    const todoInput = document.querySelector("#todo");
+    const dayInput = document.querySelector("#day");
+    const difficultyInput = document.querySelector("#difficulty");
+    json = {
+      todo: todoInput.value,
+      day: dayInput.value,
+      difficulty: difficultyInput.value,
+      type: "todo",
+      _id: row._id,
+      user: null
+    };
+    body = JSON.stringify(json);
+    fetch("/update", {
+      method: "POST",
+      body: JSON.stringify({todo: todoInput.value, day: dayInput.value, difficulty: difficultyInput.value, type: "todo", _id: row._id, user: null}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(function(response) {
+      return response.json();
+    }).then(function(json2) {
+      appInstance.setState({todos: appInstance.loadTable()});
     });
   }
 }
