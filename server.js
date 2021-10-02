@@ -15,7 +15,6 @@ app.use(cors())
 app.use( express.static( 'build' ) )
 
 
-
 app.get( '/read', ( req, res ) => res.json( entries ) )
 
 app.post( '/add', ( req,res ) => {
@@ -25,7 +24,7 @@ app.post( '/add', ( req,res ) => {
 
 app.post( '/change', function( req,res ) {
   const idx = req.body.index
-  console.log(entries[idx])
+  console.log(req.body)
   entries[idx].name = req.body.name
   entries[ idx ].feet = req.body.feet
   entries[idx].inches = req.body.inches
