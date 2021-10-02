@@ -10,7 +10,7 @@
     "clean": "rm dist/bundle.js",
     "dev": "snowpack dev",
     "build": "snowpack build",
-    "start": "node server.js"
+    "start": "node server.improved.js"
   },
   "dependencies": {
     "express": "^4.17.1",
