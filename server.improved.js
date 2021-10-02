@@ -22,7 +22,7 @@ app.use(passport.session());
 app.use(compression())
 
 
-app.use(express.static('../frontend/build'))
+app.use(express.static('./frontend/build'))
 
 
 app.get('/auth/github', passport.authenticate('github', {
