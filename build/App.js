@@ -1,25 +1,18 @@
 import React from "./_snowpack/pkg/react.js";
-class Todo extends React.Component {
+class Entry extends React.Component {
   render() {
-    return /* @__PURE__ */ React.createElement("li", null, this.props.name, " :", /* @__PURE__ */ React.createElement("input", {
-      type: "checkbox",
-      defaultChecked: this.props.completed,
-      onChange: (e) => this.change(e)
-    }));
-  }
-  change(e) {
-    this.props.onclick(this.props.name, e.target.checked);
+    return /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("td", null, this.props.yourname), /* @__PURE__ */ React.createElement("td", null, this.props.score), /* @__PURE__ */ React.createElement("td", null, this.props.rank), /* @__PURE__ */ React.createElement("td", null, '"&#10000"'), /* @__PURE__ */ React.createElement("td", null, '"&#128465"'));
   }
 }
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {todos: []};
+    this.state = {appdata: []};
     this.load();
   }
   load() {
     fetch("/read", {method: "get", "no-cors": true}).then((response) => response.json()).then((json) => {
-      this.setState({todos: json});
+      this.setState({appdata: json});
     });
   }
   render() {
@@ -29,11 +22,11 @@ class App extends React.Component {
       type: "text"
     }), /* @__PURE__ */ React.createElement("button", {
       onClick: (e) => this.add(e)
-    }, "add"), /* @__PURE__ */ React.createElement("ul", null, this.state.todos.map((todo, i) => /* @__PURE__ */ React.createElement(Todo, {
+    }, "Submit"), /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("td", null, "Name"), /* @__PURE__ */ React.createElement("td", null, "Score"), /* @__PURE__ */ React.createElement("td", null, "Rank"), /* @__PURE__ */ React.createElement("td", null, "Edit"), /* @__PURE__ */ React.createElement("td", null, "Delete")), this.state.appdata.map((appdata, i) => /* @__PURE__ */ React.createElement(Entry, {
       key: i,
-      name: todo.name,
-      completed: todo.completed,
-      onclick: this.toggle
+      yourname: appdata.yourname,
+      score: appdata.score,
+      rank: appdata.rank
     }))));
   }
   toggle(name, completed) {
@@ -50,7 +43,7 @@ class App extends React.Component {
       body: JSON.stringify({name: value, completed: false}),
       headers: {"Content-Type": "application/json"}
     }).then((response) => response.json()).then((json) => {
-      this.setState({todos: json});
+      this.setState({appdata: json});
     });
   }
 }

@@ -5,16 +5,23 @@ const todos = [
     { name:'buy groceries', completed:false }
 ]
 
+const appdata = [
+    {'yourname': 'Greg', 'score': 745, 'rank': 1},
+    {'yourname': 'Mark', 'score': 687, 'rank': 2},
+    {'yourname': 'Liam', 'score': 430, 'rank': 3}
+]
+
+
 app.use( express.json() )
 
 // this will most likely be 'build' or 'public'
 app.use( express.static( 'build' ) )
 
-app.get( '/read', ( req, res ) => res.json( todos ) )
+app.get( '/read', ( req, res ) => res.json( appdata ) )
 
 app.post( '/add', ( req,res ) => {
-    todos.push( req.body )
-    res.json( todos )
+    appdata.push( req.body )
+    res.json( appdata )
 })
 
 app.post( '/change', function( req,res ) {

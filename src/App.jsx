@@ -3,17 +3,25 @@ import React from 'react';
 // we could place this Todo component in a separate file, but it's
 // small enough to alternatively just include it in our App.js file.
 
-class Todo extends React.Component {
+
+class Entry extends React.Component
+{
     // our .render() method creates a block of HTML using the .jsx format
-    render() {
-        return <li>{this.props.name} :
-            <input type="checkbox" defaultChecked={this.props.completed} onChange={ e => this.change(e) }/>
-        </li>
+    render()
+    {
+        return <tr>
+            <td>{this.props.yourname}</td>
+            <td>{this.props.score}</td>
+            <td>{this.props.rank}</td>
+            <td>"&#10000"</td>
+            <td>"&#128465"</td>
+        </tr>
     }
     // call this method when the checkbox for this component is clicked
-    change(e) {
-        this.props.onclick( this.props.name, e.target.checked )
-    }
+    /*change(e)
+    {
+        this.props.onclick(this.props.name, e.target.checked)
+    }*/
 }
 
 // main component
@@ -21,7 +29,7 @@ class App extends React.Component {
     constructor( props ) {
         super( props )
         // initialize our state
-        this.state = { todos:[] }
+        this.state = { appdata:[] }
         this.load()
     }
 
@@ -30,7 +38,7 @@ class App extends React.Component {
         fetch( '/read', { method:'get', 'no-cors':true })
             .then( response => response.json() )
             .then( json => {
-                this.setState({ todos:json })
+                this.setState({ appdata:json })
             })
     }
 
@@ -38,10 +46,17 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <input type='text' /><button onClick={ e => this.add( e )}>add</button>
-                <ul>
-                    { this.state.todos.map( (todo,i) => <Todo key={i} name={todo.name} completed={todo.completed} onclick={ this.toggle } /> ) }
-                </ul>
+                <input type='text' /><button onClick={ e => this.add( e )}>Submit</button>
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td>Score</td>
+                        <td>Rank</td>
+                        <td>Edit</td>
+                        <td>Delete</td>
+                    </tr>
+                    { this.state.appdata.map( (appdata,i) => <Entry key={i} yourname={appdata.yourname} score={appdata.score} rank={appdata.rank} /> ) }
+                </table>
             </div>
         )
     }
@@ -67,13 +82,11 @@ class App extends React.Component {
             .then( response => response.json() )
             .then( json => {
                 // changing state triggers reactive behaviors
-                this.setState({ todos:json })
+                this.setState({ appdata:json })
             })
     }
 
 }
-
-
 
 export default App;
 
