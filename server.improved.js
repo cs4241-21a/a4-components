@@ -48,7 +48,7 @@ app.get( '/modify', (req, res) => {
 
 app.get( '/delete', (req, res) => {
   console.log("Inside get /delete")
-  res.sendFile(__dirname + '/build/index.html')
+  res.json( appdata ) 
 })
 
 app.post( '/add', (req, res) => {

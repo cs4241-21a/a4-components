@@ -41,7 +41,7 @@ class Row extends React.Component {
       }),
       headers: {"Content-Type": "application/json"}
     }).then((response) => response.json()).then((json) => {
-      this.setState({appData: json});
+      this.props.app.setState({appData: json});
     });
   }
   modifyInputBoxes(id) {
@@ -203,6 +203,7 @@ class App extends React.Component {
     })), /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "ID"), /* @__PURE__ */ React.createElement("th", null, "First Name"), /* @__PURE__ */ React.createElement("th", null, "Last Name"), /* @__PURE__ */ React.createElement("th", null, "Sex"), /* @__PURE__ */ React.createElement("th", null, "Age Class"), /* @__PURE__ */ React.createElement("th", null, "Date Joined"), /* @__PURE__ */ React.createElement("th", null, "Membership Type"), /* @__PURE__ */ React.createElement("th", null, "Expire Date")), /* @__PURE__ */ React.createElement("tbody", {
       id: "oldTbody"
     }, this.state.appData.map((row, i) => /* @__PURE__ */ React.createElement(Row, {
+      app: this,
       id: row.id,
       fname: row.fname,
       lname: row.lname,

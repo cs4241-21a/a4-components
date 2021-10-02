@@ -39,7 +39,7 @@ delete(id) {
   .then( response => response.json() )
   .then( json => {
      // changing state triggers reactive behaviors
-     this.setState({ appData:json }) 
+     this.props.app.setState({ appData:json }) 
   })
 }
   modifyInputBoxes(id) {
@@ -173,7 +173,7 @@ class App extends React.Component {
         </tr>
 
         <tbody id='oldTbody'>
-          { this.state.appData.map( (row,i) => <Row id={row.id} fname={row.fname} lname={row.lname} sex={row.sex} ageClass={row.ageClass} dateJoined={row.dateJoined} membershipType={row.membershipType} expireDate={row.expireDate} modifyFunc={this.modify}/> ) }
+          { this.state.appData.map( (row,i) => <Row app={this} id={row.id} fname={row.fname} lname={row.lname} sex={row.sex} ageClass={row.ageClass} dateJoined={row.dateJoined} membershipType={row.membershipType} expireDate={row.expireDate} modifyFunc={this.modify}/> ) }
         </tbody>
     </table>
       </div>
