@@ -95,7 +95,7 @@ handleScoreChange = e => {
           </div>
           <div style={{ width: "40%" }}>
             <form autocomplete={"off"} id = "form">
-              <p>Add Book</p>
+              <h2>Add Book</h2>
               <div>
                 <label for={"title"} class={"theLabels"}>
                   Title:{" "}

@@ -55,7 +55,7 @@ class App extends React.Component {
     }, /* @__PURE__ */ React.createElement("form", {
       autocomplete: "off",
       id: "form"
-    }, /* @__PURE__ */ React.createElement("p", null, "Add Book"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", {
+    }, /* @__PURE__ */ React.createElement("h2", null, "Add Book"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", {
       for: "title",
       class: "theLabels"
     }, "Title:", " "), /* @__PURE__ */ React.createElement("input", {
