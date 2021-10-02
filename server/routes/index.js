@@ -52,7 +52,7 @@ router.post('/login', async (req, res, next) => {
         username
       })
     });
-  } catch (err){
+  } catch (err) {
     console.log(err);
     res.json({ errors: { error: 'error' } });
   }
@@ -68,15 +68,15 @@ router.get('/auth/github',
 
 // Github authentication callback
 router.get("/login/oauth2/code/github",
-  passport.authenticate('github', { failureRedirect: '/login' }),
+  passport.authenticate('github', { failureRedirect: 'http://localhost:3000/login' }),
   function (req, res) {
-    res.redirect(`/user/${req.user._id}`);
+    res.redirect(`http://localhost:3000/user/${req.user._id}`);
   });
 
 router.get('/logout', (req, res, next) => {
   res.clearCookie(loginCookieName);
   req.logout();
-  res.redirect('/login');
+  res.json({ loggedOut: true });
 });
 
 // Register Account endpoints
@@ -89,8 +89,8 @@ router.post('/register', async (req, res, next) => {
     passwordHash = await bcrypt.hash(password, 12);
   } else {
     res.json({
-      formData: {username},
-      errors: {password: `Passwords to not match`}
+      formData: { username },
+      errors: { password: `Passwords to not match` }
     });
 
     return;
@@ -99,8 +99,8 @@ router.post('/register', async (req, res, next) => {
   const user = await User.findOne({ username });
   if (user) {
     res.json({
-      formData: {username},
-      errors: {password: `User with username ${username} already exists`}
+      formData: { username },
+      errors: { password: `User with username ${username} already exists` }
     })
     return;
   }
@@ -125,7 +125,7 @@ router.post('/register', async (req, res, next) => {
   res.cookie(loginCookieName, { userId: newUser._id }, { maxAge: 21600000 });
   res.json({
     status: 'success',
-    userId: newUser._id, 
+    userId: newUser._id,
     token: generateToken({
       id: newUser._id,
       username

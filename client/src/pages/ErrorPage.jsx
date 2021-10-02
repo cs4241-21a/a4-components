@@ -1,5 +1,6 @@
 import React from "react";
 
+// Basic error page.
 const ErrorPage = ({ errorCode, errorMessage }) => {
     return (
         <>

@@ -16,7 +16,7 @@ module.exports.checkLogin = (req, res, next) => {
 }
 
 // Verify that a token is valid in the authentication header
-const verifyToken = (token) => {
+module.exports.verifyToken = (token) => {
         // valid token
         if (token) {
             try {
@@ -36,13 +36,11 @@ module.exports.checkAuth = (req, res, next) => {
     const { token } = req.body;
     const tokenStuff = verifyToken(token);
 
-    const gitauth = req.isAuthenticated();
-
     // not logged in
-    if (tokenStuff && !gitauth) {
-        res.json({ errors: { login: 'Not logged in' } })
+    if (!tokenStuff) {
+        res.json({ errors: { login: 'Not logged in' } });
         return;
     }
 
-    return next();
+    next();
 }

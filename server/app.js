@@ -13,7 +13,13 @@ var env = process.env.NODE_ENV || 'development';
 if (env === 'development') {
   var cors = require('cors');
   require('dotenv').config();
-  app.use(cors());
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      credentials: true, // allow session cookie from browser to pass through
+    })
+  );
   console.log('cors enabled');
 }
 require('./passport-setup');
@@ -34,6 +40,7 @@ app.use(passport.session());
 
 app.use('/api', indexRouter);
 app.use('/user', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

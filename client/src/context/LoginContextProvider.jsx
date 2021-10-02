@@ -1,8 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import LoginReducer from './LoginReducer';
 
-
-
 export const LoginContext = createContext();
 
 // get initial cart state from local mem
@@ -12,7 +10,6 @@ const loginFromStorage = localStorage.getItem('login') ?
 const initialState = loginFromStorage ;
 
 const LoginContextProvider = ({ children }) => {
-
     // state=state, dispatch=reducer
     const [state, dispatch] = useReducer(LoginReducer, initialState);
     const login = (payload) =>  dispatch({ type: 'LOGIN', payload }); ;

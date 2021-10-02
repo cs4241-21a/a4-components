@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
 import Navbar from "../components/Navbar";
+import GithubOAuth from "../components/GithubOAuth";
 import { LoginContext } from "../context/LoginContextProvider";
 
 const LoginPage = () => {
@@ -14,11 +15,12 @@ const LoginPage = () => {
         errors: { username: null, password: null }
     });
 
+    // Redirect to todolist page if logged in
     useEffect(() => {
         if (token) {
             history.push(`/user/${jwt_decode(token).id}`);
         }
-    },[token]);
+    }, [token, history]);
 
     // Set state on input field change
     const onInputChange = (name, value) => {
@@ -33,8 +35,6 @@ const LoginPage = () => {
 
     // Do api call on login form submission
     const onSubmit = () => {
-        console.log('Login form submission');
-
         fetch(`http://localhost:3001/api/login`, {
             method: 'POST',
             headers: {
@@ -44,28 +44,29 @@ const LoginPage = () => {
                 username: state.formData.username,
                 password: state.formData.password
             })
-        })
-            .then(async function (response) {
-                const data = await response.json();
+        }).then(async function (response) {
+            const data = await response.json();
 
-                if (data.errors) {
-                    setState({
-                        ...state,
-                        errors: {
-                            ...state.errors,
-                            ...data.errors
-                        }
-                    });
-                    return;
-                }
+            // Set any errors with user input
+            if (data.errors) {
+                setState({
+                    ...state,
+                    errors: {
+                        ...state.errors,
+                        ...data.errors
+                    }
+                });
+                return;
+            }
 
-                if (data.status && data.status === 'success') {
-                    login(data.token);
-                    console.log(data);
-                    console.log('push to tasks list')
-                    history.push(`/user/${data.id}`)
-                }
-            });
+            // Redirect to todo list page on login
+            if (data.status && data.status === 'success') {
+                login(data.token);
+                history.push(`/user/${data.id}`)
+            }
+        }).catch((err) => {
+            alert('Login Request failed');
+        });
     };
 
     return (
@@ -84,7 +85,6 @@ const LoginPage = () => {
                                         onSubmit();
                                     }}>
                                         <div className="form-group">
-
                                             <label className="small mb-1 mt-3" htmlFor="username">Username: </label>
                                             <input className="form-control"
                                                 placeholder="Enter Your Username" name="username" type="text"
@@ -110,10 +110,7 @@ const LoginPage = () => {
                                                 e.preventDefault();
                                                 onSubmit();
                                             }}>Log in</button>
-                                            <p className="bg-dark rounded rounded-5 mt-3 p-2 d-flex align-items-center">
-                                                <i className="fa fa-github text-light fa-3x"></i>
-                                                <a href="/auth/github" className="link-info ms-3" >Login with Github</a>
-                                            </p>
+                                            <GithubOAuth />
                                             <p className="m=0 bg-dark text-light p-2 my-1 rounded rounded-5">Don't have an account?
                                                 <a href="/register" className="link-info"> Sign up here</a>
                                             </p>

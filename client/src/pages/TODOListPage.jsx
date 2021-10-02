@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
 
@@ -9,10 +9,10 @@ const TODOListPage = () => {
     const history = useHistory();
     const { userId } = useParams();
     const [state, setState] = useState({ tasks: [] });
-    const { token } = useContext(LoginContext);
+    const { token, login } = useContext(LoginContext);
 
     // Get all user tasks from the server
-    const getTasks = () => fetch(`http://localhost:3001/user/${userId}`, {
+    const getTasks = useCallback(() => fetch(`http://localhost:3001/user/${userId}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -26,6 +26,7 @@ const TODOListPage = () => {
         if (data.errors && (data.errors.login || data.errors.user))
             history.push('/login');
         if (data.errors) {
+            console.log(data.errors)
             alert('An error occured');
             return;
         }
@@ -36,37 +37,63 @@ const TODOListPage = () => {
     }).catch((err) => {
         alert('Cannot fetch tasks');
         console.log(err);
-    });
+    }), [token, history, userId]);
 
     // Get all user tasks from the server
     useEffect(() => {
 
         if (!token) {
-            history.push('/login');
-            console.log('push to login');
-        } else {
+            let loggedIn = false;
 
-            fetch(`http://localhost:3001/user/exists`, {
+            fetch('http://localhost:3001/user/check-auth', {
                 method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id: userId
-                })
+                credentials: 'include'
             }).then(async (response) => {
                 const data = await response.json();
-                console.log(data);
 
+                console.log(data);
                 if (data.errors) {
-                    history.push(`/user/${jwt_decode(token).id}`);
+                    history.push('/login');
+                    console.log('push to login1');
                     return;
                 }
 
-                getTasks();
-            })
+
+                if (data.token) {
+                    login(data.token);
+                    loggedIn = true;
+                }
+
+            }).catch(() => {
+                history.push('/login');
+                console.log('push to login2');
+                return;
+            });
+
+            if (!loggedIn) return;
         }
-    }, [token, userId]);
+
+        fetch(`http://localhost:3001/user/exists`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: userId
+            })
+        }).then(async (response) => {
+            const data = await response.json();
+            console.log(data);
+
+            if (data.errors) {
+                history.push(`/user/${jwt_decode(token).id}`);
+                return;
+            }
+
+            getTasks();
+        })
+
+    }, [token, userId, getTasks, history, login]);
 
     // Callback to edit a task
     const editTask = async (i, title) => {

@@ -1,9 +1,25 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router";
 
 import { LoginContext } from "../context/LoginContextProvider";
 
 const Navbar = ({ user }) => {
+    const history = useHistory();
     const { logout } = useContext(LoginContext);
+
+    // Navbar logout callback
+    const onLogout = () => {
+        fetch('http://localhost:3001/api/logout', {
+            method: 'GET',
+            credentials: 'include'
+        }).then(async (response) => {
+            const data = await response.json();
+            if (data.loggedOut) {
+                logout();
+                history.push('/login');
+            }
+        });
+    }
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Navbar">
@@ -41,7 +57,10 @@ const Navbar = ({ user }) => {
                         {
                             user &&
                             <li className="nav-item">
-                                <a className="nav-link" style={{ cursor: 'pointer' }} onClick={() => { logout() }}>Logout</a>
+                                <button className="nav-link" 
+                                style={{ backgroundColor: 'transparent', border: '0px solid black' }} onClick={onLogout}>
+                                    Logout
+                                </button>
                             </li>
                         }
                     </ul>

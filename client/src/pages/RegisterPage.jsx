@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import jwt_decode from "jwt-decode";
 
 import Navbar from '../components/Navbar';
+import GithubOAuth from "../components/GithubOAuth";
 import { LoginContext } from "../context/LoginContextProvider";
 
 const RegisterPage = () => {
@@ -36,7 +37,7 @@ const RegisterPage = () => {
                 [name]: value
             }
         });
-    });
+    }, [state, setState]);
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();
@@ -72,11 +73,11 @@ const RegisterPage = () => {
                     return;
                 }
             });
-    });
+    }, [state, history, login]);
 
     return (
         <>
-        <Navbar/>
+            <Navbar />
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 offset-md-2 col-md-8">
@@ -122,10 +123,7 @@ const RegisterPage = () => {
 
                                             <button className="mt-3 btn btn-primary" type="submit" onSubmit={onSubmit}>Register</button>
 
-                                            <p className="bg-dark rounded rounded-5 mt-3 p-2 d-flex align-items-center">
-                                                <i className="fa fa-github text-light fa-3x"></i>
-                                                <a href="/auth/github" className="link-info ms-3" >Login with Github</a>
-                                            </p>
+                                            <GithubOAuth />
 
                                             <p className="bg-dark text-light p-2 my-2 rounded rounded-5" >Already have an account?
                                                 <a href="/login" className="link-info"> Log in here</a>
