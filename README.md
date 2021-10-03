@@ -2,7 +2,7 @@ Assignment 4 - Components
 ===
 ## Book Keeper App
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://a4-maddison-caten.glitch.me
 
 The Book Keeper application is designed to keep track of the books that you have read. The application includes the title of the book, the author of the book, the user's rating of the book on a scale of 1 (worst) - 5 (best), any additional notes about the book, and the year the book was read by the user. This application is a modified version of that from a2 using React and Express. 
 
