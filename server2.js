@@ -85,8 +85,6 @@ app.post( '/login', function(req,res) {
 
       // https://stackoverflow.com/questions/10827242/understanding-the-post-redirect-get-pattern 
       // make redirect
-      //aaaaaaaaaaaaaaaaaaaaa
-      console.log("HERE")
       res.redirect('/index.html' )
 
     }else{

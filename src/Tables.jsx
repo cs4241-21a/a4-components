@@ -9,15 +9,12 @@ class Tables extends React.Component{
         // initialize our state
         tableInstance = this
       }
+      /*
     render(){
         let tableString = tableInstance.populateTable()
         tableString = tableString.getElementsByTagName()
-        return(
-            <div>
-            {tableString}
-            </div>
-        )
     }
+    */
 
     populateTable(){
 
