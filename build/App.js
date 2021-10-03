@@ -8,17 +8,28 @@ class App extends React.Component {
     appInstance = this;
   }
   loadTable() {
-    let json2 = null;
-    fetch("/loadTable", {
+    const todoInput = document.querySelector("#todo");
+    const dayInput = document.querySelector("#day");
+    const difficultyInput = document.querySelector("#difficulty");
+    const json2 = {
+      todo: todoInput.value,
+      day: dayInput.value,
+      difficulty: difficultyInput.value,
+      type: "todo",
+      user: null
+    };
+    const body2 = JSON.stringify(json2);
+    return fetch("/loadTable", {
       method: "POST",
-      body: null,
+      body: JSON.stringify({todo: todoInput.value, day: dayInput.value, difficulty: difficultyInput.value, type: "todo", user: null}),
       headers: {
         "Content-Type": "application/json"
       }
     }).then(function(response) {
-      json2 = response;
+      return response.json();
+    }).then(function(response2) {
+      return response2;
     });
-    return json2;
   }
   render() {
     return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("form", {
@@ -105,8 +116,7 @@ class App extends React.Component {
     }).then(function(response) {
       return response.json();
     }).then(function(json3) {
-      console.log(json3);
-      appInstance.setState({todos: appInstance.loadTable()});
+      appInstance.loadTable().then((response) => appInstance.setState({todos: response}));
     });
   }
   deleteButton(row) {
@@ -131,7 +141,7 @@ class App extends React.Component {
     }).then(function(response) {
       return response.json();
     }).then(function(json2) {
-      appInstance.setState({todos: appInstance.loadTable()});
+      appInstance.loadTable().then((response) => appInstance.setState({todos: response}));
     });
   }
   updateButton(row) {
@@ -156,7 +166,7 @@ class App extends React.Component {
     }).then(function(response) {
       return response.json();
     }).then(function(json2) {
-      appInstance.setState({todos: appInstance.loadTable()});
+      appInstance.loadTable().then((response) => appInstance.setState({todos: response}));
     });
   }
 }

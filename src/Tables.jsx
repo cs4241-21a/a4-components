@@ -10,102 +10,16 @@ class Tables extends React.Component{
         tableInstance = this
       }
     render(){
-        return tableInstance.populateTable()
+        let tableString = tableInstance.populateTable()
+        tableString = tableString.getElementsByTagName()
+        return(
+            <div>
+            {tableString}
+            </div>
+        )
     }
-    /*
-    render() {
-      return (
-      <div class="table-container">
-      <div>
-        <table id="Sunday">
-          <tr><th>Sunday</th></tr>
-          <tr>
-            <th>Todo</th>
-            <th>Difficulty</th>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-      <div>
-        <table id="Monday">
-          <tr><th>Monday</th></tr>
-          <tr>
-            <th>Todo</th>
-            <th>Difficulty</th>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-      <div>
-        <table id="Tuesday">
-          <tr><th>Tuesday</th></tr>
-          <tr>
-            <th>Todo</th>
-            <th>Difficulty</th>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-      <div>
-        <table id="Wednesday">
-          <tr><th>Wednesday</th></tr>
-          <tr>
-            <th>Todo</th>
-            <th>Difficulty</th>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-      <div>
-        <table id="Thursday">
-          <tr><th>Thursday</th></tr>
-          <tr>
-            <th>Todo</th>
-            <th>Difficulty</th>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-      <div>
-        <table id="Friday">
-          <tr><th>Friday</th></tr>
-          <tr>
-            <th>Todo</th>
-            <th>Difficulty</th>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-      <div>
-        <table id="Saturday">
-          <tr><th>Saturday</th></tr>
-          <tr>
-            <th>Todo</th>
-            <th>Difficulty</th>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-    </div>
-      )}
-    //style="table-layout: auto;"
-    //style="flex-grow: 8"
-*/
 
     populateTable(){
-
-        //const todoInput = document.querySelector( '#todo' )
-        //const dayInput = document.querySelector( '#day' )
-       // const difficultyInput = document.querySelector('#difficulty')
-/*
-        const tableDeleter = function(day){
-            let table = document.getElementById(day);
-            let rowCount = table.rows.length;
-            for (let count = 1; count < rowCount; count++) {
-                table.deleteRow(1);
-            }
-        }
-        */
 
         const tableStarter = function(day)
         {
@@ -116,6 +30,8 @@ class Tables extends React.Component{
             let item = document.createTextNode(day)
             th.appendChild(item)
             tr.appendChild(th)
+
+            return table
 
         }
 
@@ -128,21 +44,35 @@ class Tables extends React.Component{
                             tableItems.push(json[count])
                         }
                     }
-    
-                    tableStarter('Sunday')
-                    tableStarter('Monday')
-                    tableStarter('Tuesday')
-                    tableStarter('Wednesday')
-                    tableStarter('Thursday')
-                    tableStarter('Friday')
-                    tableStarter('Saturday')
 
-                    let table = null
-                    
+                    let tables = []
+    
+                    tables.push(tableStarter('Sunday'))
+                    tables.push(tableStarter('Monday'))
+                    tables.push(tableStarter('Tuesday'))
+                    tables.push(tableStarter('Wednesday'))
+                    tables.push(tableStarter('Thursday'))
+                    tables.push(tableStarter('Friday'))
+                    tables.push(tableStarter('Saturday'))
+
+                    let curTable = null
+
+                   const tablePicker = function(day){
+                       switch(day){
+                           case 'Sunday': return 0; break;
+                           case 'Monday': return 1; break;
+                           case 'Tuesday': return 2; break;
+                           case 'Wednesday': return 3; break;
+                           case 'Thursday' : return 4; break;
+                           case 'Friday' : return 5; break;
+                           case 'Saturday' : return 6; break;
+                       }
+                    }
+                                        
                     for(let count = 0; count < tableItems.length; count++){
                         let tr = document.createElement('tr')
                         let day = tableItems[count].day
-                        table = document.getElementById(day)
+                        curTable = tables[tablePicker(day)]
                         let td = document.createElement('td')
                         let item = document.createTextNode(tableItems[count].todo)
                         td.appendChild(item)
@@ -169,9 +99,9 @@ class Tables extends React.Component{
     
                         item.onclick = function() {deleteButton(tableItems[count])}
     
-                        table.appendChild(tr)
+                        curTable.appendChild(tr)
                     }
-        return table
+        return curTable
     }
 }
 

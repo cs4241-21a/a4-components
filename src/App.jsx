@@ -14,18 +14,35 @@ class App extends React.Component {
   }
 
   loadTable(){
-    let json = null
-    fetch( '/loadTable', {
+
+      const todoInput = document.querySelector( '#todo' )
+      const dayInput = document.querySelector( '#day' )
+      const difficultyInput = document.querySelector('#difficulty')
+
+      const json = { todo: todoInput.value, 
+        day: dayInput.value, 
+        difficulty: difficultyInput.value,
+        type: 'todo',
+        user: null
+        }
+    const body = JSON.stringify( json )
+
+    return(
+      fetch( '/loadTable', {
       method:'POST',
-      body: null,
+      body: JSON.stringify({todo:todoInput.value, day:dayInput.value, difficulty:difficultyInput.value, type:'todo', user:null}),
       headers: {
       'Content-Type': 'application/json'
       }
       })
       .then( function( response ) {
-        json = response}
-      )
-    return json}
+        return response.json()
+        })
+        .then(function(response2){
+          return response2
+        })
+    )
+  }
 
 
   render() {
@@ -102,8 +119,10 @@ class App extends React.Component {
     return response.json()
     })
     .then(function(json){
-    console.log(json)
-    appInstance.setState({ todos:appInstance.loadTable()})
+    appInstance.loadTable()
+    .then(response =>(
+      appInstance.setState({todos:response}))
+    )
     });
     }
 
@@ -133,9 +152,10 @@ class App extends React.Component {
              return response.json()
          })
          .then(function(json){
-          appInstance.setState({ todos:appInstance.loadTable()})
-          //console.log(json)
-            // populateTable(json)
+          appInstance.loadTable()
+          .then(response =>(
+          appInstance.setState({todos:response}))
+    )
          });
    }
   
@@ -165,9 +185,10 @@ class App extends React.Component {
         return response.json()
     })
     .then(function(json){
-      appInstance.setState({ todos:appInstance.loadTable()})
-      //console.log(json)
-       // populateTable(json)
+      appInstance.loadTable()
+      .then(response =>(
+      appInstance.setState({todos:response}))
+    )
     });
   }
 }

@@ -22,8 +22,6 @@ const { env } = require('process');
 const morgan = require('morgan');
 const responseTime = require('response-time')
 const compression = require('compression')
-
-app.use(express.static("build"));
 app.use(express.json());
 
 
@@ -52,11 +50,21 @@ client.connect()
   return collection.find({ }).toArray()
 })
 //.then(console.log)
-/*
+
+// add some middleware that always sends unauthenicaetd users to the login page
+app.use( function( req,res,next) {
+  console.log("session: ", req.session.login)
+  if( req.session.login === true || req.method === 'POST')
+    next()
+  else
+    res.sendFile( __dirname + '/build/login.html' )
+})
+
 app.post( '/login', function(req,res) {
   // express.urlencoded will put your key value pairs 
   // into an object, where the key is the name of each
   // form field and the value is whatever the user entered
+  console.log("login!")
 
   collection.find({'username':req.body.username}).toArray()
     .then(dbresponse => {
@@ -77,7 +85,9 @@ app.post( '/login', function(req,res) {
 
       // https://stackoverflow.com/questions/10827242/understanding-the-post-redirect-get-pattern 
       // make redirect
-      res.sendFile( __dirname + '/build/index.html' )
+      //aaaaaaaaaaaaaaaaaaaaa
+      console.log("HERE")
+      res.redirect('/index.html' )
 
     }else{
         // password incorrect, redirect back to login page
@@ -86,16 +96,15 @@ app.post( '/login', function(req,res) {
   })
 })
 
-// add some middleware that always sends unauthenicaetd users to the login page
-app.use( function( req,res,next) {
-  if( req.session.login === true )
-    next()
-  else
-    res.sendFile( __dirname + '/build/login.html' )
-})
-*/
+
+//app.get('/index.html', (request, response) => {
+  //console.log("went through /index")
+  //response.redirect("/index.html");
+//})
+
 app.get('/', (request, response) => {
-  response.sendFile(__dirname + "/build/index.html");
+  console.log("went through /")
+  response.redirect("/index.html");
 })
 
 app.post('/submit', bodyparser.json(),function(req, res){
@@ -138,8 +147,10 @@ app.post('/delete', bodyparser.json(),function(req, res){
 })
 
 app.post('/loadTable', bodyparser.json(),function(req, res){
+  console.log("here1")
   collection.find({}).toArray()
   .then(dbresponse =>{
+    console.log("here2")
     dbresponse.unshift(req.session.user)
   res.json(dbresponse)
   })
@@ -166,6 +177,7 @@ const sendFile = function( response, filename ) {
      }
    })
 }
+app.use(express.static("build"));
 app.listen(3000)
 //app.listen(process.env.PORT, () => {
   //console.log("Your app is listening on port " + process.env.PORT);
