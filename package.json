@@ -12,11 +12,16 @@
     "build": "snowpack build"
   },
   "dependencies": {
+    "@heroku/buildpack-registry": "^1.0.1",
     "app": "^0.1.0",
+    "async-file": "^2.0.2",
+    "cli-ux": "^5.6.3",
     "express": "^4.17.1",
+    "got": "^11.8.2",
     "heroku": "^7.59.0",
     "jss": "^10.8.0",
     "node": "^16.8.0",
+    "phoenix": "^1.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "serve": "^12.0.1"
