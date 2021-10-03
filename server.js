@@ -89,7 +89,7 @@ app.post( '/add', ( req,res ) => {
       dTime = hours + ":" + minutes + meridiem
     }
 
-    if(d.getHours() > 12){
+    if(d.getHours() > 15){
       meridiem2 = "PM"
       timePlaced = (d.getHours() - 16) + ":" + d.getMinutes() + meridiem2; 
     }
