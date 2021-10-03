@@ -90,10 +90,12 @@ class App extends React.Component {
     <p>In the table, click on a delete button to delete that todo, 
     and the update button to replace any part of that todo with what's in the inputs above!</p>
     <h2>Your Todos:</h2>
-    <Tables todos = {appInstance.state.todos} update = {appInstance.updateButton} delete = {appInstance.deleteButton} ></Tables>
     </div>
    
     );
+    // table code
+    //<Tables todos = {appInstance.state.todos} update = {appInstance.updateButton} delete = {appInstance.deleteButton} ></Tables>
+
   }
     submit(){
       const todoInput = document.querySelector( '#todo' )
