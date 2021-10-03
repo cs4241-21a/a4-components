@@ -1,6 +1,6 @@
 ## Online Food Ordering Using React
 
-Jack Campanale http://a4-charlieroberts.glitch.me
+Jack Campanale https://a4-jack-campanale.herokuapp.com/
 
 ## Changes from A2 ##
 I took into account the feedback I received from assignment #2 and added a function that includes AM or PM in the time placed and expected dropoff time table cells. Other than that the styling I kept essentially the same except some minor accessibility changes taken from assignment #3. This site is also being hosted on heroku compared to assignment #2 which is hosted on glitch.
