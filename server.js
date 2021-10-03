@@ -2,7 +2,7 @@ const express  = require( 'express' ),
       app      = express()
 
 const todos = [
-  { yourname:'aName', birth:'2000', cur: '2021' }
+  { yourname:'aName', birth:'2000', cur: '2021', statement: 'aPerfectAge for the internet' }
 ]
 
 app.use( express.json() )
@@ -13,6 +13,10 @@ app.use( express.static( 'build' ) )
 app.get( '/read', ( req, res ) => res.json( todos ) )
 
 app.post( '/add', ( req,res ) => {
+  req.body.yourname += ' is a cool name!'
+  req.body.birth += ' is an amazing birth year!'
+  req.body.cur += ', wow time flies by!'
+  if (parseInt(req.body.cur) - parseInt(req.body.birth) > 30){req.body.statement = (parseInt(req.body.cur) - parseInt(req.body.birth)).toString() + " your too old for the internet!"}else{req.body.statement = (parseInt(req.body.cur) - parseInt(req.body.birth)).toString() + " your too young for the internet!"}
   todos.push( req.body )
   res.json( todos )
 })

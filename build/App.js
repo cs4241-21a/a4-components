@@ -2,7 +2,7 @@ import React from "./_snowpack/pkg/react.js";
 import "./style.css.proxy.js";
 class Todo extends React.Component {
   render() {
-    return /* @__PURE__ */ React.createElement("li", null, this.props.yourname + this.props.birth + this.props.cur);
+    return /* @__PURE__ */ React.createElement("p", null, this.props.yourname, " ", /* @__PURE__ */ React.createElement("br", null), this.props.birth, " ", /* @__PURE__ */ React.createElement("br", null), this.props.cur, " ", /* @__PURE__ */ React.createElement("br", null), this.props.statement, " ", /* @__PURE__ */ React.createElement("br", null), "------------------------------------------------------------------- ", /* @__PURE__ */ React.createElement("br", null));
   }
 }
 class App extends React.Component {
@@ -41,7 +41,8 @@ class App extends React.Component {
       key: i,
       yourname: todo.yourname,
       birth: todo.birth,
-      cur: todo.cur
+      cur: todo.cur,
+      statement: todo.statement
     }))));
   }
   add(evt) {
@@ -50,7 +51,7 @@ class App extends React.Component {
     const valueCur = document.getElementById("cur").value;
     fetch("/add", {
       method: "POST",
-      body: JSON.stringify({yourname: valueName, birth: valueBirth, cur: valueCur}),
+      body: JSON.stringify({yourname: valueName, birth: valueBirth, cur: valueCur, statement: ""}),
       headers: {"Content-Type": "application/json"}
     }).then((response) => response.json()).then((json) => {
       this.setState({todos: json});

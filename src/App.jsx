@@ -7,9 +7,14 @@ import './style.css';
 class Todo extends React.Component {
   // our .render() method creates a block of HTML using the .jsx format
   render() {
-    return <li>
-      {this.props.yourname + this.props.birth + this.props.cur} 
-    </li>
+    return <p>
+          {this.props.yourname} <br />
+          {this.props.birth} <br />
+          {this.props.cur} <br />
+          {this.props.statement} <br />
+          ------------------------------------------------------------------- <br />
+    </p>
+    
 
     
   }
@@ -58,7 +63,7 @@ class App extends React.Component {
       <button onClick={ e => this.add( e )}>add</button>
       </form>
         <ul>
-          { this.state.todos.map( (todo,i) => <Todo key={i} yourname={todo.yourname} birth={todo.birth} cur={todo.cur} /> ) }
+          { this.state.todos.map( (todo,i) => <Todo key={i} yourname={todo.yourname} birth={todo.birth} cur={todo.cur} statement={todo.statement}/> ) }
        </ul> 
       </div>
     )
@@ -73,7 +78,7 @@ class App extends React.Component {
 
     fetch( '/add', { 
       method:'POST',
-      body: JSON.stringify({ yourname:valueName, birth:valueBirth, cur:valueCur,}),
+      body: JSON.stringify({ yourname:valueName, birth:valueBirth, cur:valueCur, statement:''}),
       headers: { 'Content-Type': 'application/json' }
     })
     .then( response => response.json() )
