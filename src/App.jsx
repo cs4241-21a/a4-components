@@ -1,5 +1,7 @@
 import React from 'react';
 
+let app;
+
 class App extends React.Component{
     constructor( props ) {
       super( props )
@@ -16,6 +18,9 @@ class App extends React.Component{
       this.isKeyPressed = true;
       this.wrongKeyPressed = false;
       this.gameTimer;
+      this.usernameVar = "sample";
+
+      app = this;
     }
 
 
@@ -28,10 +33,10 @@ class App extends React.Component{
             "Content-Type":"application/json"
           }
         }).then(function(response) {
-          response.text().then(function(textdata) {
+          response.json().then(function(textdata) {
             //console.log(JSON.parse(textdata)[0].name);
-            usernameVar = JSON.parse(textdata)[0].name;
-            document.getElementById("playername").innerHTML = usernameVar;
+            app.usernameVar = textdata[0].name;
+            document.getElementById("playername").innerHTML = app.usernameVar;
         
             //makeTableFromData(newAppdata);
           })
@@ -43,7 +48,7 @@ class App extends React.Component{
         e.preventDefault()
 
         const scoreinput = document.querySelector('#playerscore'),
-              json = { playername: usernameVar, playerscore: playerScore },
+              json = { playername: this.usernameVar, playerscore: playerScore },
               body = JSON.stringify( json )
 
         fetch('/submit',{
@@ -69,7 +74,7 @@ class App extends React.Component{
     deleteScore(e){
         e.preventDefault();
 
-        const json = { playername: usernameVar},
+        const json = { playername: this.usernameVar},
             body = JSON.stringify( json )
 
         fetch('/delete', {
@@ -145,44 +150,45 @@ class App extends React.Component{
     }
 
     gameLoopSetup(){
-      this.playerScore = 0;
-      this.gameOver = false;
-      this.timeInterval = 1500;
-      this.isKeyPressed = true;
-      this.displayScore.innerHTML = "Score: " + playerScore;
+      app.playerScore = 0;
+      app.gameOver = false;
+      app.timeInterval = 1500;
+      app.isKeyPressed = true;
+      let displayScore = document.getElementById("score");
+      displayScore.innerHTML = "Score: " + app.playerScore;
     
     
-      this.gameLoop();
+      app.gameLoop();
     }
 
     gameLoop(){
 
       //If the correct key was pressed at the end of the interval, the game continues
-      if(isKeyPressed){
-        gameOver = false;
+      if(app.isKeyPressed){
+        app.gameOver = false;
       } else {
-        gameOver = true;
+        app.gameOver = true;
       }
     
       //Primary game loop
-      if(!gameOver){
-        isKeyPressed = false;
+      if(!app.gameOver){
+        app.isKeyPressed = false;
     
         //Increase game speed over time
-        if(playerScore % 10 === 0 && playerScore <= 100 && playerScore !== 0){
-          timeInterval -= 50;
+        if(app.playerScore % 10 === 0 && app.playerScore <= 100 && app.playerScore !== 0){
+          app.timeInterval -= 50;
         }
     
         //Make a new timeout
-        clearTimeout(gameLoop);
-        gameTimer = setTimeout(gameLoop, timeInterval);
+        clearTimeout(app.gameLoop);
+        app.gameTimer = setTimeout(app.gameLoop, app.timeInterval);
     
         //Set a randomized key
         let keyArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-        let currentKey = keyArray[this.getRandomInt(0,25)];
+        let currentKey = keyArray[app.getRandomInt(0,25)];
         let currentKeyCode = "Key"+currentKey;
     
-    
+        let displayMessage = document.getElementById("message");
         displayMessage.innerHTML = "Press " + currentKey + "!";
     
         //Make a key event listener that removes itself after success
@@ -193,29 +199,32 @@ class App extends React.Component{
           if(event.code === currentKeyCode){
     
             displayMessage.innerHTML = currentKey + " was pressed!";
-            isKeyPressed = true;
-            playerScore += 1;
-            displayScore.innerHTML = "Score: " + playerScore;
+            app.isKeyPressed = true;
+            app.playerScore += 1;
+            let displayScore = document.getElementById("score");
+            displayScore.innerHTML = "Score: " + app.playerScore;
             timesActivated += 1;
     
           } else {
             if(timesActivated > 0){
               displayMessage.innerHTML = currentKey + " was not pressed! Game over!";
               wrongKeyPressed = true;
-              gameOver = true;
+              app.gameOver = true;
               clearTimeout(gameLoop);
             }
            
             timesActivated += 1;
           }
         }, {once: true});
-      } else if(gameOver) {
-        if(!wrongKeyPressed){
+      } else if(app.gameOver) {
+        if(!app.wrongKeyPressed){
+          let displayMessage = document.getElementById("message");
           displayMessage.innerHTML = " The key was not pressed in time! Game over!";
         }
-    
-        displaySavedScore.innerHTML = playerScore;
-        clearTimeout(gameLoop);
+  
+        let displaySavedScore = document.getElementById("savedScore");
+        displaySavedScore.innerHTML = app.playerScore;
+        clearTimeout(app.gameLoop);
       }
     }
 
@@ -239,7 +248,7 @@ class App extends React.Component{
           <div id="directions" class="gameLabel"><h3>Press the key before time runs out!</h3></div>
           <section id="message" class="gameLabel"><h1>Start the game to get prompts!</h1></section>
           <div id="score" class="gameLabel">Score: 0</div>
-          <button id="start-button" class="nes-btn is-primary" type="button" onclick={this.gameLoopSetup()}>Start Game</button>
+          <button id="start-button" class="nes-btn is-primary" type="button" onClick={this.gameLoopSetup}>Start Game</button>
         </main>
     
         <section id="gameForms">
