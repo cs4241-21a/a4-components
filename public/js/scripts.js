@@ -2,8 +2,6 @@ let entryCount = 0;
 let activeId; // -1 = Not Open, 0 = New Entry, id = Open for entry w/id
 
 window.onload = () => {
-    loadServerData();
-
     const addButton = document.querySelector("#add-button")
     addButton.onclick = () => {
         clearForm();
@@ -14,45 +12,9 @@ window.onload = () => {
     submitButton.onclick = submitData;
 }
 
-const loadServerData = () => {
-    fetch( "/db", {
-        method:"GET",
-    })
-    .then(res => res.json())
-    .then(res => { 
-        res.forEach((item) => {
-            setEntry(addTableRow(item._id), item);
-            entryCount++;
-        });
-    })
-}
+
 
 //#region Table Handling
-    // Sets the table data of a given entry for row
-    const setEntry = (entryRow, entry) => {
-        const tableDatas = entryRow.querySelectorAll("td");
-        tableDatas[0].innerText = entry["name"];
-        tableDatas[1].innerText = entry["date"] || "N/A";
-        tableDatas[2].innerText = entry["time"] || "N/A";
-        tableDatas[3].innerText = (entry["attendance"]) ? "✓" : "✖";
-    }
-
-    // Creates a new row on the table
-    const addTableRow = (id) => {
-        const emptyRow = document.querySelector("#empty-row");
-        const newRow = emptyRow.cloneNode(true);
-        newRow.setAttribute("id", id);
-        newRow.setAttribute("class", "table-row");
-        
-        const iconButtonCell = newRow.querySelector(".icon-button-cell");
-        iconButtonCell.innerHTML = "";
-        iconButtonCell.appendChild(addOptionButtons(newRow, id));
-
-        emptyRow.before(newRow);
-
-        return newRow;
-    }
-
     // Finds a table row by the id of the item it contains
     const findTableRow = (id) => {
         return document.getElementById(id);

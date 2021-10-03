@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import Typography from "./components/Typography";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -7,8 +8,18 @@ import EventTableRow from "./components/EventTableRow";
 import EventTableEmptyRow from "./components/EventTableEmptyRow";
 import EventForm from "./components/EventForm";
 
-const IndexRouteView = (props) => {
-  
+const IndexRouteView = (props) => {  
+  const [events, setEvents] = useState([]);
+
+  useEffect((() => {
+    fetch( "/db", {
+      method:"GET",
+    })
+    .then(res => res.json())
+    .then(res => {
+      setEvents(res);
+    });
+  }), []);
 
   return (
     <>
@@ -18,7 +29,11 @@ const IndexRouteView = (props) => {
         Events Scheduled
       </Typography>
       <EventTable>
-        {/* Add a for each table row !!! */}
+        {events.map(event => {
+          return (
+            <EventTableRow event={event} />
+          )  
+        })}
         <EventTableEmptyRow />
       </EventTable>
 
@@ -26,13 +41,13 @@ const IndexRouteView = (props) => {
       
       <Footer>
         <span class="text-light">
-          Icons made by 
+          Icons made by&nbsp; 
           <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry" class="text-light">
-            &nbsp;Kiranshastry
+            Kiranshastry
           </a>
-            &nbsp;from
+            &nbsp;from&nbsp;
           <a href="https://www.flaticon.com/" title="Flaticon" class="text-light">
-            &nbsp;www.flaticon.com
+            www.flaticon.com
           </a>
         </span>
       </Footer>
