@@ -8,9 +8,6 @@ import './App.css';
 class Servant extends React.Component {
   // our .render() method creates a block of HTML using the .jsx format
   render() {
-    // return <li>{this.props.name} : 
-    //   <input type="checkbox" defaultChecked={this.props.completed} onChange={ e => this.change(e) }/>
-    // </li>
     return <tr><td>{this.props.name}</td>
                 <td>{this.props.occupation}</td>
                 <td>{this.props.strength}</td>
@@ -21,10 +18,6 @@ class Servant extends React.Component {
                 <td>{this.props.noble}</td>
                 </tr>
   }
-  // call this method when the checkbox for this component is clicked
-  // change(e) {
-  //   this.props.onclick( this.props.name, e.target.checked )
-  // }
 }
 
 // main component
@@ -71,23 +64,10 @@ class App extends React.Component {
           { this.state.servants.map( (servent,i) => <Servant key={i} name={servent.name} occupation={servent.occupation} strength={servent.strength} endurance={servent.endurance} agility={servent.agility} magic={servent.magic} luck={servent.luck} noble={servent.noble}/> ) }
         </tbody>
       </table>
-
-        {/* <ul>
-          { this.state.servants.map( (servent,i) => <Servant key={i} name={servent.name} completed={servent.completed} onclick={ this.toggle } /> ) }
-       </ul>  */}
     </div>
     )
   }
 
-  // toggle( name, completed ) {
-  //   fetch( '/change', {
-  //     method:'POST',
-  //     body: JSON.stringify({ name, completed }),
-  //     headers: { 'Content-Type': 'application/json' }
-  //   })
-  // }
- 
-  // add a new todo list item
   add( evt ) {
     const servantname = document.querySelector('#name').value
     const servantoccupation = document.querySelector('#occupation').value
