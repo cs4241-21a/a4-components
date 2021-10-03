@@ -1,30 +1,9 @@
-# empty-project
+## League of Legends Team Sign Up Form
 
-Empty project.
+your hosting link e.g. http://a4-charlieroberts.glitch.me
 
-## How to run on localhost
+Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
 
-First install dependencies:
+Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
 
-```sh
-npm install
-```
-
-To run in dev mode mode:
-
-```sh
-npm start
-```
-
-Then go to http://localhost:8080
-
-To create a production build:
-
-```sh
-npm run build
-```
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
 
