@@ -6,12 +6,7 @@ const http = require( 'http' ),
       dir  = 'public/',
       port = 3000
 
-const appdata = [{
-  name: "God",
-  message: "Welcome to Heaven, kid.",
-  nameowo: "God",
-  messageowo: "Wewcome to Heaven, kid."
-}];
+const appdata = [];
 const faces = ["(・`ω´・)",";;w;;","owo","UwU",">w<","^w^","(･.◤)","^̮^","(>人<)","( ﾟヮﾟ)","(▰˘◡˘▰)"]
 
 const server = http.createServer( function( request,response ) {
@@ -30,7 +25,6 @@ const handleGet = function( request, response ) {
     sendFile( response, 'public/index.html' )
   }else if(request.url === '/getAppdata') {
     response.writeHead(200, "OK", { 'Content-Type': 'text/plain' });
-    console.log(JSON.stringify(appdata));
     response.end(JSON.stringify(appdata));
   }else{
     sendFile( response, filename )
