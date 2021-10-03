@@ -34,6 +34,7 @@ app.use(cookieParser(cookieParser));
 
 // Middleware 2 - Serve Static files
 app.use(serveStatic(path.join(__dirname, 'public')));
+app.use(express.static('build') )
 
 // Middleware 3 - Serve Favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
