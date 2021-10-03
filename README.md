@@ -6,7 +6,12 @@ My application is a stock, ETF, or index fund financial portfolio creator and ma
 listing and attaches that item to the user's account. Information that the user must enter includes the name of the security, its ticker symbol, the exchange it is traded
 on, its perceived risk, its price in dollars, and the amount of shares that the user owns. The site produces a derived field that denotes the total dollar amount that the
 user has invested in the security. All of the information that the user enters plus the derived field is used to append a portfolio listing to the page that the user can
-edit and remove.
+edit and remove. Since this app does not include functionality for creating a new account if one with the given credentials does not exist, I have listed three valid
+accounts that are stored in the database with two sample items each.
+
+- Test User 1: Username: user1, Password: pass1
+- Test User 2: Username: user2, Password: pass2
+- Test User 3: Username: user3, Password: pass3
 
 This application was refactored from my a3 submission to use React components for the portfolio listing display and updating. To start, a basic React project was created
 using Babel to compile and Snowpack to bundle by following the instructions at createapp.dev. The App and Item components were used to organize between the bulk of the
