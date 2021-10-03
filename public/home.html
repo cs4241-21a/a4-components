@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>A4 Home Page</title>
+    <meta charset="utf-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          tasks: [],
+          taskname: "",
+          priority: "",
+          duedate: "",
+          remainingdays: ""
+        };
+        this.getata = this.getdata.bind(this);
+        this.logout = this.logout.bind(this);
+        this.submit = this.submit.bind(this);
+        this.delete = this.delete.bind(this);
+        this.modify = this.modify.bind(this);
+      }
+      getdata(json) {
+        this.setState({ tasks: json });
+      }
+      componentDidMount() {
+        fetch("/appdata")
+          .then(response => response.json())
+          .then(json => this.getdata(json));
+      }
+      logout() {
+        fetch("/logout").then(() => {
+          window.location.href = "/";
+        });
+      }
+      delete(id) {
+        const json = { _id: id },
+          body = JSON.stringify(json);
+        fetch("/delete", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body
+        })
+          .then(response => response.json())
+          .then(json => {
+            this.getata(json);
+          });
+      }
+      modify(taskname) {
+        const tasknameinput = document.querySelector("#taskname");
+        tasknameinput.value = taskname;
+        this.setState({ taskname: taskname });
+      }
+      submit() {
+        fetch("/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            taskname: taskname.value,
+            priority: priority.options[priority.selectedIndex].value,
+            duedate: duedate.value,
+            remainingdays: Math.round(
+              (new Date(duedate.value).getTime() - new Date().getTime()) /
+                (24 * 3600 * 1000)
+            )
+          })
+        })
+          .then(response => response.json())
+          .then(json => {
+            // do something with the reponse
+            this.getdata(json);
+          });
+      }
+
+      render() {
+        return (
+          <div>
+            <header>
+              <h1>Task Management Tool</h1>
+              <p>
+                This tool provides the abilities to add/modify/delete a task and
+                helps users learn how many days are remaining to complete the
+                task
+              </p>
+            </header>
+            <section class="small_section">
+              <h2>Tool Usage</h2>
+              <p>To add a task, fill in all three fields and submit.</p>
+              <p>
+                To modify a task, type in the existing task name and change the
+                priority or due date.
+              </p>
+              <p>
+                To delete a task, type in the exisitng task name and leave all
+                other fields blank.
+              </p>
+            </section>
+            <section class="big_section">
+              <h2>Add/Modify/Delete Tasks</h2>
+              <div>
+                <div class="row">
+                  <div class="col-xs-6">
+                    <form class="form-horizontal">
+                      <div class="form-group">
+                        <label for="nameField" class="col-xs-2">
+                          Task Name:
+                        </label>
+                        <div class="col-xs-2">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="taskname"
+                            value={this.state.taskname}
+                            onChange={e =>
+                              this.setState({ taskname: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="priority" class="col-xs-2">
+                          Priority:
+                        </label>
+                        <div class="col-xs-2">
+                          <select
+                            id="priority"
+                            name="priority"
+                            value={this.state.priorityInput}
+                            onChange={e =>
+                              this.setState({ priority: e.target.value })
+                            }
+                          >
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="duedate" class="col-xs-2">
+                          Due Date:
+                        </label>
+                        <div class="col-xs-2">
+                          <input
+                            type="date"
+                            class="form-control"
+                            id="duedate"
+                            value={this.state.duedate}
+                            onChange={e =>
+                              this.setState({ duedate: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-xs-10 col-xs-offset-2">
+                        <button
+                          class="btn btn-primary"
+                          id="submitButton"
+                          onClick={this.submit}
+                        >
+                          Submit
+                        </button>
+                        <button
+                          class="btn btn-primary"
+                          id="logoutButton"
+                          onClick={this.logout}
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div id="messagebox">
+                <p></p>
+                <p></p>
+              </div>
+              <div>
+                <h2>Task List</h2>
+                <table id="resultsTable">
+                  <thead>
+                    <th>Task Name</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th>Remaining Days</th>
+                    <th></th>
+                    <th></th>
+                  </thead>
+                  <tbody id="tasks">
+                    {this.state.tasks.map((task, i) => {
+                      return (
+                        <tr>
+                          <td>{task.taskname}</td>
+                          <td>{task.priority}</td>
+                          <td>{task.duedate}</td>
+                          <td>{task.remainingdays}</td>
+                          <td>
+                            <button
+                              id="deleteButton"
+                              onClick={() => this.delete(task._id)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                          <td>
+                            <button
+                              id="modifyButton"
+                              onClick={() => this.modify(task.taskname)}
+                            >
+                              Modify
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+</html>
