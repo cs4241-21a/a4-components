@@ -1,33 +1,8 @@
-Assignment 4 - Components
-===
+## League of Legends Team Sign Up Form
 
-Due: October 4th, by 11:59 AM.
+https://a4-jasonodell2001.glitch.me
+This is a very basic sign up form, you enter your information and press submit and it will display it on the table. The main change I made from A2 was reworking how the website loaded the sign up form and I had it remove the sign up form after the user inputted their data. 
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+Using react initially was very confusing, I had trouble understanding how hook functions actually worked. Once I got the hang of using it, I found things much easier and to be more intuitive than my initial functions for adding information to the table. THe main thing that I struggled with and eventually had to drop was having it save and display multiple users inputs. Overall, using react ended up feeling a lot easier and the code ended up looking much nicer than my previous projects functions. 
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
