@@ -64,7 +64,7 @@ const validatePassword = function (user, pass) {
 
 const createUser = function (user) {
   const salt = crypto.randomBytes(16).toString('hex')
-  const hash = crypto.pbkdf2Sync(user.pass, salt, 1000, 64, `sha512`).toString(`hex`)
+  const hash = crypto.pbkdf2Sync(user.password, salt, 1000, 64, `sha512`).toString(`hex`)
   const userObj = { username: user.username, salt: salt, hash: hash }
   logins.insertOne(userObj)
     .then(result => {
@@ -106,12 +106,11 @@ app.post('/add', function (request, response) {
   request.body.owner = request.session.username
   data.insertOne(request.body)
     .then(result => {
-      console.log(result.insertedId.toString())
-      request.body._id = result.insertedId.toString()
-      console.log('ADD:')
-      console.log(request.body)
-
-      response.json(request.body).end()
+      data.find({ owner: request.session.username }).toArray()
+        .then(function (result) {
+          console.log(result)
+          response.json(result).end()
+        })
     })
 })
 
@@ -129,9 +128,8 @@ app.post('/update', function (request, response) {
       }
     )
     .then(function () {
-      data.findOne({ _id: mongodb.ObjectId(request.body._id) })
-        .then(result => {
-          console.log('UPDATE:')
+      data.find({ owner: request.session.username }).toArray()
+        .then(function (result) {
           console.log(result)
           response.json(result).end()
         })
@@ -144,7 +142,13 @@ app.post('/remove', function (request, response) {
   console.log(request.body)
   data
     .deleteOne({ _id: mongodb.ObjectId(request.body._id) })
-    .then(function () { response.json(request.body) })
+    .then(function () {
+      data.find({ owner: request.session.username }).toArray()
+        .then(function (result) {
+          console.log(result)
+          response.json(result).end()
+        })
+    })
 })
 
 app.post('/all', function (request, response) {
@@ -166,7 +170,9 @@ app.post('/login', function (request, response) {
         request.session.login = true
         request.session.username = request.body.username
         console.log('created user')
-        return response.redirect('/index.html')
+        return response.send({
+          message: 'Login Success'
+        })
       } else {
         if (validatePassword(result, request.body.password)) {
           request.session.login = true

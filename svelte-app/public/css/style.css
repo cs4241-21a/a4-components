@@ -1,0 +1,32 @@
+.sex{
+    width:100%; 
+    height:100%; 
+    background-color: transparent; 
+    border:none;
+}
+
+div{
+    margin: 2em !important;
+}
+
+button.update, button.remove{
+    background-color: transparent;
+    border: none;
+}
+
+button.update:hover, button.remove:hover{
+    color:blue;   
+}
+
+.form{
+    max-width: max-content;
+}
+
+#addEntry{
+    margin:0 auto !important;
+}
+
+.float-right{
+    display:flex;
+    justify-content: flex-end;
+}
