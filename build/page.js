@@ -1,12 +1,4 @@
 const gameCanvas = document.getElementById('canvascontainer');
-let submitBtn = document.getElementById( 'submitBtn' );
-let editSubBtn = document.getElementById('submitNewNameBtn');
-let rowNumEdit;
-
-window.onload = function() {
-    submitBtn.onclick = submit;
-    editSubBtn.onclick = callEdit;
-}
 
 document.addEventListener('keyup', event => {
     if (event.code === 'Space') {
@@ -19,82 +11,6 @@ document.addEventListener('keydown', event => {
     }
 });
 
-const submit = function( e ) {
-    e.preventDefault();
-    const input = document.querySelector( '#yourname' ),
-        input2 = document.getElementById('printScore'),
-        json = { yourname: input.value,
-            score: input2.innerText,
-            rank: 0 },
-        body = JSON.stringify( json )
-    if (input.value === "") {
-        window.alert("Please enter a username");
-        return false;
-    }
-
-    fetch( '/submit', {
-        method:'POST',
-        body,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then( function( response ) {
-            // do something with the response
-            console.log("Post made to server");
-        })
-        .then( function( json ) {
-            console.log(json);
-        })
-    return false;
-}
-
-let appdata;
-
-function checkExisting(){
-    const input = document.querySelector( '#editName' );
-    fetch('/updatePage', {
-        method: 'GET'
-    }).then(function (response) {
-        return response.json();
-    }).then(function (json) {
-        appdata = json;
-        for(let user of appdata){
-            if (user.yourname === input.value){
-                window.alert("Please enter a unique username");
-            }
-        }
-    })
-    return false;
-}
-
-//Edit Function
-const callEdit = function(){
-    const input = document.querySelector( '#editName' ),
-        input2 = rowNumEdit,
-        json = { newName: input.value,
-            oldName: input2 },
-        body = JSON.stringify( json )
-    checkExisting();
-    fetch('/modify', {
-        method: 'POST',
-        body,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(function (response) {
-        // do something with the response
-        console.log("Post made to server");
-    }).then(function (json) {
-        console.log(json);
-        updatePage();
-        document.getElementById("editName").style.display = "none";
-        document.getElementById("submitNewNameBtn").style.display = "none";})
-    return false;
-}
-
-
-//////////////////////////////////////////
 let myGameArea;
 let myGamePiece;
 let myObstacles = [];
@@ -103,8 +19,6 @@ let myScore;
 function restartGame() {
     document.getElementById("myfilter").style.display = "none";
     document.getElementById("myrestartbutton").style.display = "none";
-    document.getElementById("submitBtn").style.display = "none";
-    document.getElementById("yourname").style.display = "none";
     myGameArea.stop();
     myGameArea.clear();
     myGameArea = {};
@@ -206,8 +120,6 @@ function updateGameArea() {
             myGameArea.stop();
             document.getElementById("myfilter").style.display = "block";
             document.getElementById("myrestartbutton").style.display = "block";
-            document.getElementById("yourname").style.display = "block";
-            document.getElementById("submitBtn").style.display = "block";
             document.getElementById("accelBtn").style.display = "none";
             return;
         }
@@ -243,42 +155,4 @@ function everyinterval(n) {
 
 function accelerate(n) {
     myGamePiece.gravity = n;
-}
-
-
-//////////////////////////////////////////////
-
-function sortTable() {
-    var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.getElementById("Leaderboard");
-    switching = true;
-    /*Make a loop that will continue until
-    no switching has been done:*/
-    while (switching) {
-        //start by saying: no switching is done:
-        switching = false;
-        rows = table.rows;
-        /*Loop through all table rows (except the
-        first, which contains table headers):*/
-        for (i = 1; i < (rows.length - 1); i++) {
-            //start by saying there should be no switching:
-            shouldSwitch = false;
-            /*Get the two elements you want to compare,
-            one from current row and one from the next:*/
-            x = rows[i].getElementsByTagName("TD")[2];
-            y = rows[i + 1].getElementsByTagName("TD")[2];
-            //check if the two rows should switch place:
-            if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                //if so, mark as a switch and break the loop:
-                shouldSwitch = true;
-                break;
-            }
-        }
-        if (shouldSwitch) {
-            /*If a switch has been marked, make the switch
-            and mark that a switch has been done:*/
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-        }
-    }
 }

@@ -23,30 +23,27 @@ app.use( express.static( 'build' ) )
 
 app.get( '/read', ( req, res ) => res.json( appdata ) )
 
-app.post( '/add', ( req,res ) => {
-    appdata.push( req.body )
-    res.json( appdata )
-})
-
-app.post( '/change', function( req,res ) {
-    const idx = todos.findIndex( v => v.name === req.body.name )
-    todos[ idx ].completed = req.body.completed
-
-    res.sendStatus( 200 )
-})
 
 app.post('/submit', bodyParser.json(), async (req, res) =>{
-    //console.log(req);
     await addRow(req.body);
-    console.log(appdata);
-    res.json( appdata );
-    /*res.writeHead(200,"OK", {'Content-Type': 'text/plain'});
-    res.end();*/
+    res.json( appdata.sort(compare) );
 })
-function addRow(dataString) {
-    //let jsonApp = JSON.parse(dataString);
-    let jsonApp = dataString;
-    //console.log("jsonApp:\n" + JSON.stringify(jsonApp))
+
+function compare(a, b) {
+    const rankA = a.rank;
+    const rankB = b.rank;
+
+    let comparison = 0;
+    if (rankA > rankB) {
+        comparison = 1;
+    } else if (rankA < rankB) {
+        comparison = -1;
+    }
+    return comparison;
+}
+
+function addRow(jsonApp) {
+
 
     jsonApp['rank'] = 0;
     for(let i = 0; i < appdata.length; i++){
@@ -68,22 +65,6 @@ function deleteRow(dataString) {
     appdata.splice(dataString - 1, 1);
     updateRank(rankDel);
 }
-
-function modifyRow(dataString) {
-    let jsonApp = JSON.parse(dataString);
-    for(let user of appdata){
-        if (user.yourname === jsonApp['newName']){
-            return;
-        }
-    }
-    for (let user of appdata){
-        if (user.yourname === jsonApp['oldName']){
-            user.yourname = jsonApp['newName'];
-            return;
-        }
-    }
-}
-
 
 function calcRank(){
     // for each rank of value rank or lower add 1 to number

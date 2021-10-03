@@ -1,7 +1,9 @@
 import React from "./_snowpack/pkg/react.js";
 class Entry extends React.Component {
   render() {
-    return /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("td", null, this.props.yourname), /* @__PURE__ */ React.createElement("td", null, this.props.score), /* @__PURE__ */ React.createElement("td", null, this.props.rank));
+    return /* @__PURE__ */ React.createElement("tr", {
+      id: this.props.yourname
+    }, /* @__PURE__ */ React.createElement("td", null, this.props.yourname), /* @__PURE__ */ React.createElement("td", null, this.props.score), /* @__PURE__ */ React.createElement("td", null, this.props.rank));
   }
 }
 class App extends React.Component {
@@ -29,13 +31,6 @@ class App extends React.Component {
       score: appdata.score,
       rank: appdata.rank
     }))));
-  }
-  toggle(name, completed) {
-    fetch("/change", {
-      method: "POST",
-      body: JSON.stringify({name, completed}),
-      headers: {"Content-Type": "application/json"}
-    });
   }
   reactSubmit(e) {
     e.preventDefault();
