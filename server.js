@@ -94,6 +94,7 @@ app.post( '/add', ( req,res ) => {
       timePlaced = (d.getHours() - 16) + ":" + d.getMinutes() + meridiem2; 
     }
     else{
+      meridiem2 = "AM"
       timePlaced = (d.getHours() - 4) + ":" + d.getMinutes() + meridiem2; 
     }
 
