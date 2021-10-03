@@ -48,9 +48,11 @@ class App extends React.Component{
         e.preventDefault()
 
         const scoreinput = document.querySelector('#playerscore'),
-              json = { playername: this.usernameVar, playerscore: playerScore },
+              json = { playername: app.usernameVar, playerscore: app.playerScore },
               body = JSON.stringify( json )
+              
 
+              console.log(body)
         fetch('/submit',{
             method: 'POST',
             body: body,
@@ -100,7 +102,7 @@ class App extends React.Component{
                 console.log(JSON.parse(textdata));
                 let newAppdata = JSON.parse(textdata);
 
-                this.makeTableFromData(newAppdata);
+                app.makeTableFromData(newAppdata);
             })
             //let newResponse = JSON.parse(response)
             //console.log(newResponse[0].name);
@@ -113,8 +115,8 @@ class App extends React.Component{
         let data = Object.keys(appdata[0]);
     
         table.innerHTML = '';
-        this.generateTableHead(table, data);
-        this.generateTable(table, appdata);
+        app.generateTableHead(table, data);
+        app.generateTable(table, appdata);
     
     }
 
@@ -252,7 +254,7 @@ class App extends React.Component{
         </main>
     
         <section id="gameForms">
-          <form action="/submit-player-score" class="gameForm" method="post">
+          <form action="/submit-player-data" class="gameForm" method="post">
             <h3 class="gameLabel">Input Player Score</h3>
             <table class="gameTable">
               <tr>

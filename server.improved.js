@@ -236,6 +236,7 @@ app.use( function( req,res,next) {
 app.use( express.static('build') )
 
 app.post( '/submit', bodyParser.json(), (req,res) => {
+  console.log(req.body)
 
   // assumes only one object to insert
   if(req.body.hasOwnProperty("playername") && req.body.hasOwnProperty("playerscore")){
