@@ -4,7 +4,7 @@ import "./App.css";
 import ReadOnlyRow from "./components/ReadOnlyRow";
 import EditableRow from "./components/EditableRow";
 
-let appdata = [{'id': 1, 'assignment': 'Example Assignment', 'course': 'Fake Course', 'percentage': 5, 'priority': "Low"}]
+let appdata = [{'id': 1, 'assignment': 'Example Assignment', 'course': 'Fake Course', 'percentage': 5, 'priority': "Low"}];
 
 function calculatePriority(percentage) {
   if(percentage >= 20)
@@ -17,14 +17,17 @@ function calculatePriority(percentage) {
 }
 
 const App = () => {
+    
+    useEffect(() => {
+        let assignments = window.localStorage.getItem('assignmentManager');
+        setAssignments(JSON.parse(assignments));
+       }, []);
+       
   useEffect(() => {
     window.localStorage.setItem('assignmentManager', JSON.stringify(assignments));
    });
 
-   useEffect(() => {
-    const assignments = window.localStorage.getItem('assignmentManager');
-    setAssignments(JSON.parse(assignments));
-   }, []);
+   
 
 
   const [assignments, setAssignments] = useState(appdata);
@@ -84,8 +87,6 @@ const App = () => {
       percentage: addFormData.percentage,
       priority: calculatePriority(addFormData.percentage),
     };
-
-    console.log("Assignment " + newAssignment)
 
     const newAssignments = [...assignments, newAssignment];
     setAssignments(newAssignments);
