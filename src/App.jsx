@@ -54,7 +54,7 @@ class App extends React.Component {
         <div class = "logo"><h1>BMI Calculator</h1></div>
         <div class = "calculator">
             <div id = "bmidisplay">{this.calcbmi}</div>
-            <form>
+            <form id = 'bmiForm'>
               <input type='text' id='yourname' placeholder="Name" />
               <input type='number' id='weight' placeholder= "Weight(lbs)" />
               <input type='number' id='feet' placeholder="Height (Feet)" />
@@ -96,41 +96,36 @@ class App extends React.Component {
     )
   }
 // when an entry is toggled, send data to server
-editEntry( entry, e, index) {
+editEntry( entry, evt, index) {
+  evt.preventDefault()
   const newname = document.getElementById('yourname')
   const newfeet = document.getElementById('feet')
   const newinches = document.getElementById('inches')
   const newweight = document.getElementById('weight')
-  const button = e.target
-                           
-  newname.value = entry.name
-  newfeet.value = entry.feet
-  newinches.value = entry.inches
-  newweight.value = entry.weight
-  button.innerText = 'Save'
- //  const newbmi = this.calculateBMI()
- // const newstatus = this.weightStatus()
-  var test = this
+  const button = evt.target
 
-  button.onclick = function(){
-   const newbmi = test.calculateBMI()
-   const newstatus = test.weightStatus()
-    test.weightStatus()
-    console.log(this.parentNode)
-  fetch( '/change', {
-    method:'POST',
-    body: JSON.stringify({index: index, name:newname.value, feet: parseInt(newfeet.value), inches:parseInt(newinches.value), weight: parseInt(newweight.value), bmi: newbmi, status:newstatus}),
-    headers: { 'Content-Type': 'application/json' }
-  })
-  .then(response => response.json())
-  .then(json => {
-    this.setState({loading: true, entries:json})
-  })
-  .catch(err => console.log(err))
-}
-button.innerText = 'Edit'
-this.load()
- 
+  if (button.innerText == 'Edit') {
+        button.innerText = 'Save'
+        newname.value = entry.name
+        newfeet.value = entry.feet
+        newinches.value = entry.inches
+        newweight.value = entry.weight
+  }
+   else if (button.innerText == 'Save') {
+        const newbmi = this.calculateBMI()
+        const newstatus = this.weightStatus()
+        fetch( '/change', {
+            method:'POST',
+            body: JSON.stringify({index: index, name:newname.value, feet: parseInt(newfeet.value), inches:parseInt(newinches.value), weight: parseInt(newweight.value), bmi: newbmi, status:newstatus}),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(json => this.setState({loading: true, entries:json}))
+        .catch(err => console.log(err))
+        button.innerText = 'Edit'
+        document.getElementById('bmiForm').reset()
+        this.load() 
+    }
 }
 
 

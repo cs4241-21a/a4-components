@@ -22,7 +22,9 @@ class App extends React.Component {
       class: "calculator"
     }, /* @__PURE__ */ React.createElement("div", {
       id: "bmidisplay"
-    }, this.calcbmi), /* @__PURE__ */ React.createElement("form", null, /* @__PURE__ */ React.createElement("input", {
+    }, this.calcbmi), /* @__PURE__ */ React.createElement("form", {
+      id: "bmiForm"
+    }, /* @__PURE__ */ React.createElement("input", {
       type: "text",
       id: "yourname",
       placeholder: "Name"
@@ -58,33 +60,31 @@ class App extends React.Component {
       onClick: (e) => this.deleteEntry(this.state.entries[i], e)
     }, "Delete")))))));
   }
-  editEntry(entry, e, index) {
+  editEntry(entry, evt, index) {
+    evt.preventDefault();
     const newname = document.getElementById("yourname");
     const newfeet = document.getElementById("feet");
     const newinches = document.getElementById("inches");
     const newweight = document.getElementById("weight");
-    const button = e.target;
-    newname.value = entry.name;
-    newfeet.value = entry.feet;
-    newinches.value = entry.inches;
-    newweight.value = entry.weight;
-    button.innerText = "Save";
-    var test = this;
-    button.onclick = function() {
-      const newbmi = test.calculateBMI();
-      const newstatus = test.weightStatus();
-      test.weightStatus();
-      console.log(this.parentNode);
+    const button = evt.target;
+    if (button.innerText == "Edit") {
+      button.innerText = "Save";
+      newname.value = entry.name;
+      newfeet.value = entry.feet;
+      newinches.value = entry.inches;
+      newweight.value = entry.weight;
+    } else if (button.innerText == "Save") {
+      const newbmi = this.calculateBMI();
+      const newstatus = this.weightStatus();
       fetch("/change", {
         method: "POST",
         body: JSON.stringify({index, name: newname.value, feet: parseInt(newfeet.value), inches: parseInt(newinches.value), weight: parseInt(newweight.value), bmi: newbmi, status: newstatus}),
         headers: {"Content-Type": "application/json"}
-      }).then((response) => response.json()).then((json) => {
-        this.setState({loading: true, entries: json});
-      }).catch((err) => console.log(err));
-    };
-    button.innerText = "Edit";
-    this.load();
+      }).then((response) => response.json()).then((json) => this.setState({loading: true, entries: json})).catch((err) => console.log(err));
+      button.innerText = "Edit";
+      document.getElementById("bmiForm").reset();
+      this.load();
+    }
   }
   add(evt) {
     evt.preventDefault();
