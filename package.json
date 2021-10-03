@@ -12,6 +12,7 @@
     "build": "snowpack build"
   },
   "dependencies": {
+    "@heroku-cli/plugin-buildpacks": "^7.54.0",
     "@heroku/buildpack-registry": "^1.0.1",
     "app": "^0.1.0",
     "async-file": "^2.0.2",
