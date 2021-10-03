@@ -1,9 +1,8 @@
 ## League of Legends Team Sign Up Form
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://a4-jasonodell2001.glitch.me
+This is a very basic sign up form, you enter your information and press submit and it will display it on the table. The main change I made from A2 was reworking how the website loaded the sign up form and I had it remove the sign up form after the user inputted their data. 
 
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+Using react initially was very confusing, I had trouble understanding how hook functions actually worked. Once I got the hang of using it, I found things much easier and to be more intuitive than my initial functions for adding information to the table. THe main thing that I struggled with and eventually had to drop was having it save and display multiple users inputs. Overall, using react ended up feeling a lot easier and the code ended up looking much nicer than my previous projects functions. 
 
 
