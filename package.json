@@ -1,0 +1,30 @@
+{
+  "name": "a4-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "dev": "snowpack dev",
+    "start": "node server.js",
+    "build": "snowpack build"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "i": "^0.3.7",
+    "mongodb": "^4.1.2",
+    "morgan": "^1.10.0",
+    "npm": "^7.24.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "response-time": "^2.3.2"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.8"
+  }
+}
