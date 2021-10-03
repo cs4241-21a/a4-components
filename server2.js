@@ -9,9 +9,9 @@ const http = require( 'http' ),
       dir  = 'public/',
       port = 3000
 
-const {user, pass} = require('./env.js')
-//const user = process.env.username
-//const pass = process.env.password
+//const {user, pass} = require('./env.js')
+const user = process.env.username
+const pass = process.env.password
 
 const express = require('express');
 const app = express();
@@ -178,7 +178,7 @@ const sendFile = function( response, filename ) {
    })
 }
 app.use(express.static("build"));
-app.listen(3000)
-//app.listen(process.env.PORT, () => {
-  //console.log("Your app is listening on port " + process.env.PORT);
-//})
+//app.listen(3000)
+app.listen(process.env.PORT, () => {
+  console.log("Your app is listening on port " + process.env.PORT);
+})
