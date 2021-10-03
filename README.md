@@ -1,33 +1,9 @@
-Assignment 4 - Components
-===
+Assignment 4 - Components (React)
 
-Due: October 4th, by 11:59 AM.
+https://a4-orest-ropi.glitch.me/
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+## Internet Lurkers in The Database
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
+I kept the assingment very similar to my A2 -> https://humane-certain-bromine.glitch.me/, although I changed the placement of my input text boxes to be more central, made the font a little nicer to look at, and also now the data in the server is saved and displayed even after refreshing the page. (as well as converting the whole client to react)
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+I thought the new technology made my experience a lot easier. This might be biased though, because I have learned a lot about web development through a2, a3, the reading, and class lectures over that period of time. I enjoyed the flexibility to deploy a client that behaved more functionally. I also enjoyed the fact that a block of client code could be instantiated multiple times using react, this could save me a lot of time in the future.
