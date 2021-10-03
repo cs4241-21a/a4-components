@@ -162,6 +162,7 @@ app.post('/all', function (request, response) {
 
 app.post('/login', function (request, response) {
   console.log(request.body)
+  request.body.username = request.body.username.toLowerCase()
   logins.findOne({ username: request.body.username })
     .then(result => {
       console.log(result)
