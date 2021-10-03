@@ -2,7 +2,7 @@ const express  = require( 'express' ),
       app      = express()
 
 const todos = [
-  { name:'buy groceries', completed:false }
+  { yourname:'aName', birth:'2000', cur: '2021' }
 ]
 
 app.use( express.json() )
@@ -17,11 +17,11 @@ app.post( '/add', ( req,res ) => {
   res.json( todos )
 })
 
-app.post( '/change', function( req,res ) {
-  const idx = todos.findIndex( v => v.name === req.body.name )
-  todos[ idx ].completed = req.body.completed
+// app.post( '/change', function( req,res ) {
+//   const idx = todos.findIndex( v => v.yourname === req.body.yourname, x => x.birth === req.body.birth, y => y.cur === req.body.cur )
+//   todos[ idx ].completed = req.body.completed
   
-  res.sendStatus( 200 )
-})
+//   res.sendStatus( 200 )
+// })
 
-app.listen( 8080 )
+app.listen( 8085 )
