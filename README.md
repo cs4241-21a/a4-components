@@ -1,30 +1,5 @@
-# a4-1
+## Your Simple Todo App
 
-Empty project.
+hosting link: https://cs-4241-a4-benstaw.herokuapp.com/index.html
 
-## How to run on localhost
-
-First install dependencies:
-
-```sh
-npm install
-```
-
-To run in dev mode mode:
-
-```sh
-npm start
-```
-
-Then go to http://localhost:8080
-
-To create a production build:
-
-```sh
-npm run build
-```
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
-
+This project is a react copy of my A3 todo app. It allows users to set up an account, and write down things they have to do, what day they need to be done and how difficult each one is. Completing this project in react proved to have a few twists and turns. It really forced me to think about my organization very differently. This worked out fine for the form portion of the site, but problems arose once I had to convert the dynamic table react. Although I was able to reorgize the table creation part, I wasn't able to get it to properly display on the screen. I made sure to keep all the working parts fully enabled (For example although you cant see it, the database is still updated). In total, I found react to be kind of hard to follow.
