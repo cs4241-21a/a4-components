@@ -19,7 +19,7 @@ app.post( '/add', ( req,res ) => {
     let meridiem;
     let meridiem2;
     if(entry.distance === "Not Far"){
-      if(d.getHours() > 12){
+      if(d.getHours() > 15){
         hours = d.getHours() - 16;
         meridiem = "PM"
       }
@@ -40,7 +40,7 @@ app.post( '/add', ( req,res ) => {
       }
     }
     if(entry.distance === "Decently Far"){
-      if(d.getHours() > 12){
+      if(d.getHours() > 15){
         hours = d.getHours() - 16;
         meridiem = "PM"
       }
@@ -61,7 +61,7 @@ app.post( '/add', ( req,res ) => {
       }
     }
     if(entry.distance === "Far"){
-      if(d.getHours() > 12){
+      if(d.getHours() > 15){
         hours = d.getHours() - 16;
         meridiem = "PM"
       }
@@ -120,7 +120,7 @@ app.post( '/update', function( req,res ) {
         let minutes;
         let meridiem;
         if(entry.distance === "Not Far"){
-          if(d.getHours() > 12){
+          if(d.getHours() > 15){
             hours = d.getHours() - 16;
             meridiem = "PM"
           }
@@ -141,7 +141,7 @@ app.post( '/update', function( req,res ) {
           }
         }
         if(entry.distance === "Decently Far"){
-          if(d.getHours() > 12){
+          if(d.getHours() > 15){
             hours = d.getHours() - 16;
             meridiem = "PM"
           }
@@ -162,7 +162,7 @@ app.post( '/update', function( req,res ) {
           }
         }
         if(entry.distance === "Far"){
-          if(d.getHours() > 12){
+          if(d.getHours() > 15){
             hours = d.getHours() - 16;
             meridiem = "PM"
           }
