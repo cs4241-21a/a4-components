@@ -1,33 +1,26 @@
-Assignment 4 - Components
-===
+## Short Stack Securities Portfolio
 
-Due: October 4th, by 11:59 AM.
+https://a4-adam-grabowski.herokuapp.com/
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+My application is a stock, ETF, or index fund financial portfolio creator and manager. The site gathers information from the user about a security to produce a portfolio
+listing and attaches that item to the user's account. Information that the user must enter includes the name of the security, its ticker symbol, the exchange it is traded
+on, its perceived risk, its price in dollars, and the amount of shares that the user owns. The site produces a derived field that denotes the total dollar amount that the
+user has invested in the security. All of the information that the user enters plus the derived field is used to append a portfolio listing to the page that the user can
+edit and remove. Since this app does not include functionality for creating a new account if one with the given credentials does not exist, I have listed three valid
+accounts that are stored in the database with two sample items each.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
+- Test User 1: Username: user1, Password: pass1
+- Test User 2: Username: user2, Password: pass2
+- Test User 3: Username: user3, Password: pass3
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+This application was refactored from my a3 submission to use React components for the portfolio listing display and updating. To start, a basic React project was created
+using Babel to compile and Snowpack to bundle by following the instructions at createapp.dev. The App and Item components were used to organize between the bulk of the
+application, including add, remove, and edit requests, and items of the table. The only functional difference between this refactor and my original a3 submission is that
+the input fields use placeholder text instead of clearing the value inside each input on focus. This slight difference in the functionality of the inputs is only present
+because it was easier to implement with React.
 
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+React improved the development experience by condensing code and removing the need for cumbersome implementation related to updating data. Although the file containing the
+react components (app.jsx) is long, there is no need for a scripts Javascript file and the main html file is now very short. For example, in my original a3 submission, there
+was a function update() that created a new row and populated it, which was messy and cumbersome. With React components, there is no need to manually update the page since
+the components are reactive which means they automatically change based on their state. However, I personally find writing html in a Javascript file to be awkward, so I will
+most likely stick to frameworks like Vue in the future.
