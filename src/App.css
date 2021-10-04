@@ -1,0 +1,120 @@
+/*.App {*/
+/*  text-align: center;*/
+/*}*/
+
+/*.App-logo {*/
+/*  height: 40vmin;*/
+/*  pointer-events: none;*/
+/*}*/
+
+/*@media (prefers-reduced-motion: no-preference) {*/
+/*  .App-logo {*/
+/*    animation: App-logo-spin infinite 20s linear;*/
+/*  }*/
+/*}*/
+
+/*.App-header {*/
+/*  background-color: #282c34;*/
+/*  min-height: 100vh;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  font-size: calc(10px + 2vmin);*/
+/*  color: white;*/
+/*}*/
+
+/*.App-link {*/
+/*  color: #61dafb;*/
+/*}*/
+
+/*@keyframes App-logo-spin {*/
+/*  from {*/
+/*    transform: rotate(0deg);*/
+/*  }*/
+/*  to {*/
+/*    transform: rotate(360deg);*/
+/*  }*/
+/*}*/
+
+
+/**
+ * Styling for the main body, where all the messages and the header are
+ * - Defines flexbox display style and direction
+ */
+#main {
+  /*margin: 10px;*/
+  display: flex;
+  flex-flow: column wrap;
+  height: 100vh;
+  align-content: flex-start;
+  background-color: #690086;
+  font-family: 'Crafty Girls', cursive;
+}
+
+/**
+ * Header form styles (message input form)
+ */
+header {
+  background-color: blueviolet;
+  /*width: 20%;*/
+  height: fit-content;
+  border-radius: .5em;
+  margin: .5em;
+  order: -1;
+}
+
+form {
+  padding: 1em;
+  color: white;
+}
+
+input {
+  background-color: #9c71db;
+  border-radius: 5px;
+  border-color: #804ec8 ;
+  font-family: 'Crafty Girls', cursive;
+}
+
+
+textarea {
+  width: 100%;
+  height: 60px;
+  background-color: #9c71db;
+  border-radius: 5px;
+  border-color: #804ec8;
+  font-family: 'Crafty Girls', cursive;
+}
+
+.header-btn{
+  border-radius: 5px;
+  background-color: #7e47ca;
+  color: white;
+  border-color: blueviolet;
+  font-family: 'Crafty Girls', cursive;
+}
+
+::placeholder{
+  color: #4f0064;
+  font-family: 'Crafty Girls', cursive;
+}
+
+
+/**
+ * Message general styling (for each message)
+ */
+message{
+  box-sizing: border-box;
+  background-color: blueviolet;
+  width: 20%;
+  height: fit-content;
+  border-radius: .5em;
+  margin: .5em;
+  padding: 1em;
+  color: white;
+}
+message p{
+  margin: 0;
+  background-color: #6935d2;
+  word-wrap: break-word
+}
