@@ -17,6 +17,7 @@ const Datatable = ({ todoList }: Iprops) => {
     <div className="Data-table">
       <table id="dataTable">
         <tr><th>Name</th><th>Savings</th><th>Cost</th><th>Balance</th></tr>
+        <tr><td>jerry</td><td>12</td><td>1</td><td>11</td></tr>
         { todolistdom }
       </table>
       <br /><br />

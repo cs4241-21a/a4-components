@@ -1,46 +1,24 @@
-# Getting Started with Create React App
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Since there are many errors raising when I try to make it run on glitch, I want to apologize in advance, and I don't have a glitch url provided here.
 
-In the project directory, you can run:
+### To Run the Project:
+  You need to have two terminals opened. You can do this by clicking split terminal.
 
-### `npm start`
+  On one terminal, type  `npm start` which allows you to run the project. And it will show that the project is run on http://localhost:3000. However, so far, you are not connected to the server, which means you can't add data to the database. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  On another terminal, type `node server.js`. And it will show app listening at http://localhost:5000.
+  Whenever you add data to the database, this terminal will print out the information that is added to the database.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  A screenshot called `screenshot1.png` is provided in the file.
 
-### `npm test`
+### Project summary:
+  I tried using React and typescript to rewrite a2 in this project. I am new to React and typescript. I only have the add function working so far. I tried doing modify function, but there were many errors raising up, so I didn't add modify function finally. When I was learning React, I followed instructions on React official website where taught me how to build the todolist React demo.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Did the new technology improve or hinder the development experience?
+  To be honest, I don't like React. I am learning Vue and working on MQP this term. Comparing with React, Vue is much easier to understand. They both have the idea of using component which improves the development experience. And I feel like both of them are similar with java. Like in java, we have many classes..... All things are object except primitive data types. 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
