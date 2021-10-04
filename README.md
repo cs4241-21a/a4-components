@@ -1,30 +1,46 @@
-# a4-ksincaglia
+Assignment 4 - Components
+Due: October 4th, by 11:59 AM.
 
-Empty project.
+For this assignment you will re-implement the client side portion of either A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
 
-## How to run on localhost
+Svelte Tutorial
+React Tutorial
 
-First install dependencies:
+This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
 
-```sh
-npm install
-```
+Deliverables
+Do the following to complete this assignment:
 
-To run in dev mode mode:
+Implement your project with the above requirements.
+Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
+Ensure that your project has the proper naming scheme a4-firstname-lastname so we can find it.
+Fork this repository and modify the README to the specifications below. Be sure to add all project files.
+Create and submit a Pull Request to the original repo. Name the pull request using the following template: a4-firstname-lastname.
+Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
+Your Web Application Title
+your hosting link e.g. http://a4-charlieroberts.glitch.me
 
-```sh
-npm start
-```
+Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
 
-Then go to http://localhost:8080
+Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
 
-To create a production build:
-
-```sh
-npm run build
-```
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
-
+About
+No description, website, or topics provided.
+Resources
+ Readme
+Releases
+No releases published
+Packages
+No packages published
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
