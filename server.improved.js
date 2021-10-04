@@ -3,8 +3,8 @@ const http = require( 'http' ),
       // IMPORTANT: you must run `npm install` in the directory for this assignment
       // to install the mime library used in the following line of code
       mime = require( 'mime' ),
-      dir  = 'public/',
-      port = 8080
+      dir  = 'build/',
+      port = 8081
 
 let appdata = [
   
@@ -12,6 +12,7 @@ let appdata = [
 
 const server = http.createServer( function( request,response ) {
   if( request.method === 'GET' ) {
+    console.log("problem not here")
     handleGet( request, response )    
   }else if( request.method === 'POST' ){
     console.log("problem here")
@@ -23,7 +24,7 @@ const handleGet = function( request, response ) {
   const filename = dir + request.url.slice( 1 ) 
 
   if( request.url === '/' ) {
-    sendFile( response, 'public/index.html' )
+    sendFile( response, 'build/index.html' )
   }else{
     sendFile( response, filename )
   }
@@ -141,4 +142,4 @@ const handlePost = function( request, response ) {
    })
 }
 
-server.listen( 8080 )
+server.listen( port )
