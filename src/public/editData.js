@@ -1,4 +1,8 @@
-async function removeEntry(month, from, amount, category) {
+export async function removeEntry(entry) {
+    let month = entry.month
+    let from = entry.from
+    let amount = entry.amount
+    let category = entry.category
     const queryString = new URLSearchParams(window.location.search);
     const userID = queryString.get('userID');
     console.log(userID);
@@ -9,7 +13,7 @@ async function removeEntry(month, from, amount, category) {
     return location.reload();
 }
 
-function openAddForm(month) {
+export function openAddForm(month) {
     const queryString = new URLSearchParams(window.location.search);
     const userID = queryString.get('userID');
 
