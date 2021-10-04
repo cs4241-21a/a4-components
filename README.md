@@ -1,33 +1,24 @@
-Assignment 4 - Components
-===
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Due: October 4th, by 11:59 AM.
+Since there are many errors raising when I try to make it run on glitch, I want to apologize in advance, and I don't have a glitch url provided here.
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+### To Run the Project:
+  You need to have two terminals opened. You can do this by clicking split terminal.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
+  On one terminal, type  `npm start` which allows you to run the project. And it will show that the project is run on http://localhost:3000. However, so far, you are not connected to the server, which means you can't add data to the database. 
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+  On another terminal, type `node server.js`. And it will show app listening at http://localhost:5000.
+  Whenever you add data to the database, this terminal will print out the information that is added to the database.
 
-Deliverables
----
+  A screenshot called `screenshot1.png` is provided in the file.
 
-Do the following to complete this assignment:
+### Project summary:
+  I tried using React and typescript to rewrite a2 in this project. I am new to React and typescript. I only have the add function working so far. I tried doing modify function, but there were many errors raising up, so I didn't add modify function finally. When I was learning React, I followed instructions on React official website where taught me how to build the todolist React demo.
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
+### Did the new technology improve or hinder the development experience?
+  To be honest, I don't like React. I am learning Vue and working on MQP this term. Comparing with React, Vue is much easier to understand. They both have the idea of using component which improves the development experience. And I feel like both of them are similar with java. Like in java, we have many classes..... All things are object except primitive data types. 
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
 
-## Your Web Application Title
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
 
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
 
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
