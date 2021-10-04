@@ -1,33 +1,9 @@
-Assignment 4 - Components
-===
+# daily expense tracker
+[https://a4-yonghua-wang.glitch.me/](https://a4-yonghua-wang.glitch.me/)  http://a4-charlieroberts.glitch.me
 
-Due: October 4th, by 11:59 AM.
+I originally work on a3 to transfer it into react but there are so many bugs. Therefore I have to try to focus on the essential functionality to work: to be able to add a expense.
+However, ths click callback seems to be not correctly trigger or binded to the button. I have review the guide and make adjust but still don't quite work.
+# did the new technology improve or hinder the development experience?
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
-
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+Instead of React, I prefer Vue as a progressive framework to work with. This gives much more flexibility with existing JS code and paradigm. However, admitedly, framework save a lot of time
+from populating/recreating HTML element. This gives much more flexibility to reuse code.

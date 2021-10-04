@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>register page</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Webware Second Assignment">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Yonghua Wang">
+    <title>Register</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/modals.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <!-- <h5 class="modal-title">Modal title</h5> -->
+                <h2 class="fw-bold mb-0">Sign up</h2>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <button id="registerBtn" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
+                    <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+                    <hr class="my-4">
+                    <h2 class="fs-5 fw-bold mb-3">Have an account already? <a href="/login">sign in </a>here.</h2>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function validateEmail(email)
+    {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+    const register = (e)=>{
+        e.preventDefault()
+
+        const username = document.querySelector('#floatingInput')
+        const password = document.querySelector('#floatingPassword')
+        const isValid = validateEmail(username.value)
+        if(!isValid){
+            alert('plz register with a anystring@anystring.anystring format email')
+            return
+        }
+        //console.log(inputs)
+        let body = {
+            username : username.value,
+            password : password.value
+        }
+        body = JSON.stringify(body)
+        console.log(body)
+
+        fetch( '/register', {
+            method:'POST',
+            headers:{"content-type": "application/json"},
+            body
+        })
+            .then( function( response ) {
+                // do something with the response
+                return response.json()
+            })
+            .then(function(json){
+                console.log(json)
+                if(json.isSuccessful){
+                    alert('account created successful! ')
+                    window.location.href = '/login'
+                }
+            })
+        return false
+    }
+    const submitBtn = document.querySelector('#registerBtn')
+    submitBtn.addEventListener('click',register)
+
+
+
+
+</script>
+</body>
+</html>
