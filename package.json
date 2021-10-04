@@ -1,0 +1,39 @@
+{
+  "name": "a4-components",
+  "description": "Assignment 4 - Components\r ===",
+  "author": "",
+  "scripts": {
+    "start": "node server.improved.js",
+    "build": "snowpack build"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "mime": "^2.5.2",
+    "mongodb": "^4.1.2",
+    "morgan": "^1.10.0",
+    "nes.css": "^2.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "util": "^0.12.4"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.8"
+  },
+  "version": "1.0.0",
+  "main": "server.improved.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justgaret23/a4-components.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justgaret23/a4-components/issues"
+  },
+  "homepage": "https://github.com/justgaret23/a4-components#readme"
+}
