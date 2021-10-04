@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS4241 Assignment 4</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Webware Second Assignment" />
+    <meta name="keywords" content="HTML, CSS, JavaScript" />
+    <meta name="author" content="Yonghua Wang" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap");
+      body {
+        background-color: #d2dec8;
+        font-family: "Kaisei HarunoUmi", serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="index.js"></script>
+    <script>
+      window.onload = function() {
+        const btn = document.querySelector("#addNewRecord");
+        const addRecord = () => {
+          let body = {};
+
+          body.entertainment = document.getElementById("entertainment").value;
+          body.food = document.getElementById("food").value;
+          body.other = document.getElementById("other").value;
+          body = JSON.stringify(body);
+          fetch("/add", {
+            method: "post",
+            headers: { "content-type": "application/json" },
+            body: body
+          })
+            .then(function(response) {
+              // do something with the response
+              return response.json();
+            })
+            .then(function(json) {
+              window.location.reload(true);
+            });
+        };
+        btn.addEventListener("click", addRecord);
+      };
+    </script>
+  </body>
+</html>
