@@ -1,0 +1,19 @@
+@import url('https://cdn.jsdelivr.net/npm/water.css@2/out/water.css');
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+
+/*light theme only*/
+
+@media(prefer-color-scheme: light){
+:root{
+  --background-body: rgb(12 124 167 / 20%);
+  --links: #0057d1;
+  --focus: #0096bfcc;
+  --button-base: #4f5687f2f2;
+  --button-hover: #0071d1;
+  --form-placeholder: #6e0404;
+  --form-text: #1d1d1d;
+  }
+
+}
+
+
