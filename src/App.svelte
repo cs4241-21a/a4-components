@@ -17,6 +17,8 @@
 		const ageVal = document.querySelector( '#yourage' ).value
 		const scoreVal = document.querySelector( '#yourscore' ).value
 		
+    console.log("testadd")
+    
 		if(entry === ""){
           alert("Name cannot be empty!")
           return

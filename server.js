@@ -8,6 +8,10 @@ const entries = [
 app.use( express.json() )
 app.use( express.static( 'public' ) )
 
+app.get("/", (request, response) => {
+  response.sendFile(__dirname + "/views/index.html");
+});
+
 app.get( '/read', ( req, res ) => res.json( entries ) )
 
 app.post( '/add', ( req,res ) => {
@@ -22,4 +26,4 @@ app.post( '/change', function( req,res ) {
   res.sendStatus( 200 )
 })
 
-app.listen( 8080 )
+app.listen( 3000 )
