@@ -4,7 +4,7 @@ const http = require( 'http' ),
       // to install the mime library used in the following line of code
       mime = require( 'mime' ),
       dir  = 'public/',
-      port = 3000
+      port = 8080
 
 let appdata = [
   
@@ -29,12 +29,15 @@ const handleGet = function( request, response ) {
 }
 
 const handlePost = function( request, response ) {
+  console.log("submit")
   let dataString = ''
-
+  
   request.on( 'data', function( data ) {
       dataString += data 
   })
 
+  console.log(dataString)
+  
   request.on( 'end', function() {
     
      dataObj = JSON.parse(dataString)
@@ -136,4 +139,4 @@ const handlePost = function( request, response ) {
    })
 }
 
-server.listen( process.env.PORT || port )
+server.listen( 8080 )
