@@ -16,7 +16,8 @@ const EventTableEmptyRow = (props) => {
     class: "icon-button-container"
   }, /* @__PURE__ */ React.createElement("button", {
     id: "add-button",
-    class: "icon-button"
+    class: "icon-button",
+    onClick: props.onClickAdd
   }, /* @__PURE__ */ React.createElement("img", {
     title: "Add Entry",
     class: "icon add-icon",

@@ -1,5 +1,8 @@
 import React from "react";
 
+import EventTableRow from "./EventTableRow";
+import EventTableEmptyRow from "./EventTableEmptyRow";
+
 const EventTable = (props) => {
   return (
     <div class="row d-flex m-0 justify-content-center">
@@ -14,7 +17,12 @@ const EventTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.children}
+          {props.events.map(event => {
+            return (
+              <EventTableRow event={event} onClickEdit={() => props.formHandler(event)} />
+            )  
+          })}
+          <EventTableEmptyRow onClickAdd={() => props.formHandler(null)} />
         </tbody>
       </table>
     </div>
