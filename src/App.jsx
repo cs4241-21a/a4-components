@@ -67,7 +67,7 @@ class App extends React.Component{
                 console.log(JSON.parse(textdata));
                 let newAppdata = JSON.parse(textdata);
 
-                makeTableFromData(newAppdata);
+                app.makeTableFromData(newAppdata);
             })
         })
 
@@ -77,16 +77,16 @@ class App extends React.Component{
     deleteScore(e){
         e.preventDefault();
 
-        const json = { playername: this.usernameVar},
+        const json = { playername: app.usernameVar},
             body = JSON.stringify( json )
 
-        fetch('/delete', {
+        fetch('/delete-player-score', {
             method: 'POST',
             body
         })
         .then(function (response){
             //Redirect to home page
-            window.location.href = "public/index.html";
+            window.location.href = "./index.html";
         })
     }
 
@@ -114,6 +114,8 @@ class App extends React.Component{
     makeTableFromData(appdata){
         let table = document.getElementById("game-leaderboard");
         let data = Object.keys(appdata[0]);
+
+        console.log(appdata)
     
         table.innerHTML = '';
         app.generateTableHead(table, data);
@@ -138,17 +140,24 @@ class App extends React.Component{
     generateTable(table, data){
     
         let i = 0;
+        console.log(data);
         
         for(let element of data){
             i++;
             let row = table.insertRow();
-            for(key in element){
-              if(key === "name" || key === "score" || key === "rank"){
-                let cell = row.insertCell();
-                let text = document.createTextNode(element[key]);
-                cell.appendChild(text);
-              }
-            }
+          
+            let cell = row.insertCell();
+            let text = document.createTextNode(element.name);
+            cell.appendChild(text);
+
+            let cell2 = row.insertCell();
+            let text2 = document.createTextNode(element.score);
+            cell2.appendChild(text2);
+
+            let cell3 = row.insertCell();
+            let text3 = document.createTextNode(element.rank);
+            cell3.appendChild(text3);
+            
         } 
     }
 
@@ -255,7 +264,7 @@ class App extends React.Component{
         </main>
     
         <section id="gameForms">
-          <form action="/submit-player-data" class="gameForm" method="post">
+          <form action="/submit-player-data" class="gameForm" method="post" onSubmit={this.submit}>
             <h3 class="gameLabel">Input Player Score</h3>
             <table class="gameTable">
               <tr>
@@ -268,12 +277,12 @@ class App extends React.Component{
                 <th><label id="savedScore" class="gameLabel">0</label></th>
               </tr>
             </table>
-            <button id = "submit" class="nes-btn is-success" onclick={this.submit}>Enter Score</button>
+            <button id = "submit" class="nes-btn is-success">Enter Score</button>
           </form>
       
-          <form action="/delete-player-score" id ="deleteScoreForm" class="gameForm" method="post">
+          <form action="/delete-player-score" id ="deleteScoreForm" class="gameForm" method="post" onSubmit={this.deleteScore}>
             
-            <button id = "deleteButton" class="nes-btn is-warning" onclick={this.deleteScore}>Delete Player Account</button>
+            <button id = "deleteButton" class="nes-btn is-warning">Delete Player Account</button>
           </form>
     
           <table id="game-leaderboard">

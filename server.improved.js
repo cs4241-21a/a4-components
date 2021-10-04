@@ -282,7 +282,7 @@ app.post( '/submit-player-data', bodyParser.json(), (req,res) => {
   }
 })
 
-app.post( '/delete', (req,res) => {
+app.post( '/delete-player-score', (req,res) => {
 
   collection.deleteOne({name: req.session.username}, true)
 
@@ -301,7 +301,7 @@ app.post( '/delete', (req,res) => {
     }
     console.log("Data deleted. logging out...")
     req.session.login = false;
-    res.redirect( 'index.html' )
+    res.sendFile( __dirname + '/build/index.html' )
   })
 })
 
