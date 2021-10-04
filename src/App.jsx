@@ -66,7 +66,8 @@ class App extends React.Component {
         <input type='text' id='other' placeholder="commute, online shop, etc"/>
       </div>
   
-      <button id="addNewRecord" type="submit" class="btn" onclick={ this.add}>Add</button>
+      <button id="addNewRecord" type="submit" class="btn" onclick={
+    this.add}>Add</button>
     </form>
   </div>
   
@@ -83,8 +84,8 @@ class App extends React.Component {
       })
   }
   
-     add(event){
-       event.preventDefault()
+  add(){
+    
     let body = {}
 
     body.entertainment = document.getElementById('entertainment').value
