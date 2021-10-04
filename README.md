@@ -1,33 +1,9 @@
-Assignment 4 - Components
-===
+## Eat
 
-Due: October 4th, by 11:59 AM.
+[Live demo: https://a4-components-liamrathke.herokuapp.com/](https://a4-components-liamrathke.herokuapp.com/)
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+Note that, although the project specifications request React or Svelte to be used as frameworks, this project uses VueJS. Instructor approval was received to used VueJS, a similar client-side frontend framework that effectively does the same things as React or Svelte.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
+This assignment was heavily based on A3; my submission for A3 (which itself was based on my submission for A2) already used VueJS as the frontend framework, so no code changes were required. I selected VueJS previously as it's very flexible, and easy to add to any web-based project; despite using a fully-fledged frontend framework, no build step is required, as VueJS is merely imported by CDN. Such behavior is possible because Vue can slot in to existing HTML, instead of requiring precompilation and formatting to/from JSX. I have been using VueJS in web projects and professionally since 2017, and it's my go-to framework for almost any webpage that involves manipulating the DOM with JavaScript. Reactive elements drastically speed up the rate at which I'm able to build out functional applications.
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+Were I to use a different framework, the development experience would likely be slowed. First, with most other modern frameworks, merely adding the full framework code by CDN is not possible, meaning that a build step is required, so the serverside code would need to be updated to handle a built path as well. React itself is described as an "HTML in JS" framework, whereas Vue is "JS in HTML", so switching to React would require not only learning JSX, but changing my key web development philosophy; it would probably be faster to just reimplement the desired functionality in vanilla JS. Svelte is syntactically much more similar to Vue (and there are actually a few identical operators), and thus I expect that a switch to Svelte would improve the development experience, despite the additional learning barrier to overcome.
