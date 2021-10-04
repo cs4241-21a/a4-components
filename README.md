@@ -4,7 +4,9 @@ I remade a2 with react. This application lets you add modify and delete rows of 
 
 I found it quite challenging to update the old program and in hindsite it probably would have been better to restart from the ground up.
 
-Glitch link:
+Glitch link: https://a4-jpoulos000.glitch.me
+
+
 
 
 Jared Poulos
