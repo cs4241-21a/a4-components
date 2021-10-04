@@ -1,33 +1,7 @@
-Assignment 4 - Components
-===
+# a4-danstus
 
-Due: October 4th, by 11:59 AM.
+http://a4-danstus.glitch.me
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+This is the simple task tracking app I used for assignment 2, only without a results page or a table for the data, instead storin data in a list. It allows the user to enter tasks to do in the future with a description, estimted time to complete, and a due date. It then calculates how long until the task is due.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+I would say the new technology slightly hindered the development experience, but noly because this was such a small application. Learning to use react for such a basic app was more work than simply coding it normally would have been at my current level of skill. I can certainly see how for larger projects react could save time writing code, and how ever on this project if I had already been familiar with react I could have finished the project much faster. Really the small scale of the project was the sole reason the use of react seemed to hinder development.
