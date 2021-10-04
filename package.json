@@ -1,0 +1,27 @@
+{
+  "name": "a4-components",
+  "version": "1.0.0",
+  "description": "This application is designed to take user input and then convert it into \"OwO speak.\" The specific regex rules implemented on the user messages have these effects:",
+  "main": "server.improved.js",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
+    "mime": "^2.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.improved.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrick-lee22/a4-components.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patrick-lee22/a4-components/issues"
+  },
+  "homepage": "https://github.com/patrick-lee22/a4-components#readme"
+}
