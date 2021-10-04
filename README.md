@@ -1,33 +1,7 @@
-Assignment 4 - Components
-===
+## Assignment Tracker React Refactor
 
-Due: October 4th, by 11:59 AM.
+https://a4-jmckeen8.glitch.me
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+This assignment for the most part was based on the code for my A2 submission, however I used the CSS styling from my A3 submission and did some additional restructuring to make sure the table populates on initial page load, something which my A2 failed to do. 
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+Overall porting this assignment to use React was a mixed bag. It did wind up simplifying the overall code structure in my opinion, and allowed for easier/tighter integration of the HTML and JS. It also made the code for rendering the table dynamically *exceptionally* less repetitive/verbose. However, there is a bit more of a learning curve and some hiccups to work through that can be tricky to figure out. I worked through several non-intuitive errors as I was trying to debug and make sure everything was working. Some were caused my silly typos and other mistakes on my part, but others (notably issues with binding functions to use this.setState) were very unintuitive to try to figure out what was going on, let alone solve. 
