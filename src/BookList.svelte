@@ -5,6 +5,7 @@
     export let onDeleteBook;
 
     const isString = (val) => typeof val === "string" || val instanceof String;
+    const isNumber = (value) => typeof value === "number" && isFinite(value);
 
     const tableColumns = {
         title: { name: "Title", isHeader: true },
@@ -62,6 +63,39 @@
             shouldUpdateBooks.set(false);
         }
     });
+
+    let lastSortedColumn;
+    let lastSortDir = 1;
+
+    function sortForColumn(columnKey) {
+        const sortDir = columnKey === lastSortedColumn ? -1 * lastSortDir : 1;
+
+        let newBookData = [...rawBookData];
+        newBookData.sort((a, b) => {
+            const aVal = a[columnKey];
+            const bVal = b[columnKey];
+
+            // some of our columsn can contain numbers and the string "Unknown"
+            // javascript comparison is wacky in that a > "Unknown" and a < "Unkown" will both be false regardless of the value of a
+            // so we check and consider unknown to be a larger value than any number
+            if (isNumber(aVal) && isString(bVal)) {
+                return -1 * sortDir;
+            }
+            if (isNumber(bVal) && isString(aVal)) {
+                return sortDir;
+            }
+            if (aVal > bVal) {
+                return sortDir;
+            } else if (aVal === bVal) {
+                return 0;
+            }
+            return -1 * sortDir;
+        });
+        lastSortDir = sortDir;
+        lastSortedColumn = columnKey;
+
+        bookData = newBookData.map(bookDataToTableRowData);
+    }
 </script>
 
 <div class="content">
@@ -83,9 +117,17 @@
                 <tr>
                     {#each Object.keys(tableColumns) as columnKey}
                         {#if isString(tableColumns[columnKey])}
-                            <th scope="col">{tableColumns[columnKey]}</th>
+                            <th
+                                scope="col"
+                                on:click={() => sortForColumn(columnKey)}
+                                >{tableColumns[columnKey]}</th
+                            >
                         {:else}
-                            <th scope="col">{tableColumns[columnKey].name}</th>
+                            <th
+                                scope="col"
+                                on:click={() => sortForColumn(columnKey)}
+                                >{tableColumns[columnKey].name}</th
+                            >
                         {/if}
                     {/each}
                     <th scope="col">Edit</th>

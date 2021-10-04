@@ -775,43 +775,58 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[11] = list[i];
-    	child_ctx[13] = i;
+    	child_ctx[17] = list[i];
+    	child_ctx[19] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[14] = list[i];
+    	child_ctx[20] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[17] = list[i];
+    	child_ctx[23] = list[i];
     	return child_ctx;
     }
 
-    // (87:24) {:else}
+    // (125:24) {:else}
     function create_else_block_1(ctx) {
     	let th;
-    	let t_value = /*tableColumns*/ ctx[5][/*columnKey*/ ctx[17]].name + "";
+    	let t_value = /*tableColumns*/ ctx[5][/*columnKey*/ ctx[23]].name + "";
     	let t;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler_1() {
+    		return /*click_handler_1*/ ctx[8](/*columnKey*/ ctx[23]);
+    	}
 
     	const block = {
     		c: function create() {
     			th = element("th");
     			t = text(t_value);
     			attr_dev(th, "scope", "col");
-    			add_location(th, file$3, 87, 28, 2742);
+    			add_location(th, file$3, 125, 28, 4144);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, th, anchor);
     			append_dev(th, t);
+
+    			if (!mounted) {
+    				dispose = listen_dev(th, "click", click_handler_1, false, false, false);
+    				mounted = true;
+    			}
     		},
-    		p: noop,
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(th);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -819,33 +834,48 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(87:24) {:else}",
+    		source: "(125:24) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (85:24) {#if isString(tableColumns[columnKey])}
+    // (119:24) {#if isString(tableColumns[columnKey])}
     function create_if_block_1(ctx) {
     	let th;
-    	let t_value = /*tableColumns*/ ctx[5][/*columnKey*/ ctx[17]] + "";
+    	let t_value = /*tableColumns*/ ctx[5][/*columnKey*/ ctx[23]] + "";
     	let t;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler() {
+    		return /*click_handler*/ ctx[7](/*columnKey*/ ctx[23]);
+    	}
 
     	const block = {
     		c: function create() {
     			th = element("th");
     			t = text(t_value);
     			attr_dev(th, "scope", "col");
-    			add_location(th, file$3, 85, 28, 2635);
+    			add_location(th, file$3, 119, 28, 3869);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, th, anchor);
     			append_dev(th, t);
+
+    			if (!mounted) {
+    				dispose = listen_dev(th, "click", click_handler, false, false, false);
+    				mounted = true;
+    			}
     		},
-    		p: noop,
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(th);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -853,19 +883,19 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(85:24) {#if isString(tableColumns[columnKey])}",
+    		source: "(119:24) {#if isString(tableColumns[columnKey])}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (84:20) {#each Object.keys(tableColumns) as columnKey}
+    // (118:20) {#each Object.keys(tableColumns) as columnKey}
     function create_each_block_2(ctx) {
     	let if_block_anchor;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*isString*/ ctx[4](/*tableColumns*/ ctx[5][/*columnKey*/ ctx[17]])) return create_if_block_1;
+    		if (/*isString*/ ctx[4](/*tableColumns*/ ctx[5][/*columnKey*/ ctx[23]])) return create_if_block_1;
     		return create_else_block_1;
     	}
 
@@ -894,7 +924,7 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(84:20) {#each Object.keys(tableColumns) as columnKey}",
+    		source: "(118:20) {#each Object.keys(tableColumns) as columnKey}",
     		ctx
     	});
 
@@ -916,10 +946,10 @@ var app = (function () {
     	return block;
     }
 
-    // (95:48)                      {#each booksData as book, index}
+    // (137:48)                      {#each booksData as book, index}
     function create_then_block(ctx) {
     	let each_1_anchor;
-    	let each_value = /*booksData*/ ctx[10];
+    	let each_value = /*booksData*/ ctx[16];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -944,7 +974,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*bookData, rawBookData, onDeleteBook, onModifyBook*/ 15) {
-    				each_value = /*booksData*/ ctx[10];
+    				each_value = /*booksData*/ ctx[16];
     				validate_each_argument(each_value);
     				let i;
 
@@ -977,31 +1007,31 @@ var app = (function () {
     		block,
     		id: create_then_block.name,
     		type: "then",
-    		source: "(95:48)                      {#each booksData as book, index}",
+    		source: "(137:48)                      {#each booksData as book, index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (103:32) {:else}
+    // (145:32) {:else}
     function create_else_block(ctx) {
     	let td;
-    	let t_value = /*columnEntry*/ ctx[14].text + "";
+    	let t_value = /*columnEntry*/ ctx[20].text + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			td = element("td");
     			t = text(t_value);
-    			add_location(td, file$3, 103, 36, 3459);
+    			add_location(td, file$3, 145, 36, 5029);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, td, anchor);
     			append_dev(td, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*bookData*/ 8 && t_value !== (t_value = /*columnEntry*/ ctx[14].text + "")) set_data_dev(t, t_value);
+    			if (dirty & /*bookData*/ 8 && t_value !== (t_value = /*columnEntry*/ ctx[20].text + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(td);
@@ -1012,17 +1042,17 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(103:32) {:else}",
+    		source: "(145:32) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (99:32) {#if columnEntry.isHeader}
+    // (141:32) {#if columnEntry.isHeader}
     function create_if_block(ctx) {
     	let th;
-    	let t_value = /*columnEntry*/ ctx[14].text + "";
+    	let t_value = /*columnEntry*/ ctx[20].text + "";
     	let t;
     	let th_scope_value;
 
@@ -1030,17 +1060,17 @@ var app = (function () {
     		c: function create() {
     			th = element("th");
     			t = text(t_value);
-    			attr_dev(th, "scope", th_scope_value = /*columnEntry*/ ctx[14].scope);
-    			add_location(th, file$3, 99, 36, 3251);
+    			attr_dev(th, "scope", th_scope_value = /*columnEntry*/ ctx[20].scope);
+    			add_location(th, file$3, 141, 36, 4821);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, th, anchor);
     			append_dev(th, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*bookData*/ 8 && t_value !== (t_value = /*columnEntry*/ ctx[14].text + "")) set_data_dev(t, t_value);
+    			if (dirty & /*bookData*/ 8 && t_value !== (t_value = /*columnEntry*/ ctx[20].text + "")) set_data_dev(t, t_value);
 
-    			if (dirty & /*bookData*/ 8 && th_scope_value !== (th_scope_value = /*columnEntry*/ ctx[14].scope)) {
+    			if (dirty & /*bookData*/ 8 && th_scope_value !== (th_scope_value = /*columnEntry*/ ctx[20].scope)) {
     				attr_dev(th, "scope", th_scope_value);
     			}
     		},
@@ -1053,19 +1083,19 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(99:32) {#if columnEntry.isHeader}",
+    		source: "(141:32) {#if columnEntry.isHeader}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (98:28) {#each book.columns as columnEntry}
+    // (140:28) {#each book.columns as columnEntry}
     function create_each_block_1(ctx) {
     	let if_block_anchor;
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*columnEntry*/ ctx[14].isHeader) return create_if_block;
+    		if (/*columnEntry*/ ctx[20].isHeader) return create_if_block;
     		return create_else_block;
     	}
 
@@ -1104,14 +1134,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(98:28) {#each book.columns as columnEntry}",
+    		source: "(140:28) {#each book.columns as columnEntry}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (96:20) {#each booksData as book, index}
+    // (138:20) {#each booksData as book, index}
     function create_each_block(ctx) {
     	let tr;
     	let t0;
@@ -1132,7 +1162,7 @@ var app = (function () {
     	let t6;
     	let mounted;
     	let dispose;
-    	let each_value_1 = /*book*/ ctx[11].columns;
+    	let each_value_1 = /*book*/ ctx[17].columns;
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -1140,12 +1170,12 @@ var app = (function () {
     		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
 
-    	function click_handler() {
-    		return /*click_handler*/ ctx[6](/*book*/ ctx[11]);
+    	function click_handler_2() {
+    		return /*click_handler_2*/ ctx[9](/*book*/ ctx[17]);
     	}
 
-    	function click_handler_1(...args) {
-    		return /*click_handler_1*/ ctx[7](/*book*/ ctx[11], ...args);
+    	function click_handler_3(...args) {
+    		return /*click_handler_3*/ ctx[10](/*book*/ ctx[17], ...args);
     	}
 
     	const block = {
@@ -1174,31 +1204,31 @@ var app = (function () {
     			attr_dev(a0, "class", "btn btn-secondary");
     			attr_dev(a0, "href", "#");
     			attr_dev(a0, "role", "button");
-    			attr_dev(a0, "id", `dropdownMenuLink${/*index*/ ctx[13]}`);
+    			attr_dev(a0, "id", `dropdownMenuLink${/*index*/ ctx[19]}`);
     			attr_dev(a0, "data-bs-toggle", "dropdown");
     			attr_dev(a0, "aria-expanded", "false");
-    			add_location(a0, file$3, 108, 36, 3685);
+    			add_location(a0, file$3, 150, 36, 5255);
     			attr_dev(a1, "class", "btn btn-primary dropdown-item");
     			attr_dev(a1, "data-bs-toggle", "modal");
     			attr_dev(a1, "data-bs-target", "#modify-book-modal");
-    			attr_dev(a1, "data-bs-book-id", a1_data_bs_book_id_value = /*book*/ ctx[11].id);
+    			attr_dev(a1, "data-bs-book-id", a1_data_bs_book_id_value = /*book*/ ctx[17].id);
     			attr_dev(a1, "href", "#");
-    			add_location(a1, file$3, 124, 44, 4485);
-    			add_location(li0, file$3, 123, 40, 4436);
+    			add_location(a1, file$3, 166, 44, 6055);
+    			add_location(li0, file$3, 165, 40, 6006);
     			attr_dev(a2, "class", "btn btn-primary dropdown-item");
     			attr_dev(a2, "data-bs-toggle", "modal");
     			attr_dev(a2, "data-bs-target", "#delete-book-modal");
-    			attr_dev(a2, "data-bs-book-id", a2_data_bs_book_id_value = /*book*/ ctx[11].id);
+    			attr_dev(a2, "data-bs-book-id", a2_data_bs_book_id_value = /*book*/ ctx[17].id);
     			attr_dev(a2, "href", "#");
-    			add_location(a2, file$3, 144, 44, 5740);
-    			add_location(li1, file$3, 143, 40, 5691);
+    			add_location(a2, file$3, 186, 44, 7310);
+    			add_location(li1, file$3, 185, 40, 7261);
     			attr_dev(ul, "class", "dropdown-menu");
     			attr_dev(ul, "aria-labelledby", "dropdownMenuLink");
-    			add_location(ul, file$3, 119, 36, 4217);
+    			add_location(ul, file$3, 161, 36, 5787);
     			attr_dev(div, "class", "dropdown");
-    			add_location(div, file$3, 107, 32, 3626);
-    			add_location(td, file$3, 106, 28, 3589);
-    			add_location(tr, file$3, 96, 24, 3087);
+    			add_location(div, file$3, 149, 32, 5196);
+    			add_location(td, file$3, 148, 28, 5159);
+    			add_location(tr, file$3, 138, 24, 4657);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -1224,8 +1254,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(a1, "click", click_handler, false, false, false),
-    					listen_dev(a2, "click", click_handler_1, false, false, false)
+    					listen_dev(a1, "click", click_handler_2, false, false, false),
+    					listen_dev(a2, "click", click_handler_3, false, false, false)
     				];
 
     				mounted = true;
@@ -1235,7 +1265,7 @@ var app = (function () {
     			ctx = new_ctx;
 
     			if (dirty & /*bookData*/ 8) {
-    				each_value_1 = /*book*/ ctx[11].columns;
+    				each_value_1 = /*book*/ ctx[17].columns;
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -1258,11 +1288,11 @@ var app = (function () {
     				each_blocks.length = each_value_1.length;
     			}
 
-    			if (dirty & /*bookData*/ 8 && a1_data_bs_book_id_value !== (a1_data_bs_book_id_value = /*book*/ ctx[11].id)) {
+    			if (dirty & /*bookData*/ 8 && a1_data_bs_book_id_value !== (a1_data_bs_book_id_value = /*book*/ ctx[17].id)) {
     				attr_dev(a1, "data-bs-book-id", a1_data_bs_book_id_value);
     			}
 
-    			if (dirty & /*bookData*/ 8 && a2_data_bs_book_id_value !== (a2_data_bs_book_id_value = /*book*/ ctx[11].id)) {
+    			if (dirty & /*bookData*/ 8 && a2_data_bs_book_id_value !== (a2_data_bs_book_id_value = /*book*/ ctx[17].id)) {
     				attr_dev(a2, "data-bs-book-id", a2_data_bs_book_id_value);
     			}
     		},
@@ -1278,7 +1308,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(96:20) {#each booksData as book, index}",
+    		source: "(138:20) {#each booksData as book, index}",
     		ctx
     	});
 
@@ -1332,7 +1362,7 @@ var app = (function () {
     		pending: create_pending_block,
     		then: create_then_block,
     		catch: create_catch_block,
-    		value: 10
+    		value: 16
     	};
 
     	handle_promise(promise = /*bookData*/ ctx[3], info);
@@ -1363,27 +1393,27 @@ var app = (function () {
     			tbody = element("tbody");
     			info.block.c();
     			attr_dev(h1, "class", "position-absolute start-50 translate-middle-x");
-    			add_location(h1, file$3, 69, 12, 2040);
+    			add_location(h1, file$3, 103, 12, 3274);
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-primary svelte-98fhsj");
     			attr_dev(button, "data-bs-toggle", "modal");
     			attr_dev(button, "data-bs-target", "#add-book-modal");
     			attr_dev(button, "id", "add-book");
-    			add_location(button, file$3, 72, 12, 2154);
+    			add_location(button, file$3, 106, 12, 3388);
     			attr_dev(div0, "class", "my-books-header svelte-98fhsj");
-    			add_location(div0, file$3, 68, 8, 1998);
+    			add_location(div0, file$3, 102, 8, 3232);
     			attr_dev(th, "scope", "col");
-    			add_location(th, file$3, 90, 20, 2872);
-    			add_location(tr, file$3, 82, 16, 2471);
-    			add_location(thead, file$3, 81, 12, 2447);
-    			add_location(tbody, file$3, 93, 12, 2953);
+    			add_location(th, file$3, 132, 20, 4442);
+    			add_location(tr, file$3, 116, 16, 3705);
+    			add_location(thead, file$3, 115, 12, 3681);
+    			add_location(tbody, file$3, 135, 12, 4523);
     			attr_dev(table, "class", "table");
     			attr_dev(table, "id", "book-table");
-    			add_location(table, file$3, 80, 8, 2397);
+    			add_location(table, file$3, 114, 8, 3631);
     			attr_dev(div1, "class", "book-list container-lg");
-    			add_location(div1, file$3, 67, 4, 1953);
+    			add_location(div1, file$3, 101, 4, 3187);
     			attr_dev(div2, "class", "content");
-    			add_location(div2, file$3, 66, 0, 1927);
+    			add_location(div2, file$3, 100, 0, 3161);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1415,7 +1445,7 @@ var app = (function () {
     		p: function update(new_ctx, [dirty]) {
     			ctx = new_ctx;
 
-    			if (dirty & /*tableColumns, Object, isString*/ 48) {
+    			if (dirty & /*sortForColumn, Object, tableColumns, isString*/ 112) {
     				each_value_2 = Object.keys(/*tableColumns*/ ctx[5]);
     				validate_each_argument(each_value_2);
     				let i;
@@ -1473,6 +1503,7 @@ var app = (function () {
     	let { onModifyBook } = $$props;
     	let { onDeleteBook } = $$props;
     	const isString = val => typeof val === "string" || val instanceof String;
+    	const isNumber = value => typeof value === "number" && isFinite(value);
 
     	const tableColumns = {
     		title: { name: "Title", isHeader: true },
@@ -1530,18 +1561,57 @@ var app = (function () {
     		}
     	});
 
+    	let lastSortedColumn;
+    	let lastSortDir = 1;
+
+    	function sortForColumn(columnKey) {
+    		const sortDir = columnKey === lastSortedColumn ? -1 * lastSortDir : 1;
+    		let newBookData = [...rawBookData];
+
+    		newBookData.sort((a, b) => {
+    			const aVal = a[columnKey];
+    			const bVal = b[columnKey];
+
+    			// some of our columsn can contain numbers and the string "Unknown"
+    			// javascript comparison is wacky in that a > "Unknown" and a < "Unkown" will both be false regardless of the value of a
+    			// so we check and consider unknown to be a larger value than any number
+    			if (isNumber(aVal) && isString(bVal)) {
+    				return -1 * sortDir;
+    			}
+
+    			if (isNumber(bVal) && isString(aVal)) {
+    				return sortDir;
+    			}
+
+    			if (aVal > bVal) {
+    				return sortDir;
+    			} else if (aVal === bVal) {
+    				return 0;
+    			}
+
+    			return -1 * sortDir;
+    		});
+
+    		lastSortDir = sortDir;
+    		lastSortedColumn = columnKey;
+    		$$invalidate(3, bookData = newBookData.map(bookDataToTableRowData));
+    	}
+
     	const writable_props = ['onModifyBook', 'onDeleteBook'];
 
     	Object_1.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<BookList> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = book => {
+    	const click_handler = columnKey => sortForColumn(columnKey);
+    	const click_handler_1 = columnKey => sortForColumn(columnKey);
+
+    	const click_handler_2 = book => {
     		const us = rawBookData.find(a => a._id === book.id);
     		onModifyBook({ id: book.id, ...us });
     	};
 
-    	const click_handler_1 = (book, e) => {
+    	const click_handler_3 = (book, e) => {
     		const us = rawBookData.find(a => a._id === book.id);
     		onDeleteBook({ id: book.id, ...us });
     	};
@@ -1556,11 +1626,15 @@ var app = (function () {
     		onModifyBook,
     		onDeleteBook,
     		isString,
+    		isNumber,
     		tableColumns,
     		getBookData,
     		bookDataToTableRowData,
     		rawBookData,
-    		bookData
+    		bookData,
+    		lastSortedColumn,
+    		lastSortDir,
+    		sortForColumn
     	});
 
     	$$self.$inject_state = $$props => {
@@ -1568,6 +1642,8 @@ var app = (function () {
     		if ('onDeleteBook' in $$props) $$invalidate(1, onDeleteBook = $$props.onDeleteBook);
     		if ('rawBookData' in $$props) $$invalidate(2, rawBookData = $$props.rawBookData);
     		if ('bookData' in $$props) $$invalidate(3, bookData = $$props.bookData);
+    		if ('lastSortedColumn' in $$props) lastSortedColumn = $$props.lastSortedColumn;
+    		if ('lastSortDir' in $$props) lastSortDir = $$props.lastSortDir;
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1581,8 +1657,11 @@ var app = (function () {
     		bookData,
     		isString,
     		tableColumns,
+    		sortForColumn,
     		click_handler,
-    		click_handler_1
+    		click_handler_1,
+    		click_handler_2,
+    		click_handler_3
     	];
     }
 
