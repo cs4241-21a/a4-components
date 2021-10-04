@@ -80,25 +80,27 @@ let dataarray = []
       return false;
     }
 
-          let json = {name: inputName.value, chore: inputChore.value , complete:inputComplete.value, load:0, id:-1}
+          let json = {"name": inputName.value, "chore": inputChore.value , "complete":inputComplete.value, "load":0, "id":-1}
           let body = JSON.stringify( json )
 
-console.log("send submit")
+console.log(body)
 
           /*fetch( '/submit', {
       method:'POST',
       body 
     })*/
-    fetch( '/submit', {
+    fetch( '/', {
       method:'POST',
       body: body,
-      headers: {"Content-Type": "application/json"} 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     })
     .then(function( response ) {
+        
          return response.json();
     })
     .then (function(json){
-
+      console.log("hit resp2")
       
       let newAppdata = []
       for(let i = 0; i<json.length; i++){
@@ -143,7 +145,7 @@ console.log("send submit")
           let json = {name: inputName.value, chore: inputChore.value , complete:inputComplete.value, load:0, id:inputId.value}
           let body = JSON.stringify( json )
 
-          fetch( '/submit', {
+          fetch( '/', {
       method:'POST',
       body 
     })
@@ -203,11 +205,12 @@ console.log("send submit")
          let json = {name: "n/a", chore: "n/a" , complete:"n/a", load:-1, id:parseInt(inputId.value)}
          let body = JSON.stringify( json )
 
-          fetch( '/submit', {
+          fetch( '/', {
       method:'POST',
       body 
     })
     .then(function( response ) {
+      console.log(response.json())
          return response.json();
     })
     .then (function(json){

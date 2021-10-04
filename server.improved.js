@@ -14,6 +14,7 @@ const server = http.createServer( function( request,response ) {
   if( request.method === 'GET' ) {
     handleGet( request, response )    
   }else if( request.method === 'POST' ){
+    console.log("problem here")
     handlePost( request, response ) 
   }
 })
@@ -35,6 +36,7 @@ const handlePost = function( request, response ) {
   request.on( 'data', function( data ) {
       dataString += data 
   })
+
 
   console.log(dataString)
   
