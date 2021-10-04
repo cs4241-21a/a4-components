@@ -38,13 +38,16 @@ class App extends React.Component {
                 <input type='text' id='inputName'/>
                 <button onClick={e => this.reactSubmit(e)}>Submit</button>
                 <table>
+                    <thead>
                     <tr>
                         <th>Name</th>
                         <th>Score</th>
                         <th>Rank</th>
                     </tr>
-                    {this.state.appdata.map((appdata, i) => <Entry key={i} yourname={appdata.yourname}
-                                                                   score={appdata.score} rank={appdata.rank}/>)}
+                    </thead>
+                    <tbody>
+                    {this.state.appdata.map((appdata, i) => <Entry key={i} yourname={appdata.yourname} score={appdata.score} rank={appdata.rank}/>)}
+                    </tbody>
                 </table>
             </div>
         )

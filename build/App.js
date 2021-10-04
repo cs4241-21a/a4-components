@@ -25,12 +25,12 @@ class App extends React.Component {
       id: "inputName"
     }), /* @__PURE__ */ React.createElement("button", {
       onClick: (e) => this.reactSubmit(e)
-    }, "Submit"), /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Name"), /* @__PURE__ */ React.createElement("th", null, "Score"), /* @__PURE__ */ React.createElement("th", null, "Rank")), this.state.appdata.map((appdata, i) => /* @__PURE__ */ React.createElement(Entry, {
+    }, "Submit"), /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Name"), /* @__PURE__ */ React.createElement("th", null, "Score"), /* @__PURE__ */ React.createElement("th", null, "Rank"))), /* @__PURE__ */ React.createElement("tbody", null, this.state.appdata.map((appdata, i) => /* @__PURE__ */ React.createElement(Entry, {
       key: i,
       yourname: appdata.yourname,
       score: appdata.score,
       rank: appdata.rank
-    }))));
+    })))));
   }
   reactSubmit(e) {
     e.preventDefault();
