@@ -1,33 +1,16 @@
-Assignment 4 - Components
-===
+# Assignment 4 - Matthew Spofford
 
-Due: October 4th, by 11:59 AM.
+<https://cs4241-a4-MatthewSpofford.herokuapp.com>
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+For this project, I reworked my A3 implementation to use React. This involved using Snowpack to compile and deploy the code.
+I felt that by using React, this definitely made it clearer how the code was structured and was a lot cleaner compared
+to my plain JavaScript implementation. However, due to some of the weird quirks of React that I just wasn't familiar with
+since I have never used the framework before, this did impair the development experience.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+One such quirk was for some reason whenever a user presses "Edit" while the editor is already open, the input values do not change
+even though it still correctly updates the "prop" information. This may cause situations where you may attempt to edit one assignment,
+and then change your mind and press "New Homework". However, it will still contain the old information while actually creating a new
+homework. The same could happen when pressing edit with an existing assignment, and not pressing new homework. This will overwrite
+the assignment that was edited, even though it was displaying the previously edited assignment. **The only way to fix this was by
+pressing the cancel button first, and then pressing edit.** Because of this, I even tried calling the cancel method, but that
+still didn't work for some reason.
