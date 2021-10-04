@@ -46,16 +46,17 @@ class App extends React.Component{
     submit(e) {
         // prevent default form action from being carried out
         e.preventDefault()
+        console.log("name: " + app.usernameVar)
+        console.log("score: " + app.playerScore)
 
         const scoreinput = document.querySelector('#playerscore'),
               json = { playername: app.usernameVar, playerscore: app.playerScore },
               body = JSON.stringify( json )
-              
 
-              console.log(body)
-        fetch('/submit',{
+
+        fetch('/submit-player-data',{
             method: 'POST',
-            body: body,
+            body: JSON.stringify({playername: app.usernameVar, playerscore: app.playerScore}),
             headers:{
                 "Content-Type":"application/json"
             }

@@ -235,7 +235,7 @@ app.use( function( req,res,next) {
 // serve up static files in the directory build
 app.use( express.static('build') )
 
-app.post( '/submit', bodyParser.json(), (req,res) => {
+app.post( '/submit-player-data', bodyParser.json(), (req,res) => {
   console.log(req.body)
 
   // assumes only one object to insert
