@@ -1,33 +1,10 @@
 Assignment 4 - Components
 ===
 
-Due: October 4th, by 11:59 AM.
+## Car Registry
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+Glitch Link: http://a4-evan-llewellyn.glitch.me
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
+This app allows users to register their car online by filling out a form with relavent information about their car, which then populates the table and updates the server. They can also delete rows from the table if they made a mistake or no longer own that car. For this project, I converted my A2 assignment to use React. I think that this new technology vastly improved the development experience. I didn't have to think about grabbing variables from the DOM since they were being saved in the props of the child component. I also like how you can dynamically update the table with the map function on the array that is saved in the App state.
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+P.S. The way deletion works is that it takes the plate number of the car in the row selected and finds that in the array of data and deletes it (via filter). It's possible for there to be multiple cars with the same plate number, and currently they will all be deleted when the user tries to delete one of them. It was originally intended that plate number would be unique across all cars in the registry, but I didn't get around to implementing it.
