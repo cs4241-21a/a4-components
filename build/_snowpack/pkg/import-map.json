@@ -1,0 +1,17 @@
+{
+  "imports": {
+    "bootstrap": "./bootstrap.js",
+    "bootstrap/dist/css/bootstrap.min.css": "./bootstrap/dist/css/bootstrap.min.css",
+    "jquery": "./jquery.js",
+    "react": "./react.js",
+    "react-bootstrap": "./react-bootstrap.js",
+    "react-bootstrap/Button": "./react-bootstrap/Button.js",
+    "react-bootstrap/Col": "./react-bootstrap/Col.js",
+    "react-bootstrap/Container": "./react-bootstrap/Container.js",
+    "react-bootstrap/Image": "./react-bootstrap/Image.js",
+    "react-bootstrap/Row": "./react-bootstrap/Row.js",
+    "react-bootstrap/Table": "./react-bootstrap/Table.js",
+    "react-dom": "./react-dom.js",
+    "react-router-dom": "./react-router-dom.js"
+  }
+}
