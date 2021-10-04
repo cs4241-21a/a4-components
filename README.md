@@ -1,33 +1,11 @@
-Assignment 4 - Components
-===
+## Assignment a4 - Components
 
-Due: October 4th, by 11:59 AM.
-
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
-
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://a4-william-white.glitch.me
 
 Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
 
 Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+
+My project is a remake of my assignment a2, using svelte as a base.  What has changed from assignment a2 is that the display of entries now exists as a list, where the given values are shown in brackets except for the derived field.  The values are displayed via string concatenation, and the text of the entries is bolded.  It functions very similarly to my original a2, however, the code is much cleaner, and much more compact.
+
+I would say that svelte improved the development experience.  I ran into some very annoying bugs during development, but that was more an issue of me being forgetful than it was a fault on the part of svelte.  I found the approach of having CSS, HTML, and JS in one file to be surprisingly manageable compared to how it normally would be, thanks to how svelte structured itself.  The reactive aspect of svelte was also incredibly helpful - the {#await [promise] then [actions]} and {#each [actions] as [object]} blocks were much more intuitive than chained arrow functions (at least for me, initially), in addition to being more compact.
