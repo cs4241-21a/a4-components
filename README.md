@@ -1,33 +1,43 @@
-Assignment 4 - Components
-===
-
-Due: October 4th, by 11:59 AM.
-
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
-
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
+Readme
 ---
 
-Do the following to complete this assignment:
+## Rate Your Books
+**Links**:
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
+Github: https://github.com/lewasserman/a2-shortstack
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
+(Where I worked on the code)
 
-## Your Web Application Title
+(This has a copy of one the code: https://github.com/lewasserman/a4-components)
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+Glitch: https://a4-lauren-wasserman.glitch.me
 
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
+-I changed my a2 project so that it is using react intead of just html. I created a react component which has all of my html elements. (My a2 project did not give the user the ability to edit or remove data. I figured it was okay to keep it this way, since that was within the guidelines for a2. I did add these features to a3.)
 
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+-I made another React component for my enter book form, but when I tried to import the file for that component into the main react component I got this error:
+
+Uncaught ReferenceError: require is not defined
+    at <anonymous>:5:14
+    at eZ (babel.min.js:13)
+    at r (babel.min.js:13)
+    at s (babel.min.js:13)
+    at XMLHttpRequest.t.forEach.e.src.o.onreadystatechange (babel.min.js:13)
+(anonymous) @ body.jsx:2
+eZ @ babel.min.js:13
+r @ babel.min.js:13
+s @ babel.min.js:13
+t.forEach.e.src.o.onreadystatechange @ babel.min.js:13
+XMLHttpRequest.send (async)
+(anonymous) @ babel.min.js:13
+aZ @ babel.min.js:13
+(anonymous) @ babel.min.js:13
+hZ @ babel.min.js:13
+fZ @ babel.min.js:13
+
+-I believe that import is not handled by the web-browser and so I attempted to fix this by using webpack. 
+
+-The version of the code that I am submitting which works is in the branch "react" in my a2 project and main in my a4 project. This branch does not use webpack and uses one React component. I believe that this fulfills the requirments of a4-components as it does re-implement the client side portion of my a2 using React.
+
+-The version of the code with which I attempted to use webpack is in the branch "a4" in my a2 project.
+
+-The new technology improved my development experience overall. I enjoyed, using React as I like the ability to create custom components. However, my issues with webpack did hinder me. I also think it was good experience to write the same code in different formats (html and React).
