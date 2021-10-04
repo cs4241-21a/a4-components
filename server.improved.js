@@ -3,7 +3,7 @@ const http = require( 'http' ),
       // IMPORTANT: you must run `npm install` in the directory for this assignment
       // to install the mime library used in the following line of code
       mime = require( 'mime' ),
-      dir  = 'public/',
+      dir  = 'build/',
       port = 3000
 
 const appdata = []
@@ -20,7 +20,7 @@ const handleGet = function( request, response ) {
   const filename = dir + request.url.slice( 1 ) 
 
   if( request.url === '/' ) {
-    sendFile( response, 'public/index.html' )
+    sendFile( response, 'build/index.html' )
   }else{
     sendFile( response, filename )
   }
@@ -34,11 +34,14 @@ const handlePost = function( request, response ) {
   })
 
   request.on( 'end', function() {
-
+  
     let parsedInput = JSON.parse(dataString)
 
+    if(Object.keys(parsedInput).length === 0) {
+      //do nothing
+    }
     //if portion runs if we're trying to get rid of one of the assignments
-    if(Object.keys(parsedInput).length === 1){
+    else if(Object.keys(parsedInput).length === 1){
       let assignmentToRemove = parsedInput.removeAssignment;
       appdata.splice(assignmentToRemove, 1);
     } 
