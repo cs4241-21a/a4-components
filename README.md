@@ -1,30 +1,10 @@
-# empty-project
+##Reactive Log
 
-Empty project.
+I remade a2 with react. This application lets you add modify and delete rows of data poertaining to chores, the people who should be doing them, and the completion status. It uses react to update the table rather than inner html.
 
-## How to run on localhost
+I found it quite challenging to update the old program and in hindsite it probably would have been better to restart from the ground up.
 
-First install dependencies:
+Glitch link:
 
-```sh
-npm install
-```
 
-To run in dev mode mode:
-
-```sh
-npm start
-```
-
-Then go to http://localhost:8080
-
-To create a production build:
-
-```sh
-npm run build
-```
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
-
+Jared Poulos
