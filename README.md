@@ -1,6 +1,20 @@
 Assignment 4 - Components
 ===
 
+## An Arcade Game Scoreboard
+Michael Lai https://a4-michael-lai.herokuapp.com/
+
+Note: Given 24 hr extension + unknown extension (he messaged I could have another extension, I interpreted it as 12 hrs)
+
+While I wanted to originally fix up A3 to port to React, that never worked out as I encountered troubles with implementing React there, so I swapped to A2.
+
+Even when swapping to A2, I encountered other problems, such as requiring to port the server to express js, and multiple issues with Snowpack setup. While React provides some benefits with JSX and somewhat easy state updates, the setup issues far exceed these benefits. With this, I strongly believe that React hindered my development.
+
+Note: This is Michael after getting help with my React setup and various syntax errors from Margaret. React seems better to use now, but my main issue is still with the inital setup (mainly with Snowpack).
+
+## Old Readme Below
+===
+
 Due: October 4th, by 11:59 AM.
 
 For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
