@@ -1,0 +1,30 @@
+{
+  "name": "a4-shortstack",
+  "version": "1.0.0",
+  "description": "Assignment 4 - Components\r ===",
+  "author": "Michael Lai",
+  "main": "js/local_script.js",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "build": "snowpack build",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "mime": "^2.5.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AzinxtheOnix/a4-components.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AzinxtheOnix/a4-components/issues"
+  },
+  "homepage": "https://github.com/AzinxtheOnix/a4-components#readme"
+}
