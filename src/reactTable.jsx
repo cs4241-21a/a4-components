@@ -1,6 +1,6 @@
 import React from 'react'
 
-class table extends React.Component {
+class ReactTable extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -18,4 +18,4 @@ class table extends React.Component {
     }
 }
 
-export default table
+export default ReactTable
