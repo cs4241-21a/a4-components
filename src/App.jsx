@@ -1,7 +1,7 @@
 
 import React from "react";
-//import todoForm from "./reactForm";
-//import reactTable from "./reactTable";
+import TodoForm from "./reactForm";
+import ReactTable from "./reactTable";
 
 class App extends React.Component {
   render() {

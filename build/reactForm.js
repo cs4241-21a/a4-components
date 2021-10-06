@@ -2,25 +2,27 @@ import React from "./_snowpack/pkg/react.js";
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ""};
+    this.state = {taskname: "", taskdesc: "", duedate: ""};
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
   handleChange(event) {
     this.setState({value: event.target.value});
   }
-  handleClick() {
+  handleClick(e) {
+    console.log("I am in click");
     e.preventDefault();
     const name = document.querySelector("#taskname");
     const desc = document.querySelector("#taskdesc");
     const due = document.querySelector("#duedate");
-    json = {taskname: name.value, taskdesc: desc.value, duedate: due.value}, body = JSON.stringify(json);
+    let json = {taskname: name.value, taskdesc: desc.value, duedate: due.value}, body = JSON.stringify(json);
     fetch("/submit", {
       method: "POST",
       body
     }).then(function(response) {
       response.json().then(function(text) {
         var table = document.getElementById("tasktable");
+        console.log(table);
         let i = text.length;
         var infoRow = table.insertRow(i);
         var infoCell1 = infoRow.insertCell(0);
@@ -41,21 +43,21 @@ class TodoForm extends React.Component {
     }, /* @__PURE__ */ React.createElement("label", null, "Task Name:", /* @__PURE__ */ React.createElement("input", {
       type: "text",
       id: "taskname",
-      value: this.state.value,
+      taskname: this.state.taskname,
       onChange: this.handleChange
     })), /* @__PURE__ */ React.createElement("label", null, "Task Description:", /* @__PURE__ */ React.createElement("input", {
       type: "text",
       id: "taskdesc",
-      value: this.state.value,
+      taskdesc: this.state.taskdesc,
       onChange: this.handleChange
     })), /* @__PURE__ */ React.createElement("label", null, "Due Date in MM/DD/YYYY Form:", /* @__PURE__ */ React.createElement("input", {
       type: "text",
       id: "duedate",
-      value: this.state.value,
+      duedate: this.state.duedate,
       onChange: this.handleChange
     })), /* @__PURE__ */ React.createElement("button", {
       type: "button",
-      onclick: this.handleClick
+      onClick: this.handleClick
     }, "Submit"));
   }
 }

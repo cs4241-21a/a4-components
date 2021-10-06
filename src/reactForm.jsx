@@ -3,7 +3,7 @@ import React from 'react'
 class TodoForm extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {value: ''};
+      this.state = {taskname: '', taskdesc: '', duedate: ''};
       this.handleChange = this.handleChange.bind(this);
       this.handleClick = this.handleClick.bind(this);
     }
@@ -12,13 +12,14 @@ class TodoForm extends React.Component {
       this.setState({value: event.target.value});
     }
   
-    handleClick() {
+    handleClick(e) {
       // prevent default form action from being carried out
+      console.log("I am in click")
       e.preventDefault()
       const name = document.querySelector( '#taskname' )
       const desc = document.querySelector( '#taskdesc' )
       const due = document.querySelector( '#duedate' )
-            json = { taskname: name.value, taskdesc: desc.value, duedate: due.value},
+            let json = { taskname: name.value, taskdesc: desc.value, duedate: due.value},
             body = JSON.stringify( json )
       
       fetch( '/submit', {
@@ -29,6 +30,7 @@ class TodoForm extends React.Component {
         // do something with the reponse
         response.json().then(function (text) {
           var table = document.getElementById("tasktable")
+          console.log(table)
           let i = text.length
           var infoRow = table.insertRow(i)
           var infoCell1 = infoRow.insertCell(0)
@@ -50,17 +52,17 @@ class TodoForm extends React.Component {
         <form className="form">
           <label>
             Task Name:
-            <input type="text" id="taskname" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" id="taskname" taskname={this.state.taskname} onChange={this.handleChange} />
           </label>
           <label>
             Task Description:
-            <input type="text" id="taskdesc" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" id="taskdesc" taskdesc={this.state.taskdesc} onChange={this.handleChange} />
           </label>
           <label>
             Due Date in MM/DD/YYYY Form:
-            <input type="text" id="duedate" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" id="duedate" duedate={this.state.duedate} onChange={this.handleChange} />
           </label>
-          <button type="button" onclick={this.handleClick}>Submit</button>
+          <button type="button" onClick={this.handleClick}>Submit</button>
         </form>
       );
     }
