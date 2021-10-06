@@ -7,7 +7,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       loggedIn: true,
-      onResponses: true
+      onResponses: true,
+      guest: false
     };
     this.closeResponses = this.closeResponses.bind(this);
     this.stayEditing = this.stayEditing.bind(this);
@@ -137,7 +138,7 @@ class App extends React.Component {
         let innerUsername = innerJson.username;
         console.log("Our username is defined as {" + innerUsername + "}");
         if (innerUsername == void 0 || innerUsername === "") {
-          this.setState({loggedIn: false, onResponses: this.state.onResponses, tableData: json.ratings, username: innerUsername, usernames: json.usernames, retrievedTableData: true});
+          this.setState({loggedIn: false, onResponses: true, tableData: json.ratings, username: innerUsername, usernames: json.usernames, retrievedTableData: true});
         } else {
           console.log("Does this trigger?");
           this.setState({loggedIn: true, onResponses: this.state.onResponses, tableData: json.ratings, username: innerUsername, usernames: json.usernames, retrievedTableData: true});
@@ -148,7 +149,13 @@ class App extends React.Component {
   componentDidMount() {
     let loggedIn = this.loggedIn;
     console.log("Logged in status..." + loggedIn);
-    this.state = {loggedIn, onResponses: false};
+    let goToResponses;
+    if (this.loggedIn) {
+      goToResponses = false;
+    } else {
+      goToResponses = true;
+    }
+    this.state = {loggedIn, onResponses: goToResponses};
     this.fetchTableData();
   }
 }

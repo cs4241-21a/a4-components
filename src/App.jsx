@@ -11,7 +11,9 @@ class App extends React.Component {
 
     this.state = {
       loggedIn: true,
-      onResponses: true};
+      onResponses: true,
+      guest: false
+    };
 
     this.closeResponses = this.closeResponses.bind(this)
     this.stayEditing = this.stayEditing.bind(this)
@@ -152,7 +154,7 @@ class App extends React.Component {
         //console.log("When setting the state, our data is " + json.ratings);
         console.log("Our username is defined as {" + innerUsername + "}")
         if (innerUsername == undefined || innerUsername === "") {
-          this.setState({ loggedIn: false, onResponses: this.state.onResponses, tableData: json.ratings, username: innerUsername, usernames: json.usernames, retrievedTableData: true });
+          this.setState({ loggedIn: false, onResponses: true, tableData: json.ratings, username: innerUsername, usernames: json.usernames, retrievedTableData: true });
         } else {
           console.log("Does this trigger?");
           this.setState({ loggedIn: true, onResponses: this.state.onResponses, tableData: json.ratings, username: innerUsername, usernames: json.usernames, retrievedTableData: true });
@@ -192,7 +194,13 @@ class App extends React.Component {
     //console.log("Fetching table data!");
     let loggedIn = this.loggedIn;
     console.log("Logged in status..." + loggedIn);
-    this.state = { loggedIn: loggedIn, onResponses: false }
+    let goToResponses;
+    if (this.loggedIn) {
+      goToResponses = false;
+    } else {
+      goToResponses = true;
+    }
+    this.state = { loggedIn: loggedIn, onResponses: goToResponses }
     this.fetchTableData();
   }
 }
