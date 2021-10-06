@@ -53,16 +53,17 @@ class EditPage extends React.Component {
         striped: true,
         bordered: true,
         responsive: true
-      }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement(TableDataHeaderWithEdit, null)), /* @__PURE__ */ React.createElement("tbody", null, this.props.data.map((item, index) => {
+      }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement(TableDataHeaderWithEdit, null)), /* @__PURE__ */ React.createElement("tbody", null, this.displayTable().map((item, index) => {
         return /* @__PURE__ */ React.createElement(TableDataItemWithEdit, {
           refreshPage: this.refresh,
           deleteRow: this.refresh,
           data: this.props.data[index],
           index,
+          personIndex: index,
           dataUsername: this.props.usernames[index],
           userUsername: this.props.username
         });
-      }), ";")), /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container, {
+      }))), /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container, {
         fluid: true,
         className: "responses-background p-3"
       }, /* @__PURE__ */ React.createElement(Container, {
@@ -89,10 +90,21 @@ class EditPage extends React.Component {
     console.log("Updating!");
     this.props.waitAndUpdate();
   }
+  displayTable() {
+    let sortedData = [];
+    for (let i = 0; i < this.props.data.length; i++) {
+      console.log(i);
+      if (this.props.usernames[i] === this.props.username) {
+        sortedData.push(this.props.data[i]);
+      }
+    }
+    return sortedData;
+  }
   organizeDataRow() {
     console.log("Our data looks like " + this.props.data);
-    let countPerPerson = 0;
-    let previousUsername = "";
+    for (let i = 0; i < this.props.data.length; i++) {
+      console.log(i);
+    }
     this.props.data.map((item, index) => {
       return /* @__PURE__ */ React.createElement(TableDataItemWithEdit, {
         refreshPage: this.refresh,

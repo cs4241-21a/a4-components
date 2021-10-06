@@ -26,10 +26,11 @@ class TableDataItemWithEdit extends React.Component {
   }
   deleteRow() {
     let confirmDelete = confirm("Are you sure you'd like to delete this row?");
+    console.log("While the index is " + this.props.index + ", the person's index is " + this.props.personIndex);
     if (confirmDelete) {
       const json = {
         username: this.state.username,
-        deletingItem: this.state.index
+        deletingItem: this.props.personIndex
       };
       console.log("Deleting row " + this.state.index);
       fetch("/deleteRow", {

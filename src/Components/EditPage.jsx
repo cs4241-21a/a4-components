@@ -61,16 +61,19 @@ class EditPage extends React.Component {
                             <TableDataHeaderWithEdit />
                         </thead>
                         <tbody>
-                            {this.props.data.map((item, index) => {
-                                return (<TableDataItemWithEdit
-                                    refreshPage={this.refresh}
-                                    deleteRow={this.refresh}
-                                    data={this.props.data[index]}
-                                    index={index}
-                                    dataUsername={this.props.usernames[index]}
-                                    userUsername={this.props.username}
-                                />);
-                            })};
+                            {
+                                this.displayTable().map((item, index) => {
+                                    return (<TableDataItemWithEdit
+                                        refreshPage={this.refresh}
+                                        deleteRow={this.refresh}
+                                        data={this.props.data[index]}
+                                        index={index}
+                                        personIndex={index}
+                                        dataUsername={this.props.usernames[index]}
+                                        userUsername={this.props.username}
+                                    />);
+                                })
+                            }
                         </tbody>
                     </Table>
 
@@ -105,6 +108,20 @@ class EditPage extends React.Component {
         return waitingForTable;
     }
 
+
+    /*                            {
+    this.props.data.map((item, index) => {
+        return (<TableDataItemWithEdit
+            refreshPage={this.refresh}
+            deleteRow={this.refresh}
+            data={this.props.data[index]}
+            index={index}
+            dataUsername={this.props.usernames[index]}
+            userUsername={this.props.username}
+        />);
+    })
+    */
+
     stayOnEdit() {
         //this.setState(this.state);
         console.log("Updating!");
@@ -112,18 +129,26 @@ class EditPage extends React.Component {
         //Link to a function pulling ratings from database, update state automatically 
     }
 
+    displayTable() {
+        let sortedData = [];
+        for (let i = 0; i < this.props.data.length; i++) {
+            console.log(i);
+            if (this.props.usernames[i] === this.props.username) {
+                sortedData.push(this.props.data[i]);
+            }
+        }
+
+        return sortedData;
+    }
+
     organizeDataRow() {
         console.log("Our data looks like " + this.props.data);
-        let countPerPerson = 0;
-        let previousUsername = "";
+
+        for (let i = 0; i < this.props.data.length; i++) {
+            console.log(i);
+        }
 
         this.props.data.map((item, index) => {
-            /*if (this.props.usernames[index] != previousUsername) {
-                countPerPerson = 0;
-                previousUsername = this.props.usernames[index];
-            } else {
-                countPerPerson++;
-            } */
             return (<TableDataItemWithEdit
                 refreshPage={this.refresh}
                 deleteRow={this.refresh}
