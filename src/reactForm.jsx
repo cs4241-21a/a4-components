@@ -31,8 +31,10 @@ class TodoForm extends React.Component {
         response.json().then(function (text) {
           var table = document.getElementById("tasktable")
           console.log(table)
-          let i = text.length
-          var infoRow = table.insertRow(i)
+          let i = table.rows.length
+          console.log(i)
+          console.log(text)
+          var infoRow = table.insertRow()
           var infoCell1 = infoRow.insertCell(0)
           var infoCell2 = infoRow.insertCell(1)
           var infoCell3 = infoRow.insertCell(2)
