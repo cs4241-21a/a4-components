@@ -1,33 +1,22 @@
-Assignment 4 - Components
+Assignment 2 - Short Stack: Basic Two-tier Web Application using HTML/CSS/JS and Node.js  
 ===
 
-Due: October 4th, by 11:59 AM.
+## Work Database
+Steven Tran https://a2-stevenptran.glitch.me
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+Hello! This is basically a work database that determines if a person is a part time or full time employee of the company.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
+## Technical Achievements
+- **Tech Achievement 1**: This is a single page app that provides both a form (at the top) and a table that responds and sends back and updates the data to the client (below the form)
+- **Note about delete**: The delete button is functional, but it will delete the first row (including the header) regardless of which button is pressed. Also when you reload the page, the preset values will appear. You can press this for fun, but when checking if the data stays after refreshing, don't press this button!
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+### Design/Evaluation Achievements
+- **Design Achievement 1**: 
+1. Andrew Kerekon
+    -Problems with design: Layout is very nice, but delete button doesn't function as expected and refresh seems to bring back old values.
+    -Comments that surprised me: The 'do not click' button leads to sonmething wildly unexpected!
+    -Changes based on feedback: I would work to fix the delete button.
+2. Michael Zeolla
+    -Problems with design: The delete button doesn't function properly.
+    -Comments that surprised me: People over 18 could be a college student.
+    -Changes based on feedback: I would change the delete function and possible ask a yes/no question on if they're in school.
