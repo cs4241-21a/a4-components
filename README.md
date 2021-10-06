@@ -3,9 +3,10 @@
 https://genshinreact.herokuapp.com/
 
 ### Due to me having the flu, Professor Roberts granted me an extension.
-===
+---
 
 Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
+---
 
 This project is basically my reimplementation of the GenshinDB; except, I added a few more fields such as description and star. If you are unfamiliar with GenshinDB, it is a database which keeps track of your Genshin Impact characters. I did also change it to card form to give each character its individual space.
 
