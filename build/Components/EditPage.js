@@ -18,7 +18,7 @@ class EditPage extends React.Component {
     super(props);
     this.state = {tableLoaded: true};
     this.redirectToResponses = this.redirectToResponses.bind(this);
-    this.refresh = this.refresh.bind(this);
+    this.stayOnEdit = this.stayOnEdit.bind(this);
     this.signOut = this.signOut.bind(this);
     this.currentIndex = -1;
     this.currentEditData = false;
@@ -55,21 +55,24 @@ class EditPage extends React.Component {
         responsive: true
       }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement(TableDataHeaderWithEdit, null)), /* @__PURE__ */ React.createElement("tbody", null, this.props.data.map((item, index) => {
         return /* @__PURE__ */ React.createElement(TableDataItemWithEdit, {
+          refreshPage: this.refresh,
           deleteRow: this.refresh,
           data: this.props.data[index],
           index,
           dataUsername: this.props.usernames[index],
           userUsername: this.props.username
         });
-      }))), "(", /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container, {
+      }), ";")), /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container, {
+        fluid: true,
         className: "responses-background p-3"
       }, /* @__PURE__ */ React.createElement(Container, {
-        className: "container-fluid py-3"
+        className: "py-3"
       }, /* @__PURE__ */ React.createElement(Row, {
         className: "text-center"
-      }, /* @__PURE__ */ React.createElement(AddRatingForm, {
+      }, /* @__PURE__ */ React.createElement(Col, null, /* @__PURE__ */ React.createElement(AddRatingForm, {
+        stayOnEdit: this.stayOnEdit,
         username: this.props.username
-      }), /* @__PURE__ */ React.createElement(EditRatingForm, null))))), ");", /* @__PURE__ */ React.createElement(Container, {
+      })), /* @__PURE__ */ React.createElement(Col, null, /* @__PURE__ */ React.createElement(EditRatingForm, null)))))), ");", /* @__PURE__ */ React.createElement(Container, {
         fluid: true,
         className: "header-footer-background py-3 text-center"
       }, /* @__PURE__ */ React.createElement(Row, null, /* @__PURE__ */ React.createElement(Col, null, /* @__PURE__ */ React.createElement("h3", null, "Don't want to add a new rating or edit a current one? Check out how other students responded here!"), /* @__PURE__ */ React.createElement(Button, {
@@ -82,28 +85,24 @@ class EditPage extends React.Component {
     }
     return waitingForTable;
   }
-  refresh() {
-    console.log("About to delete!");
-    let confirmDelete = confirm("Are you sure you'd like to delete this row?");
-    if (confirmDelete) {
-      const json = {
-        username: this.props.username,
-        deletingItem: this.currentIndex
-      };
-      console.log("Deleting row " + this.currentIndex);
-      fetch("/deleteRow", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(json)
-      }).then((res) => {
-        return res.json();
-      }).then((json2) => {
-        console.log("Row deleted!!");
-        setTimeout(function() {
-          this.props.rowDeleted;
-        }, 1e3);
+  stayOnEdit() {
+    console.log("Updating!");
+    this.props.waitAndUpdate();
+  }
+  organizeDataRow() {
+    console.log("Our data looks like " + this.props.data);
+    let countPerPerson = 0;
+    let previousUsername = "";
+    this.props.data.map((item, index) => {
+      return /* @__PURE__ */ React.createElement(TableDataItemWithEdit, {
+        refreshPage: this.refresh,
+        deleteRow: this.refresh,
+        data: this.props.data[index],
+        index,
+        dataUsername: this.props.usernames[index],
+        userUsername: this.props.username
       });
-    }
+    });
   }
   redirectToResponses() {
     this.props.onResponses();

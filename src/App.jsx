@@ -9,10 +9,15 @@ class App extends React.Component {
     super(props)
     //let username = this.fetchUsername();
 
-    this.state = { loggedIn: false, onResponses: true }
+    this.state = {
+      loggedIn: true,
+      onResponses: true};
+
     this.closeResponses = this.closeResponses.bind(this)
+    this.stayEditing = this.stayEditing.bind(this)
     this.goToResponses = this.goToResponses.bind(this)
     this.refresh = this.refresh.bind(this)
+    this.waitAndUpdate = this.waitAndUpdate.bind(this);
     this.signOut = this.signOut.bind(this)
   }
 
@@ -21,10 +26,10 @@ class App extends React.Component {
     //console.log("Have we receieved any data?");
     console.log("Rendering..., responses is " + this.state.onResponses);
     console.log("Are we logged in?" + this.state.loggedIn);
-    if (!this.state.onResponses) {
+    if (!this.state.onResponses || this.state.goBackToEdit) {
       if (this.state.loggedIn) {
         return <>
-          <EditPage rowDeleted={this.refresh} onResponses={this.goToResponses} signOut={this.signOut} data={this.state.tableData} username={this.state.username} usernames={this.state.usernames} />
+          <EditPage waitAndUpdate={this.waitAndUpdate} refresh={this.refresh} onResponses={this.goToResponses} signOut={this.signOut} data={this.state.tableData} username={this.state.username} usernames={this.state.usernames} />
         </>;
       } else {
         window.location.replace("index.html");
@@ -33,11 +38,32 @@ class App extends React.Component {
     } else {
       if (this.state.retrievedTableData) {
         //console.log("We're passing " + this.state.tableData);
-        return <ResponsesPage onClose={this.closeResponses} usernames={this.state.usernames} data={this.state.tableData} loggedIn={this.state.loggedIn} />;
+        return <ResponsesPage stayOnEdit={this.stayEditing} onClose={this.closeResponses} usernames={this.state.usernames} data={this.state.tableData} loggedIn={this.state.loggedIn} />;
       } else {
         return (<h1>Loading table data...</h1>);
       }
     }
+  }
+
+  waitAndUpdate() {
+    console.log("Waiting...")
+    setTimeout(
+      function() {
+          //this.setState({ goBackToEdit: true });
+          //console.log("And updating!");
+          window.location.reload();
+      }
+      .bind(this),
+      1000
+  );
+  }
+
+  stayEditing() {
+    console.log("Staying on the edit page!");
+    this.setState({
+      loggedIn: true,
+      onResponses: false
+    });
   }
 
   closeResponses() {
@@ -52,6 +78,7 @@ class App extends React.Component {
     console.log("Going to responses!");
     this.setState({
       loggedIn: this.state.loggedIn,
+      goBackToEdit: false,
       onResponses: true
     });
   };
@@ -88,8 +115,22 @@ class App extends React.Component {
     });
   }
 
+  loggedIn() {
+      fetch('/getUsername', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }).then(res => {
+        return res.json();
+      }).then(innerJson => {
+        //console.log("InnerJson is " + Object.keys(innerJson));
+        let innerUsername = innerJson.username;
+        console.log("Username is " + innerUsername);
+        return !(innerUsername === null || innerUsername === undefined || innerUsername.trim() === "")
+      });
+  }
+
   refresh() {
-    //this.fetchTableData();
+    this.state = { loggedIn: true, onResponses: false }
   }
 
   fetchTableData() {
@@ -149,6 +190,9 @@ class App extends React.Component {
   componentDidMount() {
     //console.log("Data:" + this.state.data);
     //console.log("Fetching table data!");
+    let loggedIn = this.loggedIn;
+    console.log("Logged in status..." + loggedIn);
+    this.state = { loggedIn: loggedIn, onResponses: false }
     this.fetchTableData();
   }
 }

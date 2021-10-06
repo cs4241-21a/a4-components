@@ -85,7 +85,7 @@ class EditRatingForm extends React.Component {
                         <Form.Control type="text" />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">Edit This Rating!</Button>
+                    <Button variant="danger" type="submit">Edit This Rating!</Button>
                 </Form>
             </Col>
         );

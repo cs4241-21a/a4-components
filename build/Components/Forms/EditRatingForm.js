@@ -90,7 +90,7 @@ class EditRatingForm extends React.Component {
     }, /* @__PURE__ */ React.createElement(Form.Label, null, "Do you have any additional notes?"), /* @__PURE__ */ React.createElement(Form.Control, {
       type: "text"
     })), /* @__PURE__ */ React.createElement(Button, {
-      variant: "primary",
+      variant: "danger",
       type: "submit"
     }, "Edit This Rating!")));
   }

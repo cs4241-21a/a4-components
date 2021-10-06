@@ -19,7 +19,7 @@ class EditPage extends React.Component {
         super(props)
         this.state = { tableLoaded: true }
         this.redirectToResponses = this.redirectToResponses.bind(this)
-        this.refresh = this.refresh.bind(this)
+        this.stayOnEdit = this.stayOnEdit.bind(this)
         this.signOut = this.signOut.bind(this)
         this.currentIndex = -1;
 
@@ -61,26 +61,29 @@ class EditPage extends React.Component {
                             <TableDataHeaderWithEdit />
                         </thead>
                         <tbody>
-                            
                             {this.props.data.map((item, index) => {
                                 return (<TableDataItemWithEdit
+                                    refreshPage={this.refresh}
                                     deleteRow={this.refresh}
                                     data={this.props.data[index]}
                                     index={index}
                                     dataUsername={this.props.usernames[index]}
                                     userUsername={this.props.username}
                                 />);
-                            })}
+                            })};
                         </tbody>
                     </Table>
 
-                    (
                     <>
-                        <Container className="responses-background p-3">
-                            <Container className="container-fluid py-3">
+                        <Container fluid className="responses-background p-3">
+                            <Container className="py-3">
                                 <Row className="text-center">
-                                    <AddRatingForm username={this.props.username}/>
-                                    <EditRatingForm />
+                                    <Col>
+                                        <AddRatingForm stayOnEdit={this.stayOnEdit} username={this.props.username} />
+                                    </Col>
+                                    <Col>
+                                        <EditRatingForm />
+                                    </Col>
                                 </Row>
                             </Container>
                         </Container>
@@ -102,29 +105,34 @@ class EditPage extends React.Component {
         return waitingForTable;
     }
 
-    refresh() {
-        console.log("About to delete!");
-        let confirmDelete = confirm("Are you sure you'd like to delete this row?");
-        if (confirmDelete) {
-            const json = {
-                username: this.props.username,
-                deletingItem: this.currentIndex
-            }
+    stayOnEdit() {
+        //this.setState(this.state);
+        console.log("Updating!");
+        this.props.waitAndUpdate();
+        //Link to a function pulling ratings from database, update state automatically 
+    }
 
-            console.log("Deleting row " + this.currentIndex);
-            fetch('/deleteRow', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(json)
-            }).then(res => {
-                return res.json();
-            }).then(json => {
-                console.log("Row deleted!!");
-                setTimeout(function () {
-                    this.props.rowDeleted;
-                }, 1000);
-            })
-        }
+    organizeDataRow() {
+        console.log("Our data looks like " + this.props.data);
+        let countPerPerson = 0;
+        let previousUsername = "";
+
+        this.props.data.map((item, index) => {
+            /*if (this.props.usernames[index] != previousUsername) {
+                countPerPerson = 0;
+                previousUsername = this.props.usernames[index];
+            } else {
+                countPerPerson++;
+            } */
+            return (<TableDataItemWithEdit
+                refreshPage={this.refresh}
+                deleteRow={this.refresh}
+                data={this.props.data[index]}
+                index={index}
+                dataUsername={this.props.usernames[index]}
+                userUsername={this.props.username}
+            />);
+        });
     }
 
     redirectToResponses() {
