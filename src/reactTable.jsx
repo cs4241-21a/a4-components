@@ -6,13 +6,17 @@ class ReactTable extends React.Component {
     }
     render() {
         return (
-            <table className="table" id="tasktable">
-              <tr>
-                <th>Task Name</th>
-                <th>Task Description</th>
-                <th>Due Date in MM/DD/YYYY Form</th>
-                <th>Days Until Due</th>
-              </tr>
+            <table className="table" id="taskhead">
+              <thead>
+                <tr>
+                  <th>Task Name</th>
+                  <th>Task Description</th>
+                  <th>Due Date in MM/DD/YYYY Form</th>
+                  <th>Days Until Due</th>
+                </tr>
+              </thead>
+              <tbody id="tasktable">
+              </tbody>
             </table>
         );
     }

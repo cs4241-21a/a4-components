@@ -22,19 +22,22 @@ class TodoForm extends React.Component {
     }).then(function(response) {
       response.json().then(function(text) {
         var table = document.getElementById("tasktable");
+        while (table.hasChildNodes()) {
+          table.removeChild(table.firstChild);
+        }
         console.log(table);
-        let i = table.rows.length;
-        console.log(i);
         console.log(text);
-        var infoRow = table.insertRow();
-        var infoCell1 = infoRow.insertCell(0);
-        var infoCell2 = infoRow.insertCell(1);
-        var infoCell3 = infoRow.insertCell(2);
-        var infoCell4 = infoRow.insertCell(3);
-        infoCell1.innerHTML = text[i - 1].taskname;
-        infoCell2.innerHTML = text[i - 1].taskdesc;
-        infoCell3.innerHTML = text[i - 1].duedate;
-        infoCell4.innerHTML = text[i - 1].daysuntil;
+        for (let i = 0; i < text.length; i++) {
+          var infoRow = table.insertRow();
+          var infoCell1 = infoRow.insertCell(0);
+          var infoCell2 = infoRow.insertCell(1);
+          var infoCell3 = infoRow.insertCell(2);
+          var infoCell4 = infoRow.insertCell(3);
+          infoCell1.innerHTML = text[i].taskname;
+          infoCell2.innerHTML = text[i].taskdesc;
+          infoCell3.innerHTML = text[i].duedate;
+          infoCell4.innerHTML = text[i].daysuntil;
+        }
       });
     });
     return false;
