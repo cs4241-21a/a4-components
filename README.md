@@ -1,5 +1,5 @@
 ## GenshinReact
----
+--
 https://genshinreact.herokuapp.com/
 
 ### Due to me having the flu, Professor Roberts granted me an extension.
