@@ -1,33 +1,9 @@
-Assignment 4 - Components
-===
+# a4 - Duncan Soiffer
 
-Due: October 4th, by 11:59 AM.
+https://a4-duncan-soiffer.glitch.me
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+NOTE: THE PROF GAVE ME AN EXTENSION, HENCE WHY I AM SUBMITTING THIS LATE.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
+## Brief Summary
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+I chose to do a4-components and port my a2 into React. I tried to preserve as much of the original website format and functionality as possible, which proved to be a bit annoying to do. Part of my trouble was because I had formatted a2 pretty clumsily, and part of it was because of some subtleties with how React works breaking my project. I probably also committed heinous crimes against React best practices due to not really knowing how to use React properly. It's hard to say if React helped or hindered my process; it certainly went smoother this time around but I think that is largely because I am far more familiar with web development now. I think if I continued to use React in the same way that I am now, it would end up hindering my development. It will take some time for me to learn it before it becomes actually useful.
