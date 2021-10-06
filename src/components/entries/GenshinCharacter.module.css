@@ -1,0 +1,35 @@
+.item {
+    margin: 1rem 0;
+  }
+  
+  .content {
+    padding: 1rem;
+    color: #fcf3f6;
+    text-align: center;
+  }
+  
+  .content h3 {
+    font-size: 1.25rem;
+    color: #fcf3f6;
+    font-weight: bold;
+  }
+  
+  .actions {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .actions button {
+    font: inherit;
+    cursor: pointer;
+    color: #fcf3f6;
+    border: 1px solid #fcf3f6;
+    background-color: transparent;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+  }
+  
+  .actions button:hover,
+  .actions button:active {
+    background-color: #fcb8d2;
+  }
