@@ -1,4 +1,7 @@
 <script>
+  let totP = 0
+  let slicesPer = 0
+  let gfP = 0
   const getPizzas = function(){
     const p = fetch('/read', {
       method: 'GET'
@@ -12,9 +15,9 @@
   }
   
   const addPizzaOrder = function( e ){
-    const totP = document.querySelector( totP ).value
-          slicesPer = document.querySelector( slicesPer ).value
-          gfP = document.querySelector( gfP ).value
+     totP = document.querySelector( totP ).value
+     slicesPer = document.querySelector( slicesPer ).value
+     gfP = document.querySelector( gfP ).value
             
     var pNoGf = totP - gfP; //people that aren't gf
     var totalSl = slicesPer * pNoGf; //total slices needed
@@ -90,7 +93,7 @@
     <td>{smallGf} : smallGf</td>
   {/each}
   </table>
-{/awat}
+{/await}
 
 <style>
 	main {
