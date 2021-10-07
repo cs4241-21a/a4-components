@@ -18,7 +18,7 @@ const app = express();
 app.use(timeout('5s'));
 app.use(bodyParser.json());
 app.use(haltOnTimedout);
-app.use(express.static('public'));
+app.use(express.static('./'));
 app.use(haltOnTimedout);
 app.use(bodyParser.urlencoded({
     extended: true
