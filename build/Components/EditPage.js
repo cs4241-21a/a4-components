@@ -58,12 +58,12 @@ class EditPage extends React.Component {
         return /* @__PURE__ */ React.createElement(TableDataItemWithEdit, {
           refreshPage: this.refresh,
           deleteRow: this.refresh,
-          data: this.props.data[index],
+          data: item.data,
           index,
           personIndex: index,
           editRow: this.editRow,
-          dataUsername: this.props.usernames[index],
-          userUsername: this.props.username
+          dataUsername: item.username,
+          userUsername: item.username
         });
       }))), /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container, {
         fluid: true,
@@ -95,9 +95,13 @@ class EditPage extends React.Component {
   displayTable() {
     let sortedData = [];
     for (let i = 0; i < this.props.data.length; i++) {
-      console.log(i);
+      console.log(i + " " + this.props.usernames[i] + " " + this.props.username);
       if (this.props.usernames[i] === this.props.username) {
-        sortedData.push(this.props.data[i]);
+        console.log("Pushing " + this.props.data[i]);
+        sortedData.push({
+          data: this.props.data[i],
+          username: this.props.usernames[i]
+        });
       }
     }
     return sortedData;
