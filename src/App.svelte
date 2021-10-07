@@ -73,9 +73,9 @@
   let promise = getPizzas
 </script>
 
-<input type='number' bind:value={totP} />
-<input type='number' bind:value={slicesPer} />
-<input type='number' bind:value={gfP} />
+<input type='text' bind:value={totP} />
+<input type='text' bind:value={slicesPer} />
+<input type='text' bind:value={gfP} />
 <button on:click={addPizzaOrder}>Submit</button>
 
 {#await promise then pizzas}
