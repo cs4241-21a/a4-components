@@ -7,6 +7,14 @@
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear"
   },
+  "dependencies": {
+    "sirv-cli": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "98.css": "^0.1.16"
+  },
+  "engines": {
+    "node": "12.x"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
@@ -16,8 +24,5 @@
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
     "svelte": "^3.0.0"
-  },
-  "dependencies": {
-    "sirv-cli": "^1.0.0"
   }
 }

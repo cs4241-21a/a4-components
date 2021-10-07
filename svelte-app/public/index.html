@@ -4,15 +4,65 @@
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>Svelte app</title>
+	<title>CS4241 Assignment 4</title>
 
-	<link rel='icon' type='image/png' href='/favicon.png'>
 	<link rel='stylesheet' href='/global.css'>
-	<link rel='stylesheet' href='/build/bundle.css'>
+	<link rel="stylesheet" href="https://unpkg.com/98.css" />
 
 	<script defer src='/build/bundle.js'></script>
 </head>
 
 <body>
+  <div class="bigBox">
+      <div class="header">
+        <h1>Pizza Calculator<h1>
+      </div>
+
+      <div class="intro">
+        <p>
+          Welcome to the Post-COVID Pizza Party Planner (PCPPP for short)!
+          COVD-19 has taken parties away for 2 years now leading to people
+          <strong>forgetting</strong> how to throw an awesome pizza party. This website was designed so you don't have to stress about your lost
+          knowledge! Just follow the instructions below and you'll be on your
+          way to pizza party success!
+        </p>
+      </div>
+
+          
+          
+        <p class="instructions">
+          All we need from you is how many people are coming, how many of those
+          people are gluten free, and how many slices you want each person to
+          have! From there we'll let you know how many small, mediums, and
+          larges you'll need<span>&#42;</span> (including how many gf options
+          you'll need available).
+        </p>
+      </div>
+
+      <h2 class = "tableH">Pizza Party Log:</h2>
+      <table id="t1" role:"table">
+        <tr>
+          <th>Total People</th>
+          <th>Slices Per Person</th>
+          <th>Total gf People</th>
+          <th>Total Large</th>
+          <th>Total Meduim</th>
+          <th>Total Small</th>
+          <th>Total gf Large</th>
+          <th>Total gf Meduim</th>
+          <th>Total gf Small</th>
+        </tr>
+      </table>
+
+      <div class="footer">
+        <p>
+          <span>&#42;</span>This goes off the assumption that where you order
+          from has 8-10" smalls, 12" mediums, and 14" larges. The PCPPP is not
+          responsible for any pizza party mishaps that come from ordering
+          different sized pizzas.
+        </p>
+      </div>
+    </div>
 </body>
 </html>
+
