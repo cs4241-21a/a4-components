@@ -5,10 +5,12 @@ class TableDataItemWithEdit extends React.Component {
     
     constructor(props) {
         super(props);
+        
         this.state = {
             username: this.props.userUsername,
             index: this.props.index
          };
+         this.editRow = this.editRow.bind(this);
          this.deleteRow = this.deleteRow.bind(this);
         //console.log("Our data are " + props.data);
         console.log("Userusername is " + this.props.userUsername + " and datausername is " + this.props.dataUsername)
@@ -27,12 +29,18 @@ class TableDataItemWithEdit extends React.Component {
                 <td>{rowData.favoriteDining}</td>
                 <td>{rowData.favoriteSpot}</td>
                 <td>{rowData.notes}</td>
-                <td><button class="btn btn-dark" onClick={this.editRow}>Edit This Row</button></td>
+                <td><button class="btn btn-dark" onClick={this.editRow}>Edit This Row (Coming Soon!)</button></td>
                 <td><button class="btn btn-dark" onClick={this.deleteRow}>Delete This Row</button></td>
             </tr>);
         } else {
             return <td></td>
         }
+    }
+
+    editRow() {
+        //console.log("Within the table, editing " + this.props.personIndex );
+        //this.props.editRow(this.props.personIndex);
+        alert("This functionality is currently in the process of being ported to React (source code in GitHub)! For now, please delete a row and re-add its data! Thank you! :)")
     }
 
     deleteRow() {

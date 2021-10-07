@@ -7,6 +7,7 @@ class TableDataItemWithEdit extends React.Component {
       username: this.props.userUsername,
       index: this.props.index
     };
+    this.editRow = this.editRow.bind(this);
     this.deleteRow = this.deleteRow.bind(this);
     console.log("Userusername is " + this.props.userUsername + " and datausername is " + this.props.dataUsername);
   }
@@ -16,13 +17,16 @@ class TableDataItemWithEdit extends React.Component {
       return /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("td", null, this.state.username), /* @__PURE__ */ React.createElement("td", null, rowData.name), /* @__PURE__ */ React.createElement("td", null, rowData.studentYear), /* @__PURE__ */ React.createElement("td", null, rowData.yearsRemaining), /* @__PURE__ */ React.createElement("td", null, rowData.favoriteDorm), /* @__PURE__ */ React.createElement("td", null, rowData.favoriteDining), /* @__PURE__ */ React.createElement("td", null, rowData.favoriteSpot), /* @__PURE__ */ React.createElement("td", null, rowData.notes), /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("button", {
         class: "btn btn-dark",
         onClick: this.editRow
-      }, "Edit This Row")), /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("button", {
+      }, "Edit This Row (Coming Soon!)")), /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("button", {
         class: "btn btn-dark",
         onClick: this.deleteRow
       }, "Delete This Row")));
     } else {
       return /* @__PURE__ */ React.createElement("td", null);
     }
+  }
+  editRow() {
+    alert("This functionality is currently in the process of being ported to React (source code in GitHub)! For now, please delete a row and re-add its data! Thank you! :)");
   }
   deleteRow() {
     let confirmDelete = confirm("Are you sure you'd like to delete this row?");

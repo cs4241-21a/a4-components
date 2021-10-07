@@ -17,10 +17,11 @@ import { Form } from 'react-bootstrap';
 class EditPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { tableLoaded: true }
+        this.state = { tableLoaded: true, feederData: [] }
         this.redirectToResponses = this.redirectToResponses.bind(this)
         this.stayOnEdit = this.stayOnEdit.bind(this)
         this.signOut = this.signOut.bind(this)
+        this.editRow = this.editRow.bind(this)
         this.currentIndex = -1;
 
         this.currentEditData = false;
@@ -69,6 +70,7 @@ class EditPage extends React.Component {
                                         data={this.props.data[index]}
                                         index={index}
                                         personIndex={index}
+                                        editRow={this.editRow}
                                         dataUsername={this.props.usernames[index]}
                                         userUsername={this.props.username}
                                     />);
@@ -84,9 +86,9 @@ class EditPage extends React.Component {
                                     <Col>
                                         <AddRatingForm stayOnEdit={this.stayOnEdit} username={this.props.username} />
                                     </Col>
-                                    <Col>
-                                        <EditRatingForm />
-                                    </Col>
+                                    {/*<Col>
+                                        <EditRatingForm username={this.props.username} stayOnEdit={this.stayOnEdit} feederData={this.state.feederData} rowIndex={this.state.rowIndex} />
+                                    </Col> */}
                                 </Row>
                             </Container>
                         </Container>
@@ -169,7 +171,13 @@ class EditPage extends React.Component {
         console.log("Signing out?");
     }
 
-    editRow(rowIndex) {
+    editRow(index) {
+        console.log("Editing row!");
+        console.log("Row " + index);
+        this.setState({
+            feederData: this.props.data[index],
+            rowIndex: index
+        })
     }
 }
 

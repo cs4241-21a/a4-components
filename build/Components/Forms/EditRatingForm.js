@@ -5,25 +5,106 @@ import {Form} from "../../_snowpack/pkg/react-bootstrap.js";
 class EditRatingForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ""};
+    if (this.props.feederData === void 0 || this.props.feederData.length === 0) {
+      console.log("ROW DATA UNDEFINED");
+      this.state = {
+        name: "",
+        year: "First-Year",
+        dorm: "Daniels Hall",
+        hall: "Campus Center",
+        spot: "",
+        notes: "N/A"
+      };
+    } else {
+      console.log("ROW DATA GOOD!!!");
+      this.state = {
+        name: this.props.feederData.name,
+        year: this.props.feederData.studentYear,
+        dorm: this.props.feederData.favoriteDorm,
+        hall: this.props.feederData.favoriteDining,
+        spot: this.props.feederData.favoriteSpot,
+        notes: this.props.feederData.notes
+      };
+    }
+    const name = this.state.name;
+    const studentYear = this.state.year;
+    const favoriteDorm = this.state.dorm;
+    const favoriteDining = this.state.hall;
+    const favoriteSpot = this.state.spot;
+    const notes = this.state.notes;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
-    this.setState({value: event.target.value});
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+    console.log("State change! Target is " + target + ", value is " + value + ", and name is " + name);
+    this.setState({
+      [name]: value
+    });
   }
   handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
     event.preventDefault();
+    this.props.stayOnEdit();
+    const name = this.state.name;
+    const studentYear = this.state.year;
+    const favoriteDorm = this.state.dorm;
+    const favoriteDining = this.state.hall;
+    const favoriteSpot = this.state.spot;
+    const notes = this.state.notes;
+    console.log("Our current name, for instance, is " + name);
+    console.log("Within edit, submitting " + name + studentYear + favoriteDorm + favoriteDining + favoriteSpot + notes);
+    console.log("Default row index is " + this.props.rowIndex);
+    if (this.props.rowIndex === "") {
+      alert("You must first select 'Edit This Row' on a row to edit its data!");
+      return false;
+    }
+    if (name.trim() === "" || studentYear.trim() === "" || favoriteDorm.trim() === "" || favoriteDining.trim() === "" || favoriteSpot.trim() === "") {
+      alert("To obtain accurate data, please be sure to respond to every question (except for additional notes)!");
+      return false;
+    } else {
+      const jsonData = {
+        index: this.props.rowIndex,
+        username: this.props.username,
+        name,
+        studentYear,
+        favoriteDorm,
+        favoriteDining,
+        favoriteSpot,
+        notes,
+        yearsRemaining: ""
+      };
+      fetch("/editTableData", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(jsonData)
+      }).then((res) => {
+        return res.json();
+      }).then((json) => {
+        console.log("Data uploaded successfully!");
+      });
+      console.log("Refreshing to show new data!");
+    }
   }
   render() {
-    return /* @__PURE__ */ React.createElement(Col, null, /* @__PURE__ */ React.createElement("h3", null, 'Edit a Row (click "Edit Row" above!):'), /* @__PURE__ */ React.createElement(Form, null, /* @__PURE__ */ React.createElement(Form.Group, {
+    console.log("Our feeder data is " + this.props.feederData);
+    console.log("Our default student dorm is " + this.props.feederData.favoriteDorm + ", reflected in state as " + this.state.dorm);
+    return /* @__PURE__ */ React.createElement(Col, null, /* @__PURE__ */ React.createElement("h3", null, 'Edit a Row (click "Edit Row" above!):'), /* @__PURE__ */ React.createElement(Form, {
+      onSubmit: this.handleSubmit
+    }, /* @__PURE__ */ React.createElement(Form.Group, {
       class: "mb-3"
     }, /* @__PURE__ */ React.createElement(Form.Label, null, "What is your name?"), /* @__PURE__ */ React.createElement(Form.Control, {
+      defaultValue: this.state.name,
+      name: "name",
+      onChange: this.handleChange,
       type: "text"
     })), /* @__PURE__ */ React.createElement(Form.Group, {
       class: "mb-3"
     }, /* @__PURE__ */ React.createElement(Form.Label, null, "Which year are you?"), /* @__PURE__ */ React.createElement(Form.Select, {
+      defaultValue: this.state.studentYear,
+      name: "year",
+      onChange: this.handleChange,
       "aria-label": "Select A Student Year"
     }, /* @__PURE__ */ React.createElement("option", {
       value: "First-Year"
@@ -38,6 +119,9 @@ class EditRatingForm extends React.Component {
     }, "Graduate Student"))), /* @__PURE__ */ React.createElement(Form.Group, {
       class: "mb-3"
     }, /* @__PURE__ */ React.createElement(Form.Label, null, "What is your favorite dorm?"), /* @__PURE__ */ React.createElement(Form.Select, {
+      defaultValue: this.state.favoriteDorm,
+      name: "dorm",
+      onChange: this.handleChange,
       "aria-label": "Select Your Favorite Dorm"
     }, /* @__PURE__ */ React.createElement("option", {
       value: "Daniels Hall"
@@ -70,6 +154,9 @@ class EditRatingForm extends React.Component {
     }, "Other Housing"))), /* @__PURE__ */ React.createElement(Form.Group, {
       class: "mb-3"
     }, /* @__PURE__ */ React.createElement(Form.Label, null, "What is your favorite dining hall?"), /* @__PURE__ */ React.createElement(Form.Select, {
+      defaultValue: this.state.favoriteDining,
+      name: "hall",
+      onChange: this.handleChange,
       "aria-label": "Select Your Favorite Dining Hall"
     }, /* @__PURE__ */ React.createElement("option", {
       value: "Campus Center"
@@ -84,10 +171,16 @@ class EditRatingForm extends React.Component {
     }, "Starbucks"))), /* @__PURE__ */ React.createElement(Form.Group, {
       class: "mb-3"
     }, /* @__PURE__ */ React.createElement(Form.Label, null, "What is your favorite spot on campus?"), /* @__PURE__ */ React.createElement(Form.Control, {
+      defaultValue: this.state.favoriteSpot,
+      name: "spot",
+      onChange: this.handleChange,
       type: "text"
     })), /* @__PURE__ */ React.createElement(Form.Group, {
       class: "mb-3"
     }, /* @__PURE__ */ React.createElement(Form.Label, null, "Do you have any additional notes?"), /* @__PURE__ */ React.createElement(Form.Control, {
+      defaultValue: this.state.notes,
+      name: "notes",
+      onChange: this.handleChange,
       type: "text"
     })), /* @__PURE__ */ React.createElement(Button, {
       variant: "danger",

@@ -16,10 +16,11 @@ import {Form} from "../_snowpack/pkg/react-bootstrap.js";
 class EditPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {tableLoaded: true};
+    this.state = {tableLoaded: true, feederData: []};
     this.redirectToResponses = this.redirectToResponses.bind(this);
     this.stayOnEdit = this.stayOnEdit.bind(this);
     this.signOut = this.signOut.bind(this);
+    this.editRow = this.editRow.bind(this);
     this.currentIndex = -1;
     this.currentEditData = false;
   }
@@ -60,6 +61,7 @@ class EditPage extends React.Component {
           data: this.props.data[index],
           index,
           personIndex: index,
+          editRow: this.editRow,
           dataUsername: this.props.usernames[index],
           userUsername: this.props.username
         });
@@ -73,7 +75,7 @@ class EditPage extends React.Component {
       }, /* @__PURE__ */ React.createElement(Col, null, /* @__PURE__ */ React.createElement(AddRatingForm, {
         stayOnEdit: this.stayOnEdit,
         username: this.props.username
-      })), /* @__PURE__ */ React.createElement(Col, null, /* @__PURE__ */ React.createElement(EditRatingForm, null)))))), ");", /* @__PURE__ */ React.createElement(Container, {
+      })))))), ");", /* @__PURE__ */ React.createElement(Container, {
         fluid: true,
         className: "header-footer-background py-3 text-center"
       }, /* @__PURE__ */ React.createElement(Row, null, /* @__PURE__ */ React.createElement(Col, null, /* @__PURE__ */ React.createElement("h3", null, "Don't want to add a new rating or edit a current one? Check out how other students responded here!"), /* @__PURE__ */ React.createElement(Button, {
@@ -123,7 +125,13 @@ class EditPage extends React.Component {
     this.props.signOut();
     console.log("Signing out?");
   }
-  editRow(rowIndex) {
+  editRow(index) {
+    console.log("Editing row!");
+    console.log("Row " + index);
+    this.setState({
+      feederData: this.props.data[index],
+      rowIndex: index
+    });
   }
 }
 export default EditPage;
