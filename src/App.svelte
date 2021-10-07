@@ -12,11 +12,21 @@
   }
   
   const addPizzaOrder = function( e ){
-    const pizza
+    const form1 = document.querySelector( '#form1' ),
+          json = { totP: form1.totP.value, slicePer: form1.slicePer.value, gfP: form1.gfP.value, large: 0, medium: 0, small: 0, largeGf: 0, mediumGf: 0, smallGf: 0},
+          body = JSON.stringify( json )
+    promise = fetch('/add', {
+      method:'POST',
+      body: body,
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
   }
   
   let promise = getPizzas
 </script>
+
+<input type='text'/>
 
 {#await promise then pizzas}
   var pNoGf = pizza.totP - pizza.gfP; //people that aren't gf
