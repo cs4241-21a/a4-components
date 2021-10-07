@@ -12,9 +12,10 @@
   }
   
   const addPizzaOrder = function( e ){
-    const form1 = document.querySelector( '#form1' ),
+    const totP = document.querySelector( '#totP' ).value
+          
           json = { totP: form1.totP.value, slicePer: form1.slicePer.value, gfP: form1.gfP.value, large: 0, medium: 0, small: 0, largeGf: 0, mediumGf: 0, smallGf: 0},
-          body = JSON.stringify( json )
+          
     promise = fetch('/add', {
       method:'POST',
       body: body,
@@ -26,7 +27,10 @@
   let promise = getPizzas
 </script>
 
-<input type='text'/>
+<input type='text' id='totP' />
+<input type='text' id='slicesPer' />
+<input type='text' id='gfP' />
+<button on:click={addPizzaOrder}>Submit</button>
 
 {#await promise then pizzas}
   var pNoGf = pizza.totP - pizza.gfP; //people that aren't gf
@@ -85,11 +89,6 @@
   {/each}
   </table>
 {/awat}
-
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
 
 <style>
 	main {
