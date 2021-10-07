@@ -12,9 +12,9 @@
   }
   
   const addPizzaOrder = function( e ){
-    const totP = document.querySelector( '#totP' ).value
-          slicesPer = document.querySelector( '#slicesPer' ).value
-          gfP = document.querySelector( '#gfP' ).value
+    const totP = document.querySelector( totP ).value
+          slicesPer = document.querySelector( slicesPer ).value
+          gfP = document.querySelector( gfP ).value
             
     var pNoGf = totP - gfP; //people that aren't gf
     var totalSl = slicesPer * pNoGf; //total slices needed
@@ -70,9 +70,9 @@
   let promise = getPizzas
 </script>
 
-<input type='text' bind:value={totP} />
-<input type='text' id={slicesPer} />
-<input type='text' id={gfP} />
+<input type='number' bind:value={totP} />
+<input type='number' bind:value={slicesPer} />
+<input type='number' bind:value={gfP} />
 <button on:click={addPizzaOrder}>Submit</button>
 
 {#await promise then pizzas}
