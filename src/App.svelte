@@ -176,7 +176,6 @@
     text-decoration-color: #008080;
   }
   
-  
   .intro {
     display: flex;
     font-family: Sans-Serif;
