@@ -13,6 +13,7 @@
   rm -rf test-template template && git clone sveltejs/template test-template && node scripts/setupTypeScript.js test-template
 */
 
+
 const fs = require("fs")
 const path = require("path")
 const { argv } = require("process")

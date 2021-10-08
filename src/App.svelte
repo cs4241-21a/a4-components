@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://unpkg.com/98.css" />
+
 <script>
   let totP = 0
   let slicesPer = 0
@@ -107,19 +108,6 @@
   </div>
   
   <h2 class = "tableH">Pizza Party Log:</h2>
-  <table id="t1" role:"table">
-    <tr>
-      <th>Total People</th>
-      <th>Slices Per Person</th>
-      <th>Total gf People</th>
-      <th>Total Large</th>
-      <th>Total Meduim</th>
-      <th>Total Small</th>
-      <th>Total gf Large</th>
-      <th>Total gf Meduim</th>
-      <th>Total gf Small</th>
-    </tr>
-  </table>
 
   <div class="footer">
     <p>
@@ -132,9 +120,18 @@
       
 </div>
 
-{#await promise then pizzas}
-  
-  <table>
+{#await promise then pizzas}  
+
+  <table id="t1">
+  <th>Total People</th>
+  <th>Slices Per Person</th>
+  <th>Total gf People</th>
+  <th>Total Large</th>
+  <th>Total Meduim</th>
+  <th>Total Small</th>
+  <th>Total gf Large</th>
+  <th>Total gf Meduim</th>
+  <th>Total gf Small</th>
   {#each pizzas as pizza}
     <td>{pizza.totP} : <input type='text' totP={pizza.totP}></td>
     <td>{pizza.slicesPer} : <input type='text' slicesPer={pizza.slicesPer}></td>
