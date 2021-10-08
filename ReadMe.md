@@ -12,4 +12,3 @@ questions discord chat for evidence of how confused and
 stupid i looked.
 
 glitch: https://a4evalabbe.glitch.me (not working sos)
-
