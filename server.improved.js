@@ -18,7 +18,7 @@ const app = express();
 app.use(timeout('5s'));
 app.use(bodyParser.json());
 app.use(haltOnTimedout);
-app.use(express.static('./'));
+app.use(express.static('build'));
 app.use(haltOnTimedout);
 app.use(bodyParser.urlencoded({
     extended: true
@@ -35,12 +35,12 @@ morgan(':method :url :status :res[content-length] - :response-time ms');
 
 app.get('/', function(req, res, next) {
     // Update views
-    req.session.username = current
+    //req.session.username = current
 
     // Write response
-    res.end(req.session.views + ' views')
+    //res.end(req.session.views + ' views')
+    res.sendFile(__dirname, '/build/public/index.html')
 })
-
 
 const getDatabaseData = async function(collectionName) {
     return client.db(dbName).collection(collectionName).find().toArray(function(err, res) {
