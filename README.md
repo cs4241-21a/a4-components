@@ -1,33 +1,7 @@
-Assignment 4 - Components
-===
+## A4 Components
 
-Due: October 4th, by 11:59 AM.
-
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
-
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://a4-gdgarsson-2.glitch.me/
 
 Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
 
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+The user experience remained exactly the same as assignment 3, with the only changes being to how the HTML is rendered. Using React may have helped a slight bit with the forum and making data entry much easier on the back end, but it significantly hindered the development experience of the dynamically changing table. As React does not allow for dynamically changing rendering within the render function itself, I couldn't find a way in time to change the table by refactoring my table display code to work with react. Personally, while tedious, I found working with HTML/CSS for my specific project significantly easier than working with React, which is why I ended up using a combination of the two.
