@@ -1,33 +1,11 @@
-Assignment 4 - Components
-===
+## A4 Components, Lost and Found App
+https://a4-federico-galbiati.herokuapp.com
 
-Due: October 4th, by 11:59 AM.
+The goal of the project is to store lost & found items in the database, and provide them to the frontend through Node.js. The platform allows only the creator of an item to modify/delete it.
+- I used React for the frontend
+- The app uses Passport.js with the GitHub authentication strategy to allow any user to log in. Once logged in, it will use the user's email as a unique ID for creating items.
+- I used Primer (https://primer.style) as the CSS framework for this project, included with npm. I already had some experience with Bootstrap, and Primer is the framework used by the GitHub team. Therefore, I thought it would be nice to try it out and learn the foundations of GitHub's website UI.
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+The main change was using React + Primer from npm for the frontend. In terms of backend, the only changes were in some endpoints which were initially using redirects, and had to be converted to be used as API endpoints.
 
-[Svelte Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_svelte.md)  
-[React Tutorial](https://github.com/cs4241-21a/cs4241-21a.github.io/blob/main/using_react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+Using React allowed me to write significantly better code. I was able to create reusable components each one with props that allow it to render the necessary fields. For example, instead of having two HTML tables with different handlers, I implemented one component, used it twice, and simply gave it a different array of items and title to display. Similarly, I created one form and based on the props it either allows to edit or create an item. This significantly standardized the workflow trigger->update->refresh. Using React absolutely improved my development experience.
